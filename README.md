@@ -1,1 +1,1 @@
-# gluu
+# Binary files for Gluu servers
