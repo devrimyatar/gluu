@@ -56,8 +56,8 @@ def progress_bar(i, act=''):
         act =act.ljust(40)
         if int(tty_columns) < 88:
             act = act[:int(tty_columns)-47]
-        print "Installing [{0}] {1}".format(ft, act)
-        sys.stdout.write("\033[F")
+        sys.stdout.write("\rInstalling [{0}] {1}".format(ft, act))
+        sys.stdout.flush()
 
 
 class Setup(object):
