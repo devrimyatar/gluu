@@ -924,7 +924,7 @@ class Migration(object):
         
         dn = 'ou=oxtrust,ou=configuration,inum={},ou=appliances,o=gluu'.format(inumAppliance)
 
-        results = con.search_s(dn,  ldap.SCOPE_BASE, attrlist=['oxTrustConfApplication'])
+        results = con.search_s(dn,  ldap.SCOPE_BASE, attrlist=['oxTrustConfApplication', 'oxTrustConfCacheRefresh'])
 
         jsons = results[0][1]['oxTrustConfApplication'][0]
         jdata = json.loads(jsons)
@@ -933,6 +933,14 @@ class Migration(object):
 
         con.modify_s(dn, [( ldap.MOD_REPLACE, 'oxTrustConfApplication',  jsons)])
         
+        # CR bindDN = cn=directory manager set opendj time
+        if self.ldap_type == 'opendj':
+            jsons = results[0][1]['oxTrustConfCacheRefresh'][0]
+            jdata = json.loads(jsons)
+            jdata['inumConfig']['bindDN'] = 'cn=directory manager'
+            jsons = json.dumps(jdata)
+            con.modify_s(dn, [( ldap.MOD_REPLACE, 'oxTrustConfCacheRefresh',  jsons)])
+
         #MB: I don't know which of the following is reuired
         """
         command = [self.ldif_search,'-h',self.ldapHost,'-p',self.ldapPort,'-s','sub','-T','-Z','-X','-D',self.baseDn,'-w',self.ldappassowrd,'-b','o=gluu','-z', '3','&(objectclass=oxauthclient)(displayName=oxTrust Admin GUI)','oxAuthClientSecret']
@@ -1061,9 +1069,9 @@ class Migration(object):
         #self.copyIDPFiles()
         if self.version < 300 or self.ldap_type == 'opendj':
             self.copyCustomSchema()
-        self.exportInstallData()
-        self.processBackupData()
-        self.importProcessedData()
+        #self.exportInstallData()
+        #self.processBackupData()
+        #self.importProcessedData()
         #self.fixPermissions()
         self.startLDAPServer()
         self.idpResolved()
