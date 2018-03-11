@@ -224,8 +224,9 @@ class Migration(object):
         os.path.walk("%s/etc" % self.backupDir, self.walk_function, None)
 
         logging.info("Updating the CA Certs Keystore.")
-        keys = ['httpd', 'idp-signing', 'idp-encryption', 'shibidp', 'asimba',
-                'openldap']
+        keys = ['httpd', 'idp-signing', 'idp-encryption', 'shibidp', 'asimba']
+        if self.ldap_type == 'openldap':
+            keys.append('openldap')
         hostname = self.getOutput(['hostname']).strip()
         # import all the keys into the keystore
         for key in keys:
@@ -277,10 +278,10 @@ class Migration(object):
         if self.version < 300:
             custom = self.backupDir + '/var/gluu/webapps/'
             folder_map = [
-                (custom + 'oxauth/pages', self.jettyDir + 'oxauth/custom/pages'),
+                #(custom + 'oxauth/pages', self.jettyDir + 'oxauth/custom/pages'),  #MB: this may break gluu gui
                 (custom + 'oxauth/resources', self.jettyDir + 'oxauth/custom/static'),
                 (custom + 'oxauth/libs', self.jettyDir + 'oxauth/lib/ext'),
-                (custom + 'oxtrust/pages', self.jettyDir + 'identity/custom/pages'),
+                #(custom + 'oxtrust/pages', self.jettyDir + 'identity/custom/pages'), #MB: this may break gluu gui
                 (custom + 'oxtrust/resources', self.jettyDir + 'identity/custom/static'),
                 (custom + 'oxtrust/libs', self.jettyDir + 'identity/lib/ext'),
             ]
@@ -834,6 +835,7 @@ class Migration(object):
 
     def copyIDPFiles(self):
         idp_dir = os.path.join(self.backupDir, 'opt', 'idp')
+        print(idp_dir)
         if os.path.isdir(idp_dir):
             logging.info('Copying Shibboleth IDP files...')
             if os.path.isdir(os.path.join(idp_dir, 'metadata')):
@@ -941,105 +943,6 @@ class Migration(object):
             jsons = json.dumps(jdata)
             con.modify_s(dn, [( ldap.MOD_REPLACE, 'oxTrustConfCacheRefresh',  jsons)])
 
-        #MB: I don't know which of the following is reuired
-        """
-        command = [self.ldif_search,'-h',self.ldapHost,'-p',self.ldapPort,'-s','sub','-T','-Z','-X','-D',self.baseDn,'-w',self.ldappassowrd,'-b','o=gluu','-z', '3','&(objectclass=oxauthclient)(displayName=oxTrust Admin GUI)','oxAuthClientSecret']
-        output = self.getOutput(command)
-
-        outSplit = output.split(': ')
-        self.oxAuthClientSecret = outSplit[2].split('\n\n')[0]
-
-        command = [self.ldif_search,'-h',self.ldapHost,'-p',self.ldapPort,'-s','sub','-T','-Z','-X','-D',self.baseDn,'-w',self.ldappassowrd,'-b','o=gluu','-z', '3','&(objectclass=oxapplicationconfiguration)','1.1']
-        output = self.getOutput(command)
-
-        self.idpDN = output
-
-
-        idp_conf_command = self.ldif_search+' -h '+self.ldapHost+' -p '+self.ldapPort+' -s sub -T -Z -X -D '+"'"+self.baseDn+"'"+' -w '+self.ldappassowrd+" -b 'o=gluu' -z 3 '&(objectclass=oxapplicationconfiguration)' oxConfApplication | grep -v '^dn\:\ ' | cut -d' ' -f2 | base64 -d > idp_conf.json"
-        os.system(idp_conf_command)
-
-        output = self.getOutput(['chmod','777','-R','idp_conf.json'])
-
-
-        #change openIdClientPassword with oxAuthClientSecret
-        file = "idp_conf.json"
-        data = ""
-        try:
-            with open(file) as f:
-                for line in f:
-                    data += line
-        except:
-            logging.error("Error reading idp_conf.json Template")
-            logging.error(traceback.format_exc())
-            sys.exit(1)
-
-        datastore = json.loads(data)
-        datastore['openIdClientPassword'] = self.oxAuthClientSecret
-
-        try:
-            with open(file, 'w') as outfile:
-                json.dump(datastore, outfile,indent=4)
-        except:
-            logging.error("Error writting idp_conf.json Template")
-            logging.error(traceback.format_exc())
-            sys.exit(1)
-
-        self.encryptIdpJson  = os.popen('cat idp_conf.json | base64 -w 0; echo').read()
-        getdn = self.idpDN.split('\n\n')
-
-        fileLdif = "idpconf_upd.ldif"
-        try:
-            file = open(fileLdif,'w')
-            file.write(getdn[0]+"\n")
-            file.write("changetype: modify\n")
-            file.write("replace: oxConfApplication\n")
-            file.write("oxConfApplication:: "+self.encryptIdpJson)
-            file.close()
-        except:
-            logging.error("Error writting idpconf_upd.ldif Template")
-            sys.exit(1)
-
-
-        command = [self.ldif_modify,'-h',self.ldapHost,'-p',self.ldapPort,'-Z','-X','-D',self.baseDn,'-w',self.ldappassowrd,'-f','idpconf_upd.ldif']
-        output = self.getOutput(command)
-
-        # CR bindDN = cn=directory manager set opendj time
-        if self.ldap_type == 'opendj':
-
-            command = [self.ldif_search,'-h',self.ldapHost,'-p',self.ldapPort,'-s','sub','-T','-Z','-X','-D',self.baseDn,'-w',self.ldappassowrd,'-b','o=gluu','&(objectclass=oxtrustconfiguration)','oxTrustConfCacheRefresh']
-            output = self.getOutput(command)
-            oxtrustconfcacherefreshDn = output.split('\n')
-
-            valueget = oxtrustconfcacherefreshDn[1].split('oxTrustConfCacheRefresh: ')
-            data = json.loads(valueget[1])
-            data["inumConfig"]["bindDN"] = "cn=directory manager"
-
-            fileLdif = "oxtrustconfcacherefreshDn.json"
-            try:
-                with open(fileLdif, 'w') as outfile:
-                    json.dump(data, outfile,indent=4)
-            except:
-                logging.error("Error writting oxtrustconfcacherefreshDn.json Template")
-
-            self.encryptIdpJson  = os.popen('cat oxtrustconfcacherefreshDn.json | base64 -w 0; echo').read()
-
-            fileLdif = "oxtrustconfcacherefreshDn.ldif"
-            try:
-                file = open(fileLdif,'w')
-                file.write(oxtrustconfcacherefreshDn[0]+"\n")
-                file.write("changetype: modify\n")
-                file.write("replace: oxTrustConfCacheRefresh\n")
-                file.write("oxTrustConfCacheRefresh:: "+self.encryptIdpJson)
-                file.close()
-            except:
-                logging.error("Error writting oxtrustconfcacherefreshDn.ldif Template")
-
-
-        command = [self.ldif_modify,'-h',self.ldapHost,'-p',self.ldapPort,'-Z','-X','-D',self.baseDn,'-w',self.ldappassowrd,'-f','oxtrustconfcacherefreshDn.ldif']
-        output = self.getOutput(command)
-        #end here
-
-        
         command = ['cp','/etc/certs/shibIDP.crt','/etc/certs/idp-signing.crt']
         output = self.getOutput(command)
 
@@ -1048,7 +951,6 @@ class Migration(object):
 
         command = ['service','idp','restart']
         output = self.getOutput(command)
-        """
 
     def migrate(self):
         """Main function for the migration of backup data
@@ -1063,7 +965,6 @@ class Migration(object):
         self.setupWorkDirectory()
         #self.stopWebapps()
         #self.stopLDAPServer()
-        #self.importDataIntoOpenDJ()
         #self.copyCertificates()
         #self.copyCustomFiles()
         #self.copyIDPFiles()
@@ -1073,8 +974,8 @@ class Migration(object):
         #self.processBackupData()
         #self.importProcessedData()
         #self.fixPermissions()
-        self.startLDAPServer()
-        self.idpResolved()
+        #self.startLDAPServer()
+        #self.idpResolved()
         #self.startWebapps()
         print("============================================================")
         print("The migration is complete. Gluu Server needs to be restarted.")
