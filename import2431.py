@@ -44,6 +44,21 @@ console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 logging.getLogger('jsonmerge').setLevel(logging.WARNING)
 
+def progress_bar(t, n, act='', finished=None):
+
+    if not t % 50:
+
+        if finished:
+            i = 40
+        else:
+            i = (t*1.0/(n)) /0.025    
+        ft = '#' * int(round(i))
+        ft = ft.ljust(40)
+        sys.stdout.write("\r[{0}] {1}".format(ft,act))
+        sys.stdout.flush()
+    if finished:
+        print
+
 
 class MyLDIF(LDIFParser):
     def __init__(self, input, output):
@@ -607,8 +622,12 @@ class Migration(object):
         if self.ldap_type == 'opendj':
             ignoreList.remove('oxIDPAuthentication')
 
+
         # Rewriting all the new DNs in the new installation to ldif file
-        for dn in currentDNs:
+        nodn=len(currentDNs)
+        for cnt, dn in enumerate(currentDNs):
+            
+            progress_bar(cnt, nodn, 'Rewriting DNs')
             new_entry = self.getEntry(self.currentData, dn)
             if "o=site" in dn:
                 continue  # skip all the o=site DNs
@@ -619,9 +638,10 @@ class Migration(object):
 
             old_entry = self.getEntry(os.path.join(self.ldifDir, old_dn_map[dn]), dn)
             for attr in old_entry.keys():
+                
                 if attr in ignoreList:
                     continue
-
+                
                 if attr not in new_entry:
                     new_entry[attr] = old_entry[attr]
                 elif old_entry[attr] != new_entry[attr]:
@@ -643,14 +663,28 @@ class Migration(object):
                         logging.debug("Keep multiple old values for %s", attr)
             ldif_writer.unparse(dn, new_entry)
 
+        progress_bar(0, 0, 'Rewriting DNs', True)
+
         # Pick all the left out DNs from the old DN map and write them to the LDIF
-        for dn in sorted(old_dn_map, key=len):
+        nodn = len(old_dn_map)
+        for cnt, dn in enumerate(sorted(old_dn_map, key=len)):
+
+            progress_bar(cnt, nodn, 'Perapring DNs for 3.1.2')
             if "o=site" in dn:
                 continue  # skip all the o=site DNs
             if dn in currentDNs:
                 continue  # Already processed
 
             entry = self.getEntry(os.path.join(self.ldifDir, old_dn_map[dn]), dn)
+
+            #MB: (1) TODO: instead of processing ldif twice, appy this method for (2)
+            if 'ou=people' in dn:
+                for o in entry['objectClass']:
+                    if o.startswith('ox-'):
+                        entry['objectClass'].remove(o)
+                        entry['objectClass'].append('gluuCustomPerson')
+                        break
+
 
             for attr in entry.keys():
                 if attr not in multivalueAttrs:
@@ -678,10 +712,19 @@ class Migration(object):
         # Finally
         processed_fp.close()
 
+        progress_bar(0, 0, 'Perapring DNs for 3.1.2', True)
+        
+        #MB: (2) replace the following with above method
         # Update the Schema change for lastModifiedTime
+        
+        nodn = sum(1 for line in open(self.processTempFile))
+        
         with open(self.processTempFile, 'r') as infile:
             with open(self.o_gluu, 'w') as outfile:
-                for line in infile:
+                
+                for cnt, line in enumerate(infile):
+                    progress_bar(cnt, nodn, 'converting Dns')
+                    
                     line = line.replace("lastModifiedTime", "oxLastAccessTime")
                     line = line.replace('oxAuthUmaResourceSet', 'oxUmaResource')
                     if ("gluuAttributeOrigin:" in line and line.split("gluuAttributeOrigin: ")[1][:3] == 'ox-'):
@@ -694,8 +737,9 @@ class Migration(object):
                         line = 'oxAuthenticationMode: auth_ldap_server' + '\n'
                     if 'oxTrustAuthenticationMode' in line:
                         line = 'oxTrustAuthenticationMode: auth_ldap_server'+ '\n'
-                    if ("objectClass:" in line and line.split("objectClass: ")[1][:3] == 'ox-'):
-                        line = line.replace(line, 'objectClass: gluuCustomPerson' + '\n')
+                    #MB: See (1) how we implement this
+                    #if ("objectClass:" in line and line.split("objectClass: ")[1][:3] == 'ox-'):
+                    #    line = line.replace(line, 'objectClass: gluuCustomPerson' + '\n')
                     if 'oxType' not in line and 'gluuVdsCacheRefreshLastUpdate' not in line and 'objectClass: person' not in line and 'objectClass: organizationalPerson' not in line and 'objectClass: inetOrgPerson' not in line:
                         outfile.write(line)
                     # parser = MyLDIF(open(self.currentData, 'rb'), sys.stdout)
@@ -718,6 +762,9 @@ class Migration(object):
         #            for line in infile:
         #                outfile.write(line)
         #os.remove(os.path.join(self.backupDir, 'ldif','sitetmp.ldif'))
+        
+        progress_bar(0, 0, 'converting Dns', True)
+        
     def importDataIntoOpenldap(self):
         count = len(os.listdir('/opt/gluu/data/main_db/')) - 1
         backupfile = self.ldapDataFile + ".bkp_{0:02d}".format(count)
