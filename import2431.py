@@ -416,20 +416,21 @@ class Migration(object):
                 shutil.copyfile(
                     schema_100, '/opt/opendj/config/schema/100-user.ldif')
                     
-        
-            #MB: ??
-            #return
-
-        #MB: add $ imapHost $ imapPort $ imapUsername $ imapPassword $ gluuPermission  to 77-customAttributes.ldif: gluuCustomPerson
-        
-        schema_77 = OpenDjSchema('/opt/opendj/config/schema/77-customAttributes.ldif')
-        gluuCustomPerson = schema_77.get_class_by_name('gluuCustomPerson')
-        may_list = list(gluuCustomPerson.may)
-        for a in ['imapHost', 'imapPort', 'imapUsername', 'imapPassword', 'gluuPermission']:
-            if not a in may_list:
-                may_list.append(a)
-        gluuCustomPerson.may = tuple(may_list)
-        schema_77.write()
+                #MB: add $ imapHost $ imapPort $ imapUsername $ imapPassword $ gluuPermission  to 77-customAttributes.ldif: gluuCustomPerson
+                schema_100_opendj = OpenDjSchema(schema_100)
+                w = False
+                schema_77 = OpenDjSchema('/opt/opendj/config/schema/77-customAttributes.ldif')
+                gluuCustomPerson = schema_77.get_class_by_name('gluuCustomPerson')
+                may_list = list(gluuCustomPerson.may)
+                
+                for a in ['imapHost', 'imapPort', 'imapUsername', 'imapPassword', 'gluuPermission']:
+                    if (a in schema_100_opendj.attribute_names) and (a not in may_list):
+                        may_list.append(a)
+                        w = True
+                if w:
+                    print("addded")
+                    gluuCustomPerson.may = tuple(may_list)
+                    schema_77.write()
         
         #MB: add attribute oxSectorIdentifierURI to 101-ox.ldif
         
