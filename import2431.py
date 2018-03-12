@@ -428,7 +428,6 @@ class Migration(object):
                         may_list.append(a)
                         w = True
                 if w:
-                    print("addded")
                     gluuCustomPerson.may = tuple(may_list)
                     schema_77.write()
         
@@ -836,7 +835,6 @@ class Migration(object):
 
     def copyIDPFiles(self):
         idp_dir = os.path.join(self.backupDir, 'opt', 'idp')
-        print(idp_dir)
         if os.path.isdir(idp_dir):
             logging.info('Copying Shibboleth IDP files...')
             if os.path.isdir(os.path.join(idp_dir, 'metadata')):
@@ -964,20 +962,20 @@ class Migration(object):
         self.getLDAPServerType()
         self.verifyBackupData()
         self.setupWorkDirectory()
-        #self.stopWebapps()
-        #self.stopLDAPServer()
-        #self.copyCertificates()
-        #self.copyCustomFiles()
-        #self.copyIDPFiles()
+        self.stopWebapps()
+        self.stopLDAPServer()
+        self.copyCertificates()
+        self.copyCustomFiles()
+        self.copyIDPFiles()
         if self.version < 300 or self.ldap_type == 'opendj':
             self.copyCustomSchema()
-        #self.exportInstallData()
-        #self.processBackupData()
-        #self.importProcessedData()
-        #self.fixPermissions()
-        #self.startLDAPServer()
-        #self.idpResolved()
-        #self.startWebapps()
+        self.exportInstallData()
+        self.processBackupData()
+        self.importProcessedData()
+        self.fixPermissions()
+        self.startLDAPServer()
+        self.idpResolved()
+        self.startWebapps()
         print("============================================================")
         print("The migration is complete. Gluu Server needs to be restarted.")
         print("\n\n\t# logout\n\t# service gluu-server-x.x.x restart\n")
