@@ -42,5 +42,7 @@ Install the latest version of the Gluu server (Centos7.x)
 # curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 # python get-pip.py
 # pip install jsonmerge
-#python import2431.py backup_2431/
+# wget https://raw.githubusercontent.com/mbaser/gluu/master/import2431.py
+# wget https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/testing/ldifschema_utils.py
+# python import2431.py backup_2431/
 ```
