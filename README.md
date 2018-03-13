@@ -16,8 +16,8 @@ Export the data from the current installation
 # python export2431.py
 ```
 
-Install the latest version of the Gluu server
----------------------------------------------
+Install the latest version of the Gluu server (ubuntu 16)
+----------------------------------------------------------
 ```
 # cp backup_2431/setup.properties /install/community-edition-setup
 # cd install/community-edition-setup
@@ -28,4 +28,19 @@ Install the latest version of the Gluu server
 # wget https://raw.githubusercontent.com/mbaser/gluu/master/import2431.py
 # wget https://raw.githubusercontent.com/GluuFederation/cluster-mgr/master/testing/ldifschema_utils.py
 # python import2431.py backup_2431
+```
+
+Install the latest version of the Gluu server (Centos7.x)
+----------------------------------------------------------
+```
+# cp backup_2431/setup.properties /install/community-edition-setup
+# cd install/community-edition-setup
+# ./setup.py
+# yum install epel-release
+# yum clean all
+# yum install python-ldap
+# curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+# python get-pip.py
+# pip install jsonmerge
+#python import2431.py backup_2431/
 ```

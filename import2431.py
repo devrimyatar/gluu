@@ -23,6 +23,7 @@ import datetime
 import base64
 import pyDes
 import ldap
+import shelve
 
 from distutils.dir_util import copy_tree
 from ldif import LDIFParser, LDIFWriter
@@ -58,6 +59,15 @@ def progress_bar(t, n, act='', finished=None):
         sys.stdout.flush()
     if finished:
         print
+
+class DBLDIF(LDIFParser):
+    def __init__(self, ldif_file):
+        LDIFParser.__init__(self, open(ldif_file,'rb'))
+        db_file =  os.path.basename(ldif_file)
+        self.sdb = shelve.open(os.path.join('/tmp', db_file+'.sdb'))
+
+    def handle(self, dn, entry):
+        self.sdb[dn] = entry
 
 
 class MyLDIF(LDIFParser):
@@ -106,7 +116,7 @@ class Migration(object):
         self.service = "/usr/sbin/service"
         if self.os is 'centos':
             self.service = "/sbin/service"
-
+        self.open_dj_conf_dir = '/opt/opendj/config/schema/'
         self.slapdConf = "/opt/symas/etc/openldap/slapd.conf"
         self.slapcat = "/opt/symas/bin/slapcat"
         self.slapadd = "/opt/symas/bin/slapadd"
@@ -417,39 +427,66 @@ class Migration(object):
                         line = line.replace('SUP top', 'SUP gluuPerson')
                     newuser.write(line)
 
+    def collectAllSchemaInfo(self):
+        result = { 'attributes': {}, 'objectclasses': {} }
+        for sf in os.listdir(self.open_dj_conf_dir):
+            sch = OpenDjSchema(os.path.join(self.open_dj_conf_dir, sf))
+            for a in sch.attribute_names:
+                result['attributes'][a] = sf
+            for c in sch.class_names:
+                result['objectclasses'][c] = sf
+        return result
+
+
     def copyCustomSchema(self):
-        logging.info("Converting Schema files of custom attributes.")
-        loc = os.path.join(self.backupDir, 'opt', 'opendj', 'config', 'schema')
-        schema_99 = os.path.join(loc, '99-user.ldif')
-        schema_100 = os.path.join(loc, '100-user.ldif')
+        logging.info("Checking Schema files for existance of Gluu attributes and classes")
 
         if self.ldap_type == 'opendj':
-            if os.path.isfile(schema_99):
-                shutil.copyfile(
-                    schema_99, '/opt/opendj/config/schema/99-user.ldif')
-            if os.path.isfile(schema_100):
-                shutil.copyfile(
-                    schema_100, '/opt/opendj/config/schema/100-user.ldif')
-                    
-                #MB: add $ imapHost $ imapPort $ imapUsername $ imapPassword $ gluuPermission  to 77-customAttributes.ldif: gluuCustomPerson
-                schema_100_opendj = OpenDjSchema(schema_100)
+
+            attr_class = self.collectAllSchemaInfo()
+            
+            att_dict = {
+                'gluuPermission': "( 1486403774573 NAME 'gluuPermission' EQUALITY caseIgnoreMatch ORDERING caseIgnoreOrderingMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 USAGE userApplications X-SCHEMA-FILE '100-user.ldif' X-ORIGIN 'gluu' )",
+                'imapHost': "( 1486583290517 NAME 'imapHost' EQUALITY caseIgnoreMatch ORDERING caseIgnoreOrderingMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 USAGE userApplications X-SCHEMA-FILE '100-user.ldif' X-ORIGIN 'gluu' )",
+                'imapUsername': "( 1486583381327 NAME 'imapUsername' EQUALITY caseIgnoreMatch ORDERING caseIgnoreOrderingMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 USAGE userApplications X-SCHEMA-FILE '100-user.ldif' X-ORIGIN 'gluu' )",
+                'imapPort': "( 1486583426410 NAME 'imapPort' EQUALITY caseIgnoreMatch ORDERING caseIgnoreOrderingMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 USAGE userApplications X-SCHEMA-FILE '100-user.ldif' X-ORIGIN 'gluu' )",
+                'imapPassword': "( 1486583480345 NAME 'imapPassword' EQUALITY caseIgnoreMatch ORDERING caseIgnoreOrderingMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 USAGE userApplications X-SCHEMA-FILE '100-user.ldif' X-ORIGIN 'gluu' )",
+                'imapData': "( 1486583825530 NAME 'imapData' EQUALITY caseIgnoreMatch ORDERING caseIgnoreOrderingMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 USAGE userApplications X-SCHEMA-FILE '100-user.ldif' X-ORIGIN 'gluu' )",
+                        }
+            
+            schema_77 = OpenDjSchema(os.path.join(self.open_dj_conf_dir,'77-customAttributes.ldif'))
+            
+            w = False
+            
+            for a in att_dict:
+                if not a in attr_class['attributes']:
+                    schema_77.add_attributes(att_dict[a])
+                    w = True
+            if w:
+                schema_77.write()
+            
+            if 'gluuCustomPerson' not in attr_class['objectclasses']:
+                schema_opendj = OpenDjSchema(os.path.join(self.open_dj_conf_dir,'100-user.ldif'))
+                schema_opendj.add_classs("( 1.3.6.1.4.1.48710.1.4.101 NAME 'gluuCustomPerson' SUP top AUXILIARY MAY ( telephoneNumber $ mobile $ carLicense $ facsimileTelephoneNumber $ departmentNumber $ employeeType $ cn $ st $ manager $ street $ postOfficeBox $ employeeNumber $ preferredDeliveryMethod $ roomNumber $ secretary $ homePostalAddress $ l $ postalCode $ description $ title $ gluuPermission $ imapHost $ imapPort $ imapUsername $ imapPassword ) )")
+                schema_opendj.write()
+            else:
+                schema_opendj = OpenDjSchema(os.path.join(self.open_dj_conf_dir, attr_class['objectclasses']['gluuCustomPerson']))
                 w = False
-                schema_77 = OpenDjSchema('/opt/opendj/config/schema/77-customAttributes.ldif')
-                gluuCustomPerson = schema_77.get_class_by_name('gluuCustomPerson')
+                gluuCustomPerson = schema_opendj.get_class_by_name('gluuCustomPerson')
                 may_list = list(gluuCustomPerson.may)
-                
                 for a in ['imapHost', 'imapPort', 'imapUsername', 'imapPassword', 'gluuPermission']:
-                    if (a in schema_100_opendj.attribute_names) and (a not in may_list):
+                    if a not in may_list:
                         may_list.append(a)
                         w = True
                 if w:
                     gluuCustomPerson.may = tuple(may_list)
-                    schema_77.write()
+                    schema_opendj.write()
         
-        #MB: add attribute oxSectorIdentifierURI to 101-ox.ldif
-        
-        schema_101 = OpenDjSchema('/opt/opendj/config/schema/101-ox.ldif')
-        schema_101.add_attribute(
+            #MB: add attribute oxSectorIdentifierURI to 101-ox.ldif
+            
+            schema_101 = OpenDjSchema(os.path.join(self.open_dj_conf_dir, '101-ox.ldif'))
+            if not 'oxSectorIdentifierURI' in schema_101.attribute_names:
+                schema_101.add_attribute(
                     oid='oxSectorIdentifierURI-oid',
                     names=['oxSectorIdentifierURI'],
                     syntax='1.3.6.1.4.1.1466.115.121.1.15',
@@ -458,9 +495,9 @@ class Migration(object):
                     equality='caseIgnoreMatch',
                     substr='caseIgnoreSubstringsMatch',
                     )
-        schema_101.add_attribute_to_class('pairwiseIdentifier', 'oxSectorIdentifierURI')
-        schema_101.add_attribute_to_class('oxAuthUmaScopeDescription', 'oxUrl')
-        schema_101.write()
+                schema_101.add_attribute_to_class('pairwiseIdentifier', 'oxSectorIdentifierURI')
+                schema_101.add_attribute_to_class('oxAuthUmaScopeDescription', 'oxUrl')
+                schema_101.write()
         
 
         #MB: I did not understand why we are doing followings
@@ -667,6 +704,9 @@ class Migration(object):
 
         # Pick all the left out DNs from the old DN map and write them to the LDIF
         nodn = len(old_dn_map)
+        
+        ldif_shelve_dict = {}
+        
         for cnt, dn in enumerate(sorted(old_dn_map, key=len)):
 
             progress_bar(cnt, nodn, 'Perapring DNs for 3.1.2')
@@ -675,7 +715,13 @@ class Migration(object):
             if dn in currentDNs:
                 continue  # Already processed
 
-            entry = self.getEntry(os.path.join(self.ldifDir, old_dn_map[dn]), dn)
+            cur_ldif_file = old_dn_map[dn]
+            if not cur_ldif_file in ldif_shelve_dict:
+                sdb=DBLDIF(os.path.join(self.ldifDir, cur_ldif_file))
+                sdb.parse()
+                ldif_shelve_dict[cur_ldif_file]=sdb.sdb
+
+            entry = ldif_shelve_dict[cur_ldif_file][dn]
 
             #MB: (1) TODO: instead of processing ldif twice, appy this method for (2)
             if 'ou=people' in dn:
@@ -1022,7 +1068,7 @@ class Migration(object):
         self.fixPermissions()
         self.startLDAPServer()
         self.idpResolved()
-        self.startWebapps()
+        #self.startWebapps()
         print("============================================================")
         print("The migration is complete. Gluu Server needs to be restarted.")
         print("\n\n\t# logout\n\t# service gluu-server-x.x.x restart\n")
