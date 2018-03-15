@@ -8,7 +8,7 @@ Export the data from the current installation
 ----------------------------------------------
 ```
 # service gluu-server-2.x.x login
-# wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/static/scripts/export2431.py
+# wget https://raw.githubusercontent.com/mbaser/gluu/master/export2431.py
 # wget -c https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/ldif.py
 # curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 # python get-pip.py
