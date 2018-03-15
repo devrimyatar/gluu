@@ -304,7 +304,7 @@ def doClientsChangesForUMA2(self, clientPath):
 def doUmaResourcesChangesForUma2(self, UmaPath):
     scimClient = ''
     passportClient = ''
-    inumOrg = self.props['inumOrg']
+    inumOrg = self.inumOrg
     with open('/install/community-edition-setup/setup.properties.last', 'r') as f:
         content = f.readlines()
         for line in content:
@@ -603,7 +603,7 @@ class Exporter(object):
         with open(self.passwordFile, 'w') as pfile:
             pfile.write(ldap_pass)
         # perform sample search
-        sample = self.props['inumOrg']
+        sample = self.inumOrg
         if not sample:
             # get the password from the user if it fails
             ldap_pass = getpass.getpass("Enter LDAP Passsword: ")
@@ -636,7 +636,7 @@ class Exporter(object):
 
     def getLdif(self):
         logging.info('Creating backup of LDAP data')
-        orgInum = self.props['inumOrg']
+        orgInum = self.inumOrg
         # Backup the data
         for basedn in self.base_dns:
             ou = basedn.split("=")[-1]
@@ -856,13 +856,14 @@ class Exporter(object):
         print("-------------------------------------------------------------")
         print("")
         self.makeFolders()
-        self.getLDAPServerTypeChoice()
+        self.inumOrg = self.getProp('inumOrg')
         #self.stopOpenDJ()
         #self.editLdapConfig()
         #self.startOpenDJ()
         self.prepareLdapPW()
         self.backupFiles()
         self.getLdif()
+        self.getLDAPServerTypeChoice()
         self.genProperties()
         #self.removeLdapConfig()
         print("")
