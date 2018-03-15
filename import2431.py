@@ -944,6 +944,8 @@ class Migration(object):
         if self.ldap_type == 'openldap':
             self.getOutput(['chown', 'ldap:ldap', self.ldapDataFile])
             self.getOutput(['chown', 'ldap:ldap', self.ldapSiteFile])
+        else:
+            self.getOutput(['chown', '-R', 'ldap:ldap', '/opt/opendj/db'])
 
     def getProp(self, prop, prop_file=None):
         if not prop_file:
