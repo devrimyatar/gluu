@@ -626,7 +626,7 @@ class Exporter(object):
             error = se.read()
             if error:
                 logging.error(error)
-                logging.debug(output)
+                logging.debug(traceback.format_exc())
             return so.read()
         except:
             logging.error("Error running command : %s" % " ".join(args))
