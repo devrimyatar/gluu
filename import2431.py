@@ -64,7 +64,11 @@ class DBLDIF(LDIFParser):
     def __init__(self, ldif_file):
         LDIFParser.__init__(self, open(ldif_file,'rb'))
         db_file =  os.path.basename(ldif_file)
-        self.sdb = shelve.open(os.path.join('/tmp', db_file+'.sdb'))
+        sdb_file = os.path.join('/tmp', db_file+'.sdb')
+        if os.path.exists(sdb_file):
+            os.remove(sdb_file)
+        #logging.info("\nDumping %s to shelve database" % ldif_file)
+        self.sdb = shelve.open(sdb_file)
 
     def handle(self, dn, entry):
         self.sdb[dn] = entry
@@ -594,6 +598,7 @@ class Migration(object):
         return parser.DNs
 
     def getOldEntryMap(self):
+        logging.info("Preparing dn entry map")
         files = os.listdir(self.ldifDir)
         dnMap = {}
 
@@ -602,12 +607,14 @@ class Migration(object):
         admin_dn = self.getDns(admin_ldif)[0]
 
         for fn in files:
+            logging.info("Processing %s to create dn entry map" % fn)
             dnList = self.getDns(os.path.join(self.ldifDir, fn))
             for dn in dnList:
                 # skip the entry of Admin DN
                 if fn == 'people.ldif' and admin_dn in dn:
                     continue
                 dnMap[dn] = fn
+
         return dnMap
 
     def convertTimeStamp(self, line):
@@ -644,7 +651,8 @@ class Migration(object):
         logging.info('Processing the LDIF data.')
 
         processed_fp = open(self.processTempFile, 'w')
-        ldif_writer = LDIFWriter(processed_fp)
+        ldif_writer = LDIFWriter(processed_fp,  
+                                    base64_attrs=['gluuProfileConfiguration'])
 
         currentDNs = self.getDns(self.currentData)
         old_dn_map = self.getOldEntryMap()
@@ -730,6 +738,19 @@ class Migration(object):
                         entry['objectClass'].remove(o)
                         entry['objectClass'].append('gluuCustomPerson')
                         break
+            if 'ou=trustRelationships' in dn:
+                if 'gluuIsFederation' in entry:
+                    if entry['gluuIsFederation'][0] == 'true':
+                        entry['gluuEntityType'] = ['Federation/Aggregate']
+
+                    else:
+                        entry['gluuEntityType'] = ['Single SP']    
+                        entry['gluuSpecificRelyingPartyConfig']=['true']
+                        LONGBASE64ENCODEDSTRING = '<rp:ProfileConfiguration xsi:type="saml:SAML2SSOProfile" \n\tincludeAttributeStatement="true"\n\tassertionLifetime="300000"\n\tassertionProxyCount="0"\n\tsignResponses="conditional"\n\tsignAssertions="never"\n\tsignRequests="conditional"\n\tencryptAssertions="conditional"\n\tencryptNameIds="never"\n/>'
+                        if not 'gluuProfileConfiguration' in entry:
+                            entry['gluuProfileConfiguration']=[LONGBASE64ENCODEDSTRING]
+                        else:
+                            entry['gluuProfileConfiguration'].append(LONGBASE64ENCODEDSTRING)
 
 
             for attr in entry.keys():
@@ -842,10 +863,10 @@ class Migration(object):
         logging.debug(output)
         #command = [self.ldif_import, '-n', 'userRoot',
         #           '-l', self.o_site, '-R', self.o_site + '.rejects']
-        #command = [self.ldif_import, '-n', 'site',
-        #           '-l', self.o_site, '-R', self.o_site + '.rejects']
-        #output = self.getOutput(command)
-        #logging.debug(output)
+        command = [self.ldif_import, '-n', 'site',
+                   '-l', self.o_site, '-R', self.o_site + '.rejects']
+        output = self.getOutput(command)
+        logging.debug(output)
 
     def importProcessedData(self):
         logging.info("Importing Processed LDAP data.")
@@ -1058,7 +1079,6 @@ class Migration(object):
         self.verifyBackupData()
         self.setupWorkDirectory()
         self.stopWebapps()
-        self.stopLDAPServer()
         self.copyCertificates()
         self.copyCustomFiles()
         self.copyIDPFiles()
