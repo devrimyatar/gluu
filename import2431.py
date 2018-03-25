@@ -347,6 +347,7 @@ class Migration(object):
             logging.error(start_msg)
 
     def exportInstallData(self):
+        self.stopLDAPServer()
         logging.info("Exporting LDAP data.")
         if self.ldap_type == 'openldap':
             output = self.getOutput([self.slapcat, '-f', self.slapdConf,
