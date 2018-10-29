@@ -26,7 +26,7 @@ defaultSiteConfig:
   op_discovery_path: ''
   response_types: ['code']
   grant_type: ['authorization_code']
-  acr_values: ['']
+  acr_values: ['basic']
   scope: ['openid', 'profile']
   ui_locales: ['en']
   claims_locales: ['en']
