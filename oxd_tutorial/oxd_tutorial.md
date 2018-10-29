@@ -233,7 +233,7 @@ else:
     data = {
       "oxd_id": oxd_id,
       "scope": ["openid", "profile"],
-      "acr_values": [],
+      "acr_values": ["basic"],
     }
 
     # [3] User will be directed to Gluu Server to login, so wee need an url for login
