@@ -205,9 +205,9 @@ else:
 Now navigate to https://c3.gluu.org/cgi-bin/oxd.py you will see link **Click here to login**
 as below
 
-![login link](/fig1.png)
+![login link](fig1.png)
 
 Click the link, you will be redirected to Gluu login page, after entering credidentals and allowing
 SP to access claims, you will see user info as:
 
-![user info](/fig2.png)
+![user info](fig2.png)
