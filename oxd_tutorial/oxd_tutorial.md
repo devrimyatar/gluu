@@ -37,7 +37,7 @@ Before start working on oxd-server, we need two settings on Gluu Server
 * Enable dynamic registration of clients: **Configuration->Manage Custom Script**, 
 click on **Client Registration** tab and and enable `client_registration` script, and
 click **Update** button. If you don't want to enable dynamic client registration,
-please register a client manully <give link how to do it>.
+please register [a client manully](create_client.md).
 
 * Enable Basic Script: **Configuration->Manage Custom Script**, 
 click on **Person Authentication** tab and and enable `basic` script, and
@@ -205,9 +205,9 @@ else:
 Now navigate to https://c3.gluu.org/cgi-bin/oxd.py you will see link **Click here to login**
 as below
 
-![login link](fig1.png)
+![login link](/fig1.png)
 
 Click the link, you will be redirected to Gluu login page, after entering credidentals and allowing
 SP to access claims, you will see user info as:
 
-![user info](fig2.png)
+![user info](/fig2.png)
