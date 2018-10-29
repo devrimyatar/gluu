@@ -83,10 +83,6 @@ Before start working on oxd-server, we need two settings on Gluu Server
  click **Update** button. If you don't want to enable dynamic client registration,
  please register [a client manully](create_client.md).
 
-* Enable Basic Script: **Configuration->Manage Custom Script**, 
- click on **Person Authentication** tab and and enable `basic` script, and
- click **Update** button.
-
 The first step is to create a client and register site to oxd. Write the following
 content to `data.json`
 
@@ -237,7 +233,7 @@ else:
     data = {
       "oxd_id": oxd_id,
       "scope": ["openid", "profile"],
-      "acr_values": ["basic"],
+      "acr_values": [],
     }
 
     # [3] User will be directed to Gluu Server to login, so wee need an url for login
