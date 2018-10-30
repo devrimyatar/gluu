@@ -14,8 +14,8 @@ Gluu Server will act as identiy providr (IDP). Follow
 to install your Gluu Server. In this tutorial I installed Gluu Server on host **c2.gluu.org**
 Add a test user. I added user `mbaser`
 
-### Gluu Oxd Server 4.0
-We will use Gluu Oxd Server 4.0, Follow 
+### Gluu Oxd Server 4.0.beta
+We will use Gluu Oxd Server 4.0.beta, Follow 
 [these instructions](https://github.com/GluuFederation/oxd/wiki/oxd-4.0.beta) 
 to install your Gluu Oxd Server. I installed Gluu Oxd Server on host **c3.gluu.org**.
 My **defaultSiteConfig** seciton of configuration `oxd-server.yml` is as followd:
@@ -65,7 +65,7 @@ These are the steps that will be performed for SSO, step numbers maps the steps 
 
 Step | Explanation | Endpoint
 -----|-------------|----------
-1 | Creating a client on Gluu server and registering your site to Oxd Server  (we will do this manuall, not in our cgi script though you can). | get-client-token
+1 | Creating a client on Gluu server and registering your site to Oxd Server  (we will do this manuall, not in our cgi script though you can). | register-site
 2 | Obtain access token from Oxd Server, this token will be used in headers to authenticate to oxd server in all subsequent queries. I will call this as `oxd_access_token`. So, except this step headers of subsequent queries will be: <br> `Content-type: 'application/json` <br> `Authorization': 'Bearer <oxd_access_token>'` | get-client-token
 3 | Get authorization url. User will click on this url to reach Gluu's login page and will will be redirected to `authorization_redirect_uri` | get-authorization-url
 4 | We need to verify if `code` and `state` values returned by browser to our cgi script after authorization by Gluu Server. We can pass these values to Oxd Server and obtain an access token to user's claims. | get-tokens-by-code
