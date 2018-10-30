@@ -147,7 +147,7 @@ Write the following content to `/usr/lib/cgi-bin/oxd.py` and make it executable 
 `chmod +x /usr/lib/cgi-bin/oxd.py`
 
 
-.. literalinclude:: oxd.py
+.. literalinclude:: ./oxd.py
     :linenos:
     :tab-width: 4
     :caption: main.py
