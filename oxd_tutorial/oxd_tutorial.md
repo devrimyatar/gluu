@@ -220,6 +220,9 @@ elif path_info.startswith('/logoutme'):
         "oxd_id": oxd_id,
     }
 
+    # Read access_token that we previously saved
+    oxd_access_token = open('/tmp/oxd_access_token.txt').read()
+
     # [6] Request logout uri from oxd server.
     result = post_data('get-logout-uri', data, oxd_access_token)
 
