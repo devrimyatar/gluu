@@ -5,7 +5,7 @@ with Python CGI, hoping that programmers of other languages will benefit.
 
 ## Perliminary
 
-For this tutorail we need Gluu Server 3.1.4, Gluu Oxd Server 4.0 and https & cgi enabled
+For this tutorail we need Gluu Server 3.1.4, Gluu Oxd Server 4.0.beta and https & cgi enabled
 web server. 
 
 ### Gluu Server 3.1.4 (IDP OP)
