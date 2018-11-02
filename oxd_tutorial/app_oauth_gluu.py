@@ -1,3 +1,8 @@
+#!/usr/bin/python
+
+# This is an example flask application that shows you how to use oauth2
+# authorization/aauthentication using Gluu Server 3.1.4
+
 from flask import Flask, request, redirect, url_for
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 
