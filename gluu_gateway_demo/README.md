@@ -129,6 +129,13 @@ client_id = "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!B021.E33B.3261.AF1E"
 client_secret = "73039435-13f4-4999-904f-31a69e946195"
 ```
 
+Before going further let us set Claim Redirect URI for this client, we weill need it for claim gatering service.
+Login to Gluu Server, click on **OpenID Connect**, **Clients**. Click on **ggconsumerclient**, In the client details
+screen, click **Advenced settings** tab, delete if there is any entries in **Claim Redirect URIs** field. Click on
+**Add Claim Redirect URIs** button, on the pop-up write `https://rs.mygluu.org:5500/cg` to the textbox. After adding
+reiderct uri, click **Update** button.
+
+
 ### Create Service, Route and Plugin for None Claim Gatering
 1. Create Service
 On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
@@ -160,8 +167,8 @@ anything on **Other configurations** settings. Click **ADD PLUGIN** button.
 
 ![UMA PEP Plugin for None Claim Gatering](gg_none_cliam_uma_plugin.png)
 
-4. Grant Access to None Policy Scopes
-Login to Gluu Server, click **Configuration**, **JSON Configuration**, then **oxAuth Configuration** tab. Scroll down until
+4. Gluu Server Tweaks
+We need to give grant gccess to none policy scopes. Login to Gluu Server, click **Configuration**, **JSON Configuration**, then **oxAuth Configuration** tab. Scroll down until
 **umaGrantAccessIfNoPolicies** set it to `true`
 
 ![Grant Access to None Policy Scopes](umaGrantAccessIfNoPolicies.png)
@@ -171,7 +178,7 @@ Finally test it. On your desktop navigate to the following url:
 
 https://rs.mygluu.org:5500/nc
 
-If everything went well, you will see the following on your browser:
+If everything goes well, you will see the following on your browser:
 
 ![None Claim Gatering](gg_none_claim_result.png)
 
@@ -190,4 +197,37 @@ The same as None Claim Gatering, except scope, please write `claim_gatering` to 
 
 ![UMA PEP Plugin for Claim Gatering](gg_cliam_uma_plugin.png)
 
-4. 
+We need Client ID for this plugin. To see ID, click eye icon left to the name of plugin `claim_gatering`.
+In the popup window take note of `client_id`. In my case it is:
+
+`
+ "client_id": "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!6113.376D.C687.ED24",
+`
+
+4. Gluu Server Tweaks
+Login to Gluu Server. To enable uma_rpt_policy custom script, click  **Configuration**, **Manage Custom scripts**, then 
+click **UMA RPT Policies** tab. Expand **uma_rpt_policy** custom script pane, scroll down and click **Enabled** checkbox.
+Click **Update** button. Secondly, do the same for custom script `sampleClaimsGathering` on **UMA Claims Gathering** tab. 
+Thirdly, we need to add `uma_rpt_policy` policy to `claim_gatering` Uma Scope. For this click **UMA** on the left panel, then
+click on scopes. Click on `claim_gatering` scope. In the sope details screen, click **Add Authorization Policy**. In the popup
+check `uma_rpt_policy`.
+
+![UMA Authorization Policy for Scope](uma_authorization_policiy.png)
+
+Finally click **Update** button.
+
+Test it! On your desktop navigate to the following url:
+
+https://rs.mygluu.org:5500/cg
+
+If things goes well, you will get a link to gather claims at the end of the window:
+
+![Claim Gathering URL](claim_gathering_url.png)
+
+Click the link, you will be asked Country, enter `US`, then for City enter `NY`. You will be rederected to resourse server,
+and will see:
+
+![Claim Gathering](claim_gathering_result.png)
+
+
+
