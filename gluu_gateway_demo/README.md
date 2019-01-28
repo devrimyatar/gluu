@@ -36,9 +36,14 @@ Download gg_demo_app.py:
 
 `wget https://raw.githubusercontent.com/mbaser/gluu/master/gluu_gateway_demo/gg_demo_app.py`
 
+Create `templates` directory and get template:
+```
+# mkdir templates
+# wget https://raw.githubusercontent.com/mbaser/gluu/master/gluu_gateway_demo/templates/index.html -O templates/index.html
+```
+
 And run as:
 `# python gluu_gateway_demo/gg_demo_app.py`
-
 
 
 ## Upstream Server
@@ -155,6 +160,13 @@ anything on **Other configurations** settings. Click **ADD PLUGIN** button.
 
 ![UMA PEP Plugin for None Claim Gatering](gg_none_cliam_uma_plugin.png)
 
+4. Grant Access to None Policy Scopes
+Login to Gluu Server, click **Configuration**, **JSON Configuration**, then **oxAuth Configuration** tab. Scroll down until
+**umaGrantAccessIfNoPolicies** set it to `true`
+
+![Grant Access to None Policy Scopes](umaGrantAccessIfNoPolicies.png)
+
+
 Finally test it. On your desktop navigate to the following url:
 
 https://rs.mygluu.org:5500/nc
@@ -163,3 +175,19 @@ If everything went well, you will see the following on your browser:
 
 ![None Claim Gatering](gg_none_claim_result.png)
 
+### Create Service, Route and Plugin for None Claim Gatering
+1. Create Service
+The same as None Claim Gatering, except Name and Host:
+**Name:** claim-gatering  
+**Host:** claim-gatering.mygluu.org
+
+2. Add Route
+The same as None Claim Gatering, except Hosts:
+**Hosts:** claim-gatering.mygluu.org
+
+3. Add Plugin
+The same as None Claim Gatering, except scope, please write `claim_gatering` to scope as follows:
+
+![UMA PEP Plugin for Claim Gatering](gg_cliam_uma_plugin.png)
+
+4. 
