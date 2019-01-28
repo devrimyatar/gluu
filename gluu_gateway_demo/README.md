@@ -128,10 +128,15 @@ client_secret = "73039435-13f4-4999-904f-31a69e946195"
 1. Create Service
   On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
   following boxes:
+  
   **Name:** none-claim-gatering
+  
   **Protocol:** https
+  
   **Host:** none-claim-gatering.mygluu.org
+  
   **Port:** 5000
+  
   **Path:** /posts
   
 
