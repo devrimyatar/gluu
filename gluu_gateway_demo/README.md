@@ -1,7 +1,7 @@
 # Gluu Gateway Demo Flask Application
 
-Requirements
-============
+## Requirements
+
 For this demo I will use the following VM's.
 
 |Name                    |IP Address      |Hosts            |OS                                |
@@ -23,8 +23,7 @@ Since I am using virtual IP/hosts I write the following content to file `/etc/ho
 
 ```
 
-Resource Server
----------------
+## Resource Server
 
 I am assuing that Python and pip is installed on this server. Install Flask and pyOpenSSL
 
@@ -42,8 +41,8 @@ And run as:
 
 
 
-Upstream Server
-----------------
+## Upstream Server
+
 I am assuing that Python and pip is installed on this server. Install Flask and pyOpenSSL
 
 ```
@@ -71,14 +70,14 @@ $ curl -k https://claim-gatering.mygluu.org:5000/posts
 ```
 
 
-OpenID Connect Provider
------------------------
+## OpenID Connect Provider
+
 As OpenID Connect Provider I sue Gluu Server. Please install Gluu Server by following
 instruction explained [here https://gluu.org/docs/ce/installation-guide/](https://gluu.org/docs/ce/installation-guide/)
 
 
-Gluu Gateway
-------------
+## Gluu Gateway
+
 For this demo, I used Gluu Gateway (GG) 4.0bta. Please install Gluu Gateway by following
 instruction explained [here https://gluu.org/docs/gg/installation/](https://gluu.org/docs/gg/installation/)
 
@@ -93,6 +92,9 @@ to the following address:
 https://localhost:1338
 
 Your GG UI will come, login to GG UI with your Gluu Server **admin** credidentals.
+
+
+### Create Consumer
 
 The first thing is to create a consumer that will be used by Resource Server. For this, click **CONSUMERS**
 on the left panel. Firstly we need to create a client for the consumer, click "+ CREATE CLIENT" button,
@@ -112,7 +114,7 @@ I wrote **ggconsumer** and write `Client Id` you to **Gluu Client Id**
 
 
 Edit `gg_demo_app.py` on your **Resource Server** and replace values of `client_oxd_id`, `client_id` and `client_secret`
-those you get while creating client for consumer. Since it is is degub mode it, program will reload automatically
+those you get while creating client for consumer. Since it is in degub mode it, program will reload automatically
 so you don't need to restart. In my case:
 
 ```
@@ -122,9 +124,19 @@ client_id = "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!B021.E33B.3261.AF1E"
 client_secret = "73039435-13f4-4999-904f-31a69e946195"
 ```
 
+### Create Service, Route and Plugin for None Claim Gatering
+1. Create Service
+  On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
+  following boxes:
+  **Name:** none-claim-gatering
+  **Protocol:** https
+  **Host:** none-claim-gatering.mygluu.org
+  **Port:** 5000
+  **Path:** /posts
+  
 
 
- 
+  ![Service for None Claim Gatering](none_claim_service.png)
 
 
-![Sample Screenshot](gg_demo_scrren_shot.png)
+
