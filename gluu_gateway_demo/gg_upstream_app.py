@@ -3,7 +3,6 @@ import time
 app = Flask(__name__)
 
 @app.route('/posts')
-
 def posts():
     return jsonify({'location': request.url, 'time':time.ctime(),"message": "I am a test flask-api for Gluu Gateway"})
 

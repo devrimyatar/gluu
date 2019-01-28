@@ -42,6 +42,20 @@ Create `templates` directory and get template:
 # wget https://raw.githubusercontent.com/mbaser/gluu/master/gluu_gateway_demo/templates/index.html -O templates/index.html
 ```
 
+Edit set following varaibles in `gg_demo_app.py` file to fit your settings. 
+
+```
+gg_proxy_url = "http://gg.mygluu.org:8000"
+oxd_host = "https://gg.mygluu.org:8443"
+op_host = "https://op.mygluu.org"
+api_path = "posts"
+
+# Kong route register with below host
+host_without_claims = "none-claim-gatering.mygluu.org"
+host_with_claims = "claim-gatering.mygluu.org"
+```
+
+
 And run as:
 `# python gluu_gateway_demo/gg_demo_app.py`
 
@@ -89,7 +103,7 @@ instruction explained [here https://gluu.org/docs/gg/installation/](https://gluu
 GG UI is only available on localhost. Sice it is on a remote machine, we need ssh port forwarding
 to reacg GG UI. My GG IP is 192.168.56.104, thus:
 
-`$ ssh -L 1338:localhost:1338 user@192.168.56.104`
+`$ ssh -L 1338:localhost:1338 user@gg.mygluu.org`
 
 Where `user` is any username that can make ssh to GG host. On your desktop open a browser and navigate
 to the following address:
@@ -102,7 +116,7 @@ Your GG UI will come, login to GG UI with your Gluu Server **admin** credidental
 ### Create Consumer
 
 The first thing is to create a consumer that will be used by Resource Server. For this, click **CONSUMERS**
-on the left panel. Firstly we need to create a client for the consumer, click "+ CREATE CLIENT" button,
+on the left panel. Firstly we need to create a client for the consumer, click **+ CREATE CLIENT** button,
 you just need to write **Client Name**, for this demo I wrote **ggconsumerclient**
 
 ![Create Client for Consumer](gg_consumer_client.png)
@@ -154,8 +168,7 @@ following boxes:
 ![Service for None Claim Gatering](none_claim_service.png)
 
 #### Add Route
-On GG UI, click **SERVICES** on the left panel, and then click on the link for none-claim-gatering. Click **Routes**
-then click **+ ADD ROUTE** button. Fill the following boxes:
+Click **Routes** then click **+ ADD ROUTE** button. Fill the following boxes:
 
 **Hosts:** none-claim-gatering.mygluu.org
 
