@@ -142,9 +142,13 @@ On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVI
 following boxes:
   
 **Name:** none-claim-gatering
+
 **Protocol:** https
+
 **Host:** none-claim-gatering.mygluu.org
+
 **Port:** 5000
+
 **Path:** /posts
 
 ![Service for None Claim Gatering](none_claim_service.png)
