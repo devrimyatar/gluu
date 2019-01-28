@@ -107,7 +107,7 @@ credidental info:
 
 ![Creadidentals of Client for Consumer](gg_consumer_client_info.png)
 
-To create a consumer, click on "+ CREATE CONSUMER" button. On the popup screen, write a name for consumer, 
+To create a consumer, click on **+ CREATE CONSUMER** button. On the popup screen, write a name for consumer, 
 I wrote **ggconsumer** and write `Client Id` you to **Gluu Client Id**
 
 ![Creadidentals of Client for Consumer](gg_consumer.png)
@@ -126,22 +126,40 @@ client_secret = "73039435-13f4-4999-904f-31a69e946195"
 
 ### Create Service, Route and Plugin for None Claim Gatering
 1. Create Service
-  On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
-  following boxes:
+On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
+following boxes:
   
-  **Name:** none-claim-gatering
-  
-  **Protocol:** https
-  
-  **Host:** none-claim-gatering.mygluu.org
-  
-  **Port:** 5000
-  
-  **Path:** /posts
-  
+**Name:** none-claim-gatering  
+**Protocol:** https
+**Host:** none-claim-gatering.mygluu.org
+**Port:** 5000
+**Path:** /posts
 
+![Service for None Claim Gatering](none_claim_service.png)
 
-  ![Service for None Claim Gatering](none_claim_service.png)
+2. Add Route
+On GG UI, click **SERVICES** on the left panel, and then click on the link for none-claim-gatering. Click **Routes**
+then click **+ ADD ROUTE** button. Fill the following boxes:
 
+**Hosts:** none-claim-gatering.mygluu.org
+**Paths:** /posts
 
+Note: Once you write to textboxes press "Enter"
+![Route for None Claim Gatering](none_claim_route.png)
+
+3. Add Plugin
+Click **Plugins** then click **+ ADD PLUGIN** button. A pop-up screen will be displayed. Click **+** icon the the rigth 
+side of **Gluu UMA PEP**. In the upcoming screen, click **+ ADD PATH** button. Write `/posts` to the path to be protected
+and `none_claim_gatering` to the scope, remember you need to press "Enter" after writing scope. You don't need to write
+anything on **Other configurations** settings. Click **ADD PLUGIN** button.
+
+![UMA PEP Plugin for None Claim Gatering](gg_none_cliam_uma_plugin.png)
+
+Finally test it. On your desktop navigate to the following url:
+
+https://rs.mygluu.org:5500/nc
+
+If everything went well, you will see the following on your browser:
+
+![None Claim Gatering](gg_none_claim_result.png)
 
