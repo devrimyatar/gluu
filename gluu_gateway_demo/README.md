@@ -137,11 +137,11 @@ reiderct uri, click **Update** button.
 
 
 ### Create Service, Route and Plugin for None Claim Gatering
-1. Create Service
+#### Create Service
 On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
 following boxes:
   
-**Name:** none-claim-gatering  
+**Name:** none-claim-gatering 
 **Protocol:** https
 **Host:** none-claim-gatering.mygluu.org
 **Port:** 5000
@@ -149,7 +149,7 @@ following boxes:
 
 ![Service for None Claim Gatering](none_claim_service.png)
 
-2. Add Route
+#### Add Route
 On GG UI, click **SERVICES** on the left panel, and then click on the link for none-claim-gatering. Click **Routes**
 then click **+ ADD ROUTE** button. Fill the following boxes:
 
@@ -159,7 +159,7 @@ then click **+ ADD ROUTE** button. Fill the following boxes:
 Note: Once you write to textboxes press "Enter"
 ![Route for None Claim Gatering](none_claim_route.png)
 
-3. Add Plugin
+#### Add Plugin
 Click **Plugins** then click **+ ADD PLUGIN** button. A pop-up screen will be displayed. Click **+** icon the the rigth 
 side of **Gluu UMA PEP**. In the upcoming screen, click **+ ADD PATH** button. Write `/posts` to the path to be protected
 and `none_claim_gatering` to the scope, remember you need to press "Enter" after writing scope. You don't need to write
@@ -167,7 +167,7 @@ anything on **Other configurations** settings. Click **ADD PLUGIN** button.
 
 ![UMA PEP Plugin for None Claim Gatering](gg_none_cliam_uma_plugin.png)
 
-4. Gluu Server Tweaks
+#### Gluu Server Tweaks
 We need to give grant gccess to none policy scopes. Login to Gluu Server, click **Configuration**, **JSON Configuration**, then **oxAuth Configuration** tab. Scroll down until
 **umaGrantAccessIfNoPolicies** set it to `true`
 
@@ -183,22 +183,22 @@ If everything goes well, you will see the following on your browser:
 ![None Claim Gatering](gg_none_claim_result.png)
 
 ### Create Service, Route and Plugin for None Claim Gatering
-1. Create Service
+#### Create Service
 The same as None Claim Gatering, except Name and Host:
 **Name:** claim-gatering  
 **Host:** claim-gatering.mygluu.org
 
-2. Add Route
+#### Add Route
 The same as None Claim Gatering, except Hosts:
 **Hosts:** claim-gatering.mygluu.org
 
-3. Add Plugin
+#### Add Plugin
 The same as None Claim Gatering, except scope, please write `claim_gatering` to scope as follows:
 
 ![UMA PEP Plugin for Claim Gatering](gg_cliam_uma_plugin.png)
 
 
-4. Gluu Server Tweaks
+#### Gluu Server Tweaks
 Login to Gluu Server. To enable uma_rpt_policy custom script, click  **Configuration**, **Manage Custom scripts**, then 
 click **UMA RPT Policies** tab. Expand **uma_rpt_policy** custom script pane, scroll down and click **Enabled** checkbox.
 Click **Update** button. Secondly, do the same for custom script `sampleClaimsGathering` on **UMA Claims Gathering** tab. 
