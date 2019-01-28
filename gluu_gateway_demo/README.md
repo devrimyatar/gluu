@@ -23,10 +23,39 @@ Since I am using virtual IP/hosts I write the following content to file `/etc/ho
 
 ```
 
+Upstream Server
+----------------
+I am assuing that Python and pip is installed on this server. Install Flask and pyOpenSSL
+
+```
+# pip install flask 
+# pip install pyopenssl 
+``` 
+
+Download gg_demo_app.py:
+
+
+`wget https://raw.githubusercontent.com/mbaser/gluu/master/gluu_gateway_demo/gg_upstream_app.py`
+
+And run as:
+`# python gluu_gateway_demo/gg_upstream_app.py`
+
+It will listen port 5000 of all interfaces. Test if it is running:
+
+```
+$ curl -k https://claim-gatering.mygluu.org:5000/posts
+{
+  "location": "https://claim-gatering.mygluu.org:5000/posts", 
+  "message": "I am a test flask-api for Gluu Gateway", 
+  "time": "Mon Jan 28 16:03:16 2019"
+}
+```
+
+
 OpenID Connect Provider
 -----------------------
 As OpenID Connect Provider I sue Gluu Server. Please install Gluu Server by following
-instruction explained [here https://gluu.org/docs/ce/installation-guide/]((https://www.google.com "Google's Homepage"))
+instruction explained [here https://gluu.org/docs/ce/installation-guide/](https://gluu.org/docs/ce/installation-guide/)
 
 
 Gluu Gateway
@@ -46,6 +75,22 @@ https://localhost:1338
 
 Your GG UI will come, login to GG UI with your Gluu Server **admin** credidentals.
 
+The first thing is to create a consumer that will be used by Resource Server. For this, click **CONSUMERS**
+on the left panel. Firstly we need to create a client for the consumer, click "+ CREATE CLIENT" button,
+you just need to write **Client Name**, for this demo I wrote **ggconsumerclient**
+
+![Create Client for Consumer](gg_consumer_client.png)
+
+Once you hit, you will see credidentals for consumer client, before closing the pop-up screen please copy
+credidental info:
+
+![Creadidentals of Client for Consumer](gg_consumer_client_info.png)
+
+In my case:
+|Client Name|ggconsumerclient|
+|OXD Id|80e6c1f8-76cb-4601-afb8-19866ed2a29a|
+|Client Id|@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!B021.E33B.3261.AF1E|
+|Client Secret|73039435-13f4-4999-904f-31a69e946195|
 
 
 
