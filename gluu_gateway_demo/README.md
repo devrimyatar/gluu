@@ -23,6 +23,25 @@ Since I am using virtual IP/hosts I write the following content to file `/etc/ho
 
 ```
 
+Resource Server
+---------------
+
+I am assuing that Python and pip is installed on this server. Install Flask and pyOpenSSL
+
+```
+# pip install flask 
+# pip install pyopenssl 
+```
+
+Download gg_demo_app.py:
+
+`wget https://raw.githubusercontent.com/mbaser/gluu/master/gluu_gateway_demo/gg_demo_app.py`
+
+And run as:
+`# python gluu_gateway_demo/gg_demo_app.py`
+
+
+
 Upstream Server
 ----------------
 I am assuing that Python and pip is installed on this server. Install Flask and pyOpenSSL
@@ -86,33 +105,25 @@ credidental info:
 
 ![Creadidentals of Client for Consumer](gg_consumer_client_info.png)
 
-In my case:
-|Client Name|ggconsumerclient|
-|OXD Id|80e6c1f8-76cb-4601-afb8-19866ed2a29a|
-|Client Id|@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!B021.E33B.3261.AF1E|
-|Client Secret|73039435-13f4-4999-904f-31a69e946195|
+To create a consumer, click on "+ CREATE CONSUMER" button. On the popup screen, write a name for consumer, 
+I wrote **ggconsumer** and write `Client Id` you to **Gluu Client Id**
+
+![Creadidentals of Client for Consumer](gg_consumer.png)
 
 
-
-
-Resource Server
----------------
-
-I am assuing that Python and pip is installed on this server. Install Flask and pyOpenSSL
+Edit `gg_demo_app.py` on your **Resource Server** and replace values of `client_oxd_id`, `client_id` and `client_secret`
+those you get while creating client for consumer. Since it is is degub mode it, program will reload automatically
+so you don't need to restart. In my case:
 
 ```
-# pip install flask 
-# pip install pyopenssl 
+# Consumer client
+client_oxd_id = "80e6c1f8-76cb-4601-afb8-19866ed2a29a"
+client_id = "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!B021.E33B.3261.AF1E"
+client_secret = "73039435-13f4-4999-904f-31a69e946195"
 ```
 
-Download gg_demo_app.py:
 
-`wget https://raw.githubusercontent.com/mbaser/gluu/master/gluu_gateway_demo/gg_demo_app.py`
 
-And run as:
-`# python gluu_gateway_demo/gg_demo_app.py`
-
-This will output something like:
  
 
 

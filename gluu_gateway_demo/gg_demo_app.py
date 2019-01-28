@@ -20,9 +20,9 @@ host_with_claims = "claim-gatering.mygluu.org"
 
 
 # Consumer client
-client_oxd_id = "88091d37-0ea2-41fe-a5af-89b8f2242c0d"
-client_id = "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!98AA.59F7.C554.48CA"
-client_secret = "c579e261-c04f-4d44-9fa5-1fb3b937ba88"
+client_oxd_id = "80e6c1f8-76cb-4601-afb8-19866ed2a29a"
+client_id = "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!B021.E33B.3261.AF1E"
+client_secret = "73039435-13f4-4999-904f-31a69e946195"
 
 # You need to add this URL in your consumer client in OP
 claims_redirect_url = "https://rs.mygluu.org:5500/cg"
