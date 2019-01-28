@@ -141,10 +141,14 @@ reiderct uri, click **Update** button.
 On GG UI, click **SERVICES** on the left panel, and then click **+ ADD NEW SERVICE** button. Please fill the
 following boxes:
   
-**Name:** none-claim-gatering 
+**Name:** none-claim-gatering
+
 **Protocol:** https
+
 **Host:** none-claim-gatering.mygluu.org
+
 **Port:** 5000
+
 **Path:** /posts
 
 ![Service for None Claim Gatering](none_claim_service.png)
@@ -154,6 +158,7 @@ On GG UI, click **SERVICES** on the left panel, and then click on the link for n
 then click **+ ADD ROUTE** button. Fill the following boxes:
 
 **Hosts:** none-claim-gatering.mygluu.org
+
 **Paths:** /posts
 
 Note: Once you write to textboxes press "Enter"
@@ -185,11 +190,14 @@ If everything goes well, you will see the following on your browser:
 ### Create Service, Route and Plugin for None Claim Gatering
 #### Create Service
 The same as None Claim Gatering, except Name and Host:
+
 **Name:** claim-gatering  
+
 **Host:** claim-gatering.mygluu.org
 
 #### Add Route
 The same as None Claim Gatering, except Hosts:
+
 **Hosts:** claim-gatering.mygluu.org
 
 #### Add Plugin
