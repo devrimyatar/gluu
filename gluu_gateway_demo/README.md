@@ -197,12 +197,6 @@ The same as None Claim Gatering, except scope, please write `claim_gatering` to 
 
 ![UMA PEP Plugin for Claim Gatering](gg_cliam_uma_plugin.png)
 
-We need Client ID for this plugin. To see ID, click eye icon left to the name of plugin `claim_gatering`.
-In the popup window take note of `client_id`. In my case it is:
-
-`
- "client_id": "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!6113.376D.C687.ED24",
-`
 
 4. Gluu Server Tweaks
 Login to Gluu Server. To enable uma_rpt_policy custom script, click  **Configuration**, **Manage Custom scripts**, then 
