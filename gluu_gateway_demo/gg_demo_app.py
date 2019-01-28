@@ -25,7 +25,7 @@ client_id = "@!C7C2.102D.7511.41D4!0001!B1AD.E92E!0008!98AA.59F7.C554.48CA"
 client_secret = "c579e261-c04f-4d44-9fa5-1fb3b937ba88"
 
 # You need to add this URL in your consumer client in OP
-claims_redirect_url = "https://rs.mygluu.org:5500"
+claims_redirect_url = "https://rs.mygluu.org:5500/cg"
 
 
 def get_ticket(host):
@@ -106,12 +106,12 @@ def call_gg_rpt(host, rpt):
                 
 
 
-@app.route('/', methods=['GET','POST'])
-def index():
+@app.route('/<ct>', methods=['GET','POST'])
+def index(ct):
     
     steps = []
     
-    if 'claim' in request.args or 'ticket' in request.args:
+    if ct == 'cg':
         host = host_with_claims
     else:
        host = host_without_claims
@@ -142,4 +142,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5500, debug=True, ssl_context=('cert.pem', 'key.pem')) #ssl_context='adhoc')
+    app.run(host="0.0.0.0", port=5500, debug=True, ssl_context='adhoc')
