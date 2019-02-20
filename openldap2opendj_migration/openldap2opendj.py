@@ -1447,6 +1447,7 @@ if __name__ == '__main__':
 
     installObject = Setup(setupOptions['install_dir'])
     installObject.load_properties(installObject.setup_properties_fn)
+    installObject.check_properties()
     installObject.ldapPass = get_ldap_bind_pw()
     installObject.ldap_binddn='cn=Directory Manager'
     installObject.ldap_type = 'opendj'
