@@ -1426,6 +1426,14 @@ class Setup(object):
 
     def get_missing_files(self):
         if os.path.exists(os.path.join(self.install_dir, 'static/opendj/deprecated')):
+            self.run(['wget', 'https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/schema/generator.py', '-O', './schema/generator.py'])
+            cmd_l = ['python ./schema/manager.py generate --type opendj --filename ./schema/gluu_schema.json > ./static/opendj/deprecated/101-ox.ldif',
+                     'python ./schema/manager.py generate --type opendj --filename ./schema/custom_schema.json > ./static/opendj/deprecated/77-customAttributes.ldif']
+
+            for cmd in cmd_l:
+                self.logIt('Running: ' + cmd)
+                os.system(cmd)
+
             self.openDjschemaFiles = glob.glob(os.path.join(self.install_dir, 'static/opendj/deprecated/*.ldif'))
         
         if not os.path.exists(self.openDjIndexJson):
