@@ -42,13 +42,13 @@ Get migration script from repo:
 CentOS7 users:
 
 ```
-# yum install python-ldap
+# yum install -y python-ldap
 ```
 
 Ubuntu Users:
 
 ```
-# apt-get install python-ldap
+# apt-get install -y python-ldap
 ```
 
 ## Run migration script:

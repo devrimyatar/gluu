@@ -1433,7 +1433,7 @@ class Setup(object):
                     
         if not os.path.exists(self.opendj_service_centos7):
             os.system('mkdir %s/static/opendj/systemd' % self.install_dir)
-            self.run(['wget', 'https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_3.1.2/static/opendj/systemd/opendj.service', '-O' self.opendj_service_centos7])
+            self.run(['wget', 'https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_3.1.2/static/opendj/systemd/opendj.service', '-O', self.opendj_service_centos7])
 
 
 if __name__ == '__main__':
