@@ -360,10 +360,15 @@ class Setup(object):
 
         self.openDjIndexJson = '%s/static/opendj/index.json' % self.install_dir
         self.openDjSchemaFolder = "%s/config/schema" % self.ldapBaseFolder
+        
+        
         self.openDjschemaFiles = ["%s/static/opendj/96-eduperson.ldif" % self.install_dir,
                             "%s/static/opendj/101-ox.ldif" % self.install_dir,
                             "%s/static/opendj/77-customAttributes.ldif" % self.install_dir]
 
+        if os.path.exists(os.path.join(self.install_dir, 'static/opendj/deprecated')):
+            self.openDjschemaFiles = glob.glob(os.path.join(self.install_dir, 'static/opendj/deprecated/*.ldif'))
+        
         self.opendj_init_file = '%s/static/opendj/opendj' % self.install_dir
         self.opendj_service_centos7 = '%s/static/opendj/systemd/opendj.service' % self.install_dir
 
@@ -635,6 +640,7 @@ class Setup(object):
             self.asimbaJksPass = self.getPW()
         if not self.openldapKeyPass:
             self.openldapKeyPass = self.getPW()
+        if not self.openldapJksPass:
             self.openldapJksPass = self.getPW()
         if not self.opendj_p12_pass:
             self.opendj_p12_pass = self.getPW()
@@ -1418,11 +1424,17 @@ class Setup(object):
             self.logIt(traceback.format_exc(), True)
 
 
-#/opt/opendj/bin/ldapsearch -X -Z -D "cn=directory manager,o=gluu" -w Gluu1234 -h localhost -p 1636 -b "o=gluu" "Objectclass=*" > /root/gluu.ldif
-#/opt/opendj/bin/ldapsearch -X -Z -D "cn=directory manager,o=gluu" -w Gluu1234 -h localhost -p 1636 -b "o=site" "Objectclass=*" > /root/site.ldif
-#/etc/init.d/solserver stop
-#/opt/opendj/bin/import-ldif  -b "o=gluu" -n userRoot -l /root/gluu.ldif  -R /root/gluu.ldif.rejects
-#/opt/opendj/bin/import-ldif  -b "o=site" -n site -l /root/site.ldif  -R /root/site.ldif.rejects
+    def get_missing_files(self):
+        if os.path.exists(os.path.join(self.install_dir, 'static/opendj/deprecated')):
+            self.openDjschemaFiles = glob.glob(os.path.join(self.install_dir, 'static/opendj/deprecated/*.ldif'))
+        
+        if not os.path.exists(self.openDjIndexJson):
+            self.run(['wget', 'https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_3.1.2/static/opendj/index.json', '-O', self.openDjIndexJson])
+                    
+        if not os.path.exists(self.opendj_service_centos7):
+            os.system('mkdir %s/static/opendj/systemd' % self.install_dir)
+            self.run(['wget', 'https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_3.1.2/static/opendj/systemd/opendj.service', '-O' self.opendj_service_centos7])
+
 
 if __name__ == '__main__':
 
@@ -1453,6 +1465,7 @@ if __name__ == '__main__':
     installObject.ldap_type = 'opendj'
     installObject.encode_passwords()
     
+    
     # Get the OS type
     installObject.os_type = installObject.detect_os_type()
     # Get the init type
@@ -1466,6 +1479,7 @@ if __name__ == '__main__':
         else:
             sys.exit("Unrecognized argument")
 
+    installObject.get_missing_files()
     installObject.createLdapPw()
     installObject.downloadAndExtractOpenDJ()
     installObject.install_opendj()        
