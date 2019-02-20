@@ -33,7 +33,7 @@ If you have other Gluu servers, also stop them.
 Get migration script from repo:
 
 ```
-wget https://raw.githubusercontent.com/mbaser/gluu/master/openldap2opendj_migration/openldap2opendj.py -O /install/community-edition-setup/openldap2opendj.py
+# wget https://raw.githubusercontent.com/mbaser/gluu/master/openldap2opendj_migration/openldap2opendj.py -O /install/community-edition-setup/openldap2opendj.py
 
 ```
 
@@ -92,7 +92,7 @@ Re-run migration script with `-p` argument to do post migrations
 ## Start Servers
 ```
 # /etc/init.d/oxauth start
-# /etc/init.d/identiy start
+# /etc/init.d/identity start
 ```
 
 Try login to Gluu UI, if everything is well remove OpenLDAP:
