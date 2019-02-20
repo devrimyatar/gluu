@@ -88,9 +88,6 @@ def update_ox_ldap_prop(bindDN, trustStoreFile, trustStorePin):
         w.write(''.join(prop))
     
 def update_ox_idp(ldap_bind_dn, ldap_bind_pw):
-    
-    print ldap_bind_dn, ldap_bind_pw
-    
     conn = ldap.initialize('ldaps://localhost:1636')
     conn.protocol_version = 3 
     conn.simple_bind_s(ldap_bind_dn, ldap_bind_pw)
