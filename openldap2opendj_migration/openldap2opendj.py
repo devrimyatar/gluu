@@ -51,6 +51,9 @@ ldap.set_option(ldap.OPT_REFERRALS, 0)
 from pyDes import *
 
 
+migration_time = time.ctime().replace(' ','_')
+
+
 ox_ldap_prop_fn = '/etc/gluu/conf/ox-ldap.properties'
 
 
@@ -77,7 +80,7 @@ def update_ox_ldap_prop(bindDN, trustStoreFile, trustStorePin):
             prop[i] = 'ssl.trustStoreFile: {0}\n'.format(trustStoreFile)
         elif ls.startswith('ssl.trustStorePin'):
             prop[i] = 'ssl.trustStorePin: {0}\n'.format(trustStorePin)
-    cmd = 'cp {0} {0}.back_{1}'.format(ox_ldap_prop_fn, time.ctime().replace(' ','_'))
+    cmd = 'cp {0} {0}.back_{1}'.format(ox_ldap_prop_fn, migration_time)
         
     os.system(cmd)
     
@@ -1303,6 +1306,55 @@ class Setup(object):
             self.run([service_path, 'opendj', 'start'])
 
 
+    def downloadAndExtractOpenDJ(self):
+
+        openDJArchive = os.path.join(self.distFolder, 'app/opendj-server-3.0.1.gluu.zip')
+
+        self.run(['mv', '/opt/opendj', '/opt/opendj.back_'+migration_time])
+
+        self.logIt("Downloading opendj Server")
+        self.run(['wget', 'https://ox.gluu.org/maven/org/forgerock/opendj/opendj-server-legacy/3.0.1.gluu/opendj-server-legacy-3.0.1.gluu.zip', '-O', openDJArchive])
+        self.logIt("Unzipping %s in /opt/" % openDJArchive)
+        self.run(['unzip', '-n', '-q', openDJArchive, '-d', '/opt/' ])
+        realLdapBaseFolder = os.path.realpath(self.ldapBaseFolder)
+        self.run([self.cmd_chown, '-R', 'ldap:ldap', realLdapBaseFolder])
+
+    def install_opendj(self):
+        self.logIt("Running OpenDJ Setup")
+        # Copy opendj-setup.properties so user ldap can find it in /opt/opendj
+        setupPropsFN = os.path.join(self.ldapBaseFolder, 'opendj-setup.properties')
+        shutil.copy("%s/opendj-setup.properties" % self.outputFolder, setupPropsFN)
+        ldapSetupCommand = '%s/setup' % self.ldapBaseFolder
+        setupCmd = "cd /opt/opendj ; export OPENDJ_JAVA_HOME=" + self.jre_home + " ; " + " ".join([ldapSetupCommand,
+                                                                                                   '--no-prompt',
+                                                                                                   '--cli',
+                                                                                                   '--propertiesFilePath',
+                                                                                                   setupPropsFN,
+                                                                                                   '--acceptLicense'
+                                                                                                   ])
+        self.run(['/bin/su',
+                  'ldap',
+                  '-c',
+                  setupCmd])
+
+
+        dsjavaCmd = "cd /opt/opendj/bin ; %s" % self.ldapDsJavaPropCommand
+        self.run(['/bin/su',
+                  'ldap',
+                  '-c',
+                  dsjavaCmd
+                  ])
+
+        stopDsJavaPropCommand = "%s/bin/stop-ds" % self.ldapBaseFolder
+        dsjavaCmd = "cd /opt/opendj/bin ; %s" % stopDsJavaPropCommand
+        self.run(['/bin/su',
+                  'ldap',
+                  '-c',
+                  dsjavaCmd
+                  ])
+
+
+
     def detect_service_path(self):
         service_path = '/sbin/service'
         if self.os_type in ['centos', 'redhat', 'fedora'] and self.os_initdaemon == 'systemd':
@@ -1402,13 +1454,16 @@ if __name__ == '__main__':
     installObject.ldap_binddn='cn=Directory Manager'
     installObject.ldap_type = 'opendj'
     installObject.encode_passwords()
-
+    installObject.downloadAndExtractOpenDJ()
+    installObject.createLdapPw()
+    installObject.install_opendj()
+    
     # Get the OS type
     installObject.os_type = installObject.detect_os_type()
     # Get the init type
     installObject.os_initdaemon = installObject.detect_initd()
 
-    installObject.createLdapPw()
+    
 
 
     if len(sys.argv) > 1:
