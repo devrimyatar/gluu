@@ -17,8 +17,8 @@ me = 'https://c2.gluu.org:8080'
 authorize_url = '{}/oxauth/restv1/authorize'.format(op_host)
 account_url = '{}/oxauth/restv1/userinfo'.format(op_host)
 access_token_url = '{}/oxauth/restv1/token'.format(op_host)
-redirect_uri='{}/login_callback'.format(me)
-
+login_callback_uri='{}/login_callback'.format(me)
+logout_callback_uri='{}/logout_callback'.format(me)
 
 auth_session = OAuth2Session(client_id, client_secret, scope=scope)
 auth_session.verify = False
@@ -35,14 +35,14 @@ def index():
 @app.route('/login_callback')
 def login():
     token = auth_session.fetch_access_token(url=access_token_url, 
-                authorization_response=request.url, redirect_uri=redirect_uri)
+                authorization_response=request.url, redirect_uri=login_callback_uri)
     session = OAuth2Session(client_id, client_secret, token=token, scope=scope)
     resp = auth_session.get(account_url)
     claims = resp.json()
     session_state = request.args['session_state']
     id_token = token['id_token']
     #id_token = token['access_token']
-    logout_url = '{}/oxauth/restv1/end_session?id_token_hint={}&session_state={}&post_logout_redirect_uri={}/logout_callback'.format(op_host, id_token, session_state, me)
+    logout_url = '{}/oxauth/restv1/end_session?id_token_hint={}&session_state={}&post_logout_redirect_uri='.format(op_host, id_token, session_state, logout_callback_uri)
     return 'Welcome {0}. You can logout: <a href="{1}">{1}'.format(claims['user_name'], logout_url)
 
 @app.route('/logout_callback')
@@ -52,4 +52,4 @@ def logout():
 
 if __name__ == '__main__':
     app.debug=False
-    app.run(host="0.0.0.0", ssl_context=('cert.pem', 'key.pem'), port=8080)
+    app.run(host="0.0.0.0", ssl_context='adhoc', port=8080)
