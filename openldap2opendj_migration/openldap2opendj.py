@@ -1454,9 +1454,6 @@ if __name__ == '__main__':
     installObject.ldap_binddn='cn=Directory Manager'
     installObject.ldap_type = 'opendj'
     installObject.encode_passwords()
-    installObject.downloadAndExtractOpenDJ()
-    installObject.createLdapPw()
-    installObject.install_opendj()
     
     # Get the OS type
     installObject.os_type = installObject.detect_os_type()
@@ -1464,13 +1461,16 @@ if __name__ == '__main__':
     installObject.os_initdaemon = installObject.detect_initd()
 
     
-
-
     if len(sys.argv) > 1:
         if sys.argv[1] == '-p':
             update_ox_idp(installObject.ldap_binddn, installObject.ldapPass)
-        
-    else:
-        installObject.install_ldap_server()
-        update_ox_ldap_prop(installObject.ldap_binddn, installObject.opendj_p12_fn, installObject.encoded_opendj_p12_pass)
+            sys.exit("Completed")
+        else:
+            sys.exit("Unrecognized argument")
+
+    installObject.createLdapPw()
+    installObject.downloadAndExtractOpenDJ()
+    installObject.install_opendj()        
+    installObject.install_ldap_server()
+    update_ox_ldap_prop(installObject.ldap_binddn, installObject.opendj_p12_fn, installObject.encoded_opendj_p12_pass)
     
