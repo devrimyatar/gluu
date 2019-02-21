@@ -16,7 +16,7 @@ if os.path.exists('gluu_people.txt'):
 
 N = 120
 bind_dn = 'cn=directory manager,o=gluu'
-bind_pw = 'Gluu1234'
+bind_pw = 'NewSceret'
 ldap_host = 'localhost'
 
 
