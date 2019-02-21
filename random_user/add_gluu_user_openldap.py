@@ -16,7 +16,7 @@ if os.path.exists('gluu_people.txt'):
 
 N = 120
 bind_dn = 'cn=directory manager,o=gluu'
-bind_pw = 'NewSceret'
+bind_pw = 'Gluu1234'
 ldap_host = 'localhost'
 
 
@@ -32,7 +32,10 @@ conn.search('o=gluu', '(objectClass=*)', LEVEL)
 for r in conn.response:
     if r['dn'].startswith('o='):
         dn=r['dn']
-        inum = '@!1DD5.7697.E0BC.5D26!0001!2C64.AC3D'
+        inum = dn.split(',')[0][2:]
+        
+        
+print "inumOrg", inum
 
 
 first_names = json.load(open('first-names.json')) 
@@ -101,8 +104,11 @@ while i < N :
 
                 
         r = conn.add(dn, attributes=attributes )
-        print r, i+1, username
-        w.write(username+'\n')
+        if r:
+    	    print r, i+1, username
+    	    w.write(username+'\n')
+    	else:
+    	    print conn.response
 
         i += 1
     except:
