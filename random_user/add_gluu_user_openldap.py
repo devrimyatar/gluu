@@ -8,7 +8,6 @@ import crypt
 import sha
 import os
 import hashlib
-import bcrypt
 import time
 
 if os.path.exists('gluu_people.txt'):
@@ -64,8 +63,7 @@ def make_secret(password):
 
     return tagged_digest_salt
 
-def bcrypt_password(password):
-    return '{BCRYPT}' + bcrypt.hashpw(password, bcrypt.gensalt())
+
 
 w = open('gluu_people.txt','a')
 
@@ -92,7 +90,7 @@ while i < N :
              'uid': username,
              'inum': '{0}!0000!{1}'.format(inum, dne),
              'gluustatus': 'active',
-             'userpassword': bcrypt_password(str(sn)),
+             'userpassword': make_secret(str(sn)),
              'mail': username,
              'displayname': cn,
              'givenname': name,
