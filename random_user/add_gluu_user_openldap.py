@@ -114,6 +114,5 @@ while i < N :
     except:
 	print "error"
 	print conn.result
-        break
     
 w.close()
