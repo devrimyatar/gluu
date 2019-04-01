@@ -63,6 +63,10 @@ def make_secret(password):
 
     return tagged_digest_salt
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5970e4b135b893dbb2a70bb545bda99399477c13
 
 w = open('gluu_people.txt','a')
 
@@ -111,5 +115,9 @@ while i < N :
     except:
 	print "error"
 	print conn.result
+<<<<<<< HEAD
         
+=======
+    
+>>>>>>> 5970e4b135b893dbb2a70bb545bda99399477c13
 w.close()
