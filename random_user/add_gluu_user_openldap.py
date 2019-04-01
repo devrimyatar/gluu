@@ -8,16 +8,15 @@ import crypt
 import sha
 import os
 import hashlib
-import bcrypt
 import time
 
 if os.path.exists('gluu_people.txt'):
     os.rename('gluu_people.txt', 'gluu_people.txt.'+time.ctime().replace(' ','_'))
 
 N = 120
-bind_dn = 'cn=directory manager,o=gluu'
+bind_dn = 'cn=directory manager'
 bind_pw = 'Gluu1234'
-ldap_host = 'localhost'
+ldap_host = 'c2.mygluu.org'
 
 
 
@@ -64,8 +63,6 @@ def make_secret(password):
 
     return tagged_digest_salt
 
-def bcrypt_password(password):
-    return '{BCRYPT}' + bcrypt.hashpw(password, bcrypt.gensalt())
 
 w = open('gluu_people.txt','a')
 
@@ -92,7 +89,7 @@ while i < N :
              'uid': username,
              'inum': '{0}!0000!{1}'.format(inum, dne),
              'gluustatus': 'active',
-             'userpassword': bcrypt_password(str(sn)),
+             'userpassword': make_secret(str(sn)),
              'mail': username,
              'displayname': cn,
              'givenname': name,
@@ -114,6 +111,5 @@ while i < N :
     except:
 	print "error"
 	print conn.result
-        break
-    
+        
 w.close()

@@ -1112,25 +1112,19 @@ class Setup(object):
 
 
     def createLdapPw(self):
-        if 1:
-        #try:
-            f = open(self.ldapPassFn, 'w')
-            f.write(self.ldapPass)
-            f.close()
-            self.run([self.cmd_chown, 'ldap:ldap', self.ldapPassFn])
-        #except:
-        #    self.logIt("Error writing temporary LDAP password.")
-        #    self.logIt(traceback.format_exc(), True)
+
+        f = open(self.ldapPassFn, 'w')
+        f.write(self.ldapPass)
+        f.close()
+        self.run([self.cmd_chown, 'ldap:ldap', self.ldapPassFn])
+
 
     def deleteLdapPw(self):
-        try:
-            if os.path.exists(self.ldapPassFn):
-                os.remove(self.ldapPassFn)
-            if os.path.exists(os.path.join(self.ldapBaseFolder, 'opendj-setup.properties')):
-                os.remove(os.path.join(self.ldapBaseFolder, 'opendj-setup.properties'))
-        except:
-            self.logIt("Error deleting ldap pw. Make sure %s is deleted" % self.ldapPassFn)
-            self.logIt(traceback.format_exc(), True)
+
+        if os.path.exists(self.ldapPassFn):
+            os.remove(self.ldapPassFn)
+        if os.path.exists(os.path.join(self.ldapBaseFolder, 'opendj-setup.properties')):
+            os.remove(os.path.join(self.ldapBaseFolder, 'opendj-setup.properties'))
 
     def configure_opendj(self):
         self.logIt("Configuring OpenDJ")
