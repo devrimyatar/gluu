@@ -1,4 +1,13 @@
 # Gluu Server OpenID authorization/authentication Flask Example
+# Deployment:
+# Intsall flask and python openid library: sudo pip install flask oic
+# Create cert.pem and cert.key: openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+# Set variables my_host, op_host, and contact below
+# Run server: python python app_openid.py
+# This will dynamically register client and save client info to  client.json
+# Navigate to htts://<my_host>:20444
+# where <my_host> is hostname of server on which this script is running
+
 
 import os
 
@@ -11,16 +20,27 @@ from oic.oic.message import AuthorizationResponse
 from oic.oic.message import RegistrationResponse
 
 
-client = Client(client_authn_method=CLIENT_AUTHN_METHOD, verify_ssl=False)
-provider_info = client.provider_config("https://c1.gluu.org")
+# Set these three variables:
+my_host = 'c3.gluu.org' 
+op_host = "https://c1.gluu.org"
+contact = 'admin@gluu.org'
 
-redirect_uri = 'https://c3.gluu.org:8080/login_callback'
+
+##### end of config #####
+
+port = 20443
+redirect_uri = 'https://{}:{}/login_callback'.format(my_host, port)
+
+
+client = Client(client_authn_method=CLIENT_AUTHN_METHOD, verify_ssl=False)
+
+provider_info = client.provider_config(op_host)
 
 if os.path.exists('client.json'):
     client_info = json.loads(open('client.json').read())
 else:
     # we need to register a client
-    args = {'redirect_uris': [redirect_uri], 'contacts': ['admin@gluu.org']}
+    args = {'redirect_uris': [redirect_uri], 'contacts': [contact], "scope": ["openid","user_name","mail"]}
     registration_response = client.register(provider_info["registration_endpoint"], **args)
     client_info = dict(registration_response)
     json.dump(client_info, open('client.json','w'), indent=2)
@@ -45,7 +65,7 @@ def index():
     args = {
         "client_id": client_id,
         "response_type": "code",
-        "scope": ["openid","user_name"],
+        "scope": ["openid","user_name","mail"],
         "nonce": session["nonce"],
         "redirect_uri": redirect_uri,
         "state": session["state"]
@@ -66,10 +86,17 @@ def login():
     resp = client.do_access_token_request(state=aresp["state"], request_args=args, authn_method="client_secret_basic")
     userinfo = client.do_user_info_request(state=aresp["state"])
     
-    return str(userinfo)
+    html_ = '<table>'
+    
+    for ui in userinfo:
+        html_ += '<tr><th>{}:</th><td>{}</td></tr>'.format(ui, userinfo[ui])
+    
+    html_ += '</table>'
+    
+    return html_
 
 
 
 if __name__ == '__main__':
     app.debug=True
-    app.run(host="0.0.0.0",ssl_context=('cert.pem', 'key.pem'), port=8080)
+    app.run(host="0.0.0.0",ssl_context=('cert.pem', 'key.pem'), port=port)
