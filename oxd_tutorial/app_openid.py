@@ -5,7 +5,7 @@
 # Set variables my_host, op_host, and contact below
 # Run server: python python app_openid.py
 # This will dynamically register client and save client info to  client.json
-# Navigate to htts://<my_host>:20444
+# Navigate to htts://<my_host>:20443
 # where <my_host> is hostname of server on which this script is running
 
 
