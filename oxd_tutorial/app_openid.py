@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Gluu Server OpenID authorization/authentication Flask Example
 # Deployment:
 # Intsall flask and python openid library: sudo pip install flask oic
