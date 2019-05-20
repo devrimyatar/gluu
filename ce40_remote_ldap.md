@@ -38,5 +38,5 @@ backendType                     =je
 
 To rtart installation execute the following command
 
-`/opt/opendj/setup --cli --propertiesFilePath /opt/opendj/wrends.properties --acceptLicense --no-prompt`
+`/opt/opendj/setup --cli --propertiesFilePath /opt/opendj/setup.properties --acceptLicense --no-prompt`
 
