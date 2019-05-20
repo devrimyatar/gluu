@@ -50,7 +50,7 @@ Download latest CE-4.0 from https://repo.gluu.org/# and install with package man
   
  Start container and login to container. To ensure we are using the same opendj version, download opendj:
  
- `wget https://ox.gluu.org/maven/org/forgerock/opendj/opendj-server-legacy/3.0.1.gluu/opendj-server-legacy-3.0.1.gluu.zip -O /opt/opendj-server-3.0.1.gluu.zip`
+ `wget https://ox.gluu.org/maven/org/forgerock/opendj/opendj-server-legacy/3.0.1.gluu/opendj-server-legacy-3.0.1.gluu.zip -O /opt/dist/app/opendj-server-3.0.1.gluu.zip`
  
  Download latest setup.py from github:
  
