@@ -3,9 +3,9 @@
 
 ## Install Java
 
- -on CentOS7:
+ - on CentOS7:
   `yum install java-11-openjdk`
- -on Ubuntu 16:
+ - on Ubuntu 16:
   `apt-get install default-jre`
 
 ## Install OpenDJ
