@@ -64,7 +64,7 @@ Download latest CE-4.0 from https://repo.gluu.org/# and install with package man
  
  ```
  Enter maximum RAM for applications in MB [3072] : 
-    Ldap hostname : c2.gluu.org
+    LDAP hostname : c2.gluu.org
     Password for 'cn=directory manager' : VerySecretPassword
 ```
  
