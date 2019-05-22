@@ -51,7 +51,7 @@ Download latest CE-4.0 from https://repo.gluu.org/# and install with package man
  Start container and login to container. To ensure we are using the same opendj version, download opendj:
  
  `wget https://ox.gluu.org/maven/org/forgerock/opendj/opendj-server-legacy/3.0.1.gluu/opendj-server-legacy-3.0.1.gluu.zip -O /opt/dist/app/opendj-server-3.0.1.gluu.zip`
- 
+ <!--
  Download latest setup.py from github:
  
  `wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/master/setup.py -O /install/community-edition-setup/setup.py`
@@ -59,6 +59,14 @@ Download latest CE-4.0 from https://repo.gluu.org/# and install with package man
  Execute with `--remote-ldap` option:
  
  `python /install/community-edition-setup/setup.py --remote-ldap`
+ 
+ -->
+ 
+ 
+ Execute setup.py with `--remote-ldap` option:
+ 
+ `/install/community-edition-setup/setup.py --remote-ldap`
+ 
  
  setup.py will ask you ldap server host and password, for example:
  
