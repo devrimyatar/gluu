@@ -5,9 +5,9 @@ Login to Gluu server and go **OpenID Connect->Clients->Add Client**
 
 Create Client with these properties, you can leave all other settings to defaults:
 
-**Client Name:** AnotherTest
+**Client Name:** OxdTutorialTestClient
 
-**Client Description:** A test client for cgi script
+**Client Description:** A test client for oxd.py cgi script
 
 **Client Secret:** TopSecret
 
@@ -19,7 +19,7 @@ Create Client with these properties, you can leave all other settings to default
 
 **Pre-Authorization:** True
 
-**Scopes:** openid oxd profile uma_protection
+**Scopes:** openid oxd profile
 
 Here is the relevant part of the screen:
 
