@@ -21,6 +21,8 @@ Create Client with these properties, you can leave all other settings to default
 
 **Scopes:** openid oxd profile
 
+**Response Types:** code
+
 Here is the relevant part of the screen:
 
 ![login link](figcl1.png)
