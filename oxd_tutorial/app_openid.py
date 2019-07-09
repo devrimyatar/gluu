@@ -24,7 +24,7 @@ from oic.oic.message import RegistrationResponse
 
 # Set these three variables:
 my_host = 'c3.gluu.org' 
-op_host = "https://c1.gluu.org"
+op_host = "https://c2.gluu.org"
 contact = 'admin@gluu.org'
 
 
@@ -32,7 +32,7 @@ contact = 'admin@gluu.org'
 
 port = 20443
 redirect_uri = 'https://{}:{}/login_callback'.format(my_host, port)
-
+post_logout_redirect_uri = 'https://{}:{}/logout/'.format(my_host, port)
 
 client = Client(client_authn_method=CLIENT_AUTHN_METHOD, verify_ssl=False)
 
@@ -70,6 +70,7 @@ def index():
         "scope": ["openid","user_name","mail"],
         "nonce": session["nonce"],
         "redirect_uri": redirect_uri,
+        "post_logout_redirect_uri": post_logout_redirect_uri,
         "state": session["state"]
         }
 
@@ -95,7 +96,13 @@ def login():
     
     html_ += '</table>'
     
+    html_ += '<a href="{}/oxauth/restv1/end_session?post_logout_redirect_uri={}"> Logout </a>'.format(op_host, post_logout_redirect_uri)
+
     return html_
+
+@app.route('/logout/')
+def logout():
+    return "logged out"
 
 
 
