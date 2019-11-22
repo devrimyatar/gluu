@@ -11,3 +11,5 @@ I choose c2.gluu.org as node 1. Simply execute the following command
 ```
 
 After installation, I visit http://c2.gluu.org:8091/ to setup cluster
+
+(setup_cb_node1_1.png)
