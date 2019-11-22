@@ -1,5 +1,5 @@
 # Requirements
-* two VM for couchbase clusterd, in our case they are c1.gluu.org and c2.gluu.org, they are both CentOS7
+* two VM for couchbase cluster, in our case they are c1.gluu.org and c2.gluu.org, they are both CentOS7
 * one VM for gluu-4.0, in our case it is c3.gluu.org, Ubuntu16
 * These ports should be opened accoss all three servers: 4369, 8091 to 8094, 9100 to 9105, 9998, 9999, 11207, 11209 to 11211,
 11214, 11215, 18091 to 18093, and from 21100 to 21299.
