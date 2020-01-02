@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, redirect, url_for, session, json
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 
@@ -123,6 +125,7 @@ def logoutme():
 
     data = {
         "oxd_id": oxd_id,
+        "post_logout_redirect_uri": os.path.join(request.host_url, 'logout'),
     }
 
     result = post_data('get-logout-uri', data, session['access_token'])
