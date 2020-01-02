@@ -3,11 +3,11 @@ from flask_login import LoginManager, UserMixin, current_user, login_required, l
 
 import requests
 
-oxd_id = 'a14a19c7-2b62-45b3-a1c3-ec486eb319ca'
-client_secret = '1b5268a2-66b3-4797-be23-6a741be9720e'
-client_id = '@!2A7E.034D.5BE2.F1D6!0001!8405.423D!0008!36F1.EE00.1832.90D8'
-oxd_server = 'https://c3.gluu.org:8443/'
-op_host = "https://c2.gluu.org"
+oxd_id = '27d05bd8-3d46-47ad-a1c9-6ec9842a1d1e'
+client_secret = 'f91697c2-d61b-416a-9049-b36bdb000174'
+client_id = '1448d76c-f806-4306-ae6f-02761b7b554a'
+oxd_server = 'https://c1.gluu.org:8443/'
+op_host = "https://c3.gluu.org"
 
 
 def post_data(end_point, data, access_token):
@@ -92,14 +92,12 @@ def login():
     }
 
     result = post_data('get-user-info', data, session['access_token'])
-    
-    
 
-    if result.get('claims') and result['claims'].get('sub'):
-        user = User(result['claims']['user_name'][0])
+    if result.get('sub'):
+        user = User(result['preferred_username'])
         login_user(user)
 
-        session['claims'] = result['claims']
+        session['oxd_session'] = result
         return redirect(url_for('welcome'))
 
     return 'Not authorized'
@@ -110,8 +108,8 @@ def welcome():
 
     ret_html = 'Welcome ' + current_user.username
     
-    for cl in session['claims']:
-        ret_html += '<br><b>{0} :</b> {1}'.format(cl, session['claims'][cl][0])
+    for cl in session['oxd_session']:
+        ret_html += '<br><b>{0} :</b> {1}'.format(cl, session['oxd_session'][cl])
     
     ret_html += '<br><a href="/logoutme">Click here to logout</a>'
     
