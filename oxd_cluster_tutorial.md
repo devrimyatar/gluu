@@ -1,6 +1,6 @@
 # Setting up oxd-server Cluster
 
-In this tutorial we are going to setup oxd-server cluster with nginx load balancer on CentOS 7
+In this tutorial we are going to setup oxd-server cluster with nginx load balancer on CentOS 7.
 For this purpose we need 5 VMs. My VMs are as follows:
 
 | Name          | Hostname          | IP address        |
@@ -8,7 +8,7 @@ For this purpose we need 5 VMs. My VMs are as follows:
 | Gluu Server   | op.mygluu.org     | 192.168.56.104    |
 | Redis Server  | redis.mygluu.org  | 192.168.56.103    |
 | Oxd Server 1  | oxd1.mygluu.org   | 192.168.56.101    |
-| Oxd Server 2  | oxd2.mygluu.org   | 192.168.56.101    |
+| Oxd Server 2  | oxd2.mygluu.org   | 192.168.56.102    |
 | Load Balancer | lb.mygluu.org     | 192.168.56.105    |
 
 
@@ -48,7 +48,7 @@ Combine `redis-server.key` and `redis-server.crt` to make `redis-server.pem` and
 
 We need to copy `redis-server.pem` to each oxd-server node.
 
-write the following content to `/etc/stunnel/stunnel.conf`
+Write the following content to `/etc/stunnel/stunnel.conf`
 
 ```
 pid = /run/stunnel-redis.pid
@@ -85,8 +85,8 @@ Install stunnel:
 # wget https://raw.githubusercontent.com/liuliang/centos-stunnel-systemd/master/stunnel.service -O /lib/systemd/system/stunnel.service
 ```
 
-Please download `/etc/stunnel/redis-server.pem` from Redis Server and upload to oxd-server node.
-Write the following content to `/etc/stunnel/stunnel.conf`
+Please download `/etc/stunnel/redis-server.pem` from **Redis Server** and upload to each **Oxd Server**.
+Write the following content to `/etc/stunnel/stunnel.conf`:
 
 ```
 pid = /run/stunnel-redis.pid
