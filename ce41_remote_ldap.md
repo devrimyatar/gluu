@@ -13,9 +13,9 @@
 wget https://ox.gluu.org/maven/org/forgerock/opendj/opendj-server-legacy/4.0.0-M3/opendj-server-legacy-4.0.0-M3.zip -O /opt/opendj-server-legacy-4.0.0-M3.zip
 cd /opt/
 unzip /opt/opendj-server-legacy-4.0.0-M3.zip
-wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_4.0.1/static/opendj/101-ox.ldif -O /opt/opendj/template/config/schema/101-ox.ldif
-wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_4.0.1/static/opendj/77-customAttributes.ldif -O /opt/opendj/template/config/schema/77-customAttributes.ldif
-wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_4.0.1/static/opendj/96-eduperson.ldif -O /opt/opendj/template/config/schema/96-eduperson.ldif
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_4.1.0/static/opendj/101-ox.ldif -O /opt/opendj/template/config/schema/101-ox.ldif
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_4.1.0/static/opendj/77-customAttributes.ldif -O /opt/opendj/template/config/schema/77-customAttributes.ldif
+wget https://raw.githubusercontent.com/GluuFederation/community-edition-setup/version_4.1.0/static/opendj/96-eduperson.ldif -O /opt/opendj/template/config/schema/96-eduperson.ldif
 ```
 
 Write the following content to `/opt/opendj/setup.properties`, befor running installation do not forget to change `hostname` and `rootUserPassword`:
