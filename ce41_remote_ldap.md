@@ -26,7 +26,6 @@ hostname                        =c2.gluu.org
 rootUserPassword                =VerySecretPassword
 
 ##### do not change below this line #######
-ldapPort                        =389
 generateSelfSignedCertificate   =true
 enableStartTLS                  =false
 ldapsPort                       =1636
