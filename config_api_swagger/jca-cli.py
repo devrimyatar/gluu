@@ -3,26 +3,27 @@ import time
 import sys
 import os
 import json
+import re
+import urllib3
+
 import ruamel.yaml
-import requests
 from pprint import pprint
 from functools import partial
-from urllib3.exceptions import InsecureRequestWarning
+from urllib.parse import urljoin
 
 import swagger_client
 
-
-requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
-
 clear = lambda: os.system('clear')
+urllib3.disable_warnings()
 
 
 class Menu(object):
 
-    def __init__(self, name, method='', info=''):
+    def __init__(self, name, method='', info='', path=''):
         self.name = name
         self.method = method
         self.info = info
+        self.path = path
         self.children = []
         self.parent = None
     
@@ -82,10 +83,9 @@ class JCA_CLI:
 
     def __init__(self):
         self.host = 'c2.gluu.org'
-        self.client_id = 'client_id'
-        self.client_secret = 'client_secret'
-        
-        
+        self.client_id = '1801.632ef7d0-73af-47f5-8366-8c2dc81dfdac'
+        self.client_secret = 'irNzegal0QGB'
+
         self.swagger_configuration = swagger_client.Configuration()
         self.swagger_configuration.host = 'https://{}'.format(self.host)
         
@@ -98,14 +98,14 @@ class JCA_CLI:
         self.cfg_yml = self.get_yaml()
         self.make_menu()
         self.current_menu = self.menu
-    
-    
+
+
     def get_yaml(self):
 
         with open(self.swagger_yaml_fn) as f:
-            cfg_yml = ruamel.yaml.load(f.read(), ruamel.yaml.RoundTripLoader)
+            self.cfg_yml = ruamel.yaml.load(f.read(), ruamel.yaml.RoundTripLoader)
         
-        return cfg_yml
+        return self.cfg_yml
 
 
     def make_menu(self):
@@ -122,7 +122,8 @@ class JCA_CLI:
                             sm = Menu(
                                     name=self.cfg_yml['paths'][path][method]['summary'].strip('.'),
                                     method=method,
-                                    info=self.cfg_yml['paths'][path][method]
+                                    info=self.cfg_yml['paths'][path][method],
+                                    path=path,
                                     )
                             m.add_child(sm)
         self.menu = menu
@@ -130,28 +131,30 @@ class JCA_CLI:
 
     def get_access_token(self, scope):
         print("Getting access token for scope", scope)
-        req = requests.post(
-                        'https://{}/jans-auth/restv1/token'.format(self.host),
-                        auth=(self.client_id, self.client_secret),
-                        data={
-                            'grant_type': 'client_credentials', 
-                            'scope': scope
-                            },
-                        verify=False
-                    )
+        
+        rest = swagger_client.rest.RESTClientObject(self.swagger_configuration)
+        headers = urllib3.make_headers(basic_auth='{}:{}'.format(self.client_id, self.client_secret))
+        url = urljoin(self.swagger_configuration.host, 'jans-auth/restv1/token')
+        headers['Content-Type'] = 'application/x-www-form-urlencoded'
+
+        response = rest.POST(
+                    url, 
+                    headers=headers,
+                    post_params={
+                        "grant_type": "client_credentials",
+                        "scope": scope,
+                    })
 
         try:
-            result = req.json()
-            if 'access_token' in result:
-                self.swagger_configuration.access_token = result['access_token']
+            data = json.loads(response.data)
+            if 'access_token' in data:
+                self.swagger_configuration.access_token = data['access_token']
             else:
                 print("Error while getting access token")
-                print(result)
+                print(data)
         except:
             print("Error while getting access token")
-            print(req.text)
-        
-
+            print(response.data)
 
     def check_type(self, val, vtype):
         if vtype == 'string':
@@ -161,10 +164,34 @@ class JCA_CLI:
                 return val
             if val.isnumeric():
                 return int(val)
-                
-        raise TypeError("Please enter a(n) {} value".format(vtype))
+        elif vtype=='boolean':
+            if val == '_false':
+                return False
+            if val == '_true':
+                return True
 
-    def get_input(self, values=[], text='Selection', default=None, itype=None):
+        error_text = "Please enter a(n) {} value".format(vtype)
+        if vtype == 'boolean':
+            error_text += ': _true, _false'
+
+        raise TypeError(error_text)
+
+    def get_input(self, values=[], text='Selection', default=None, itype=None, help_text=None, sitype=None, enforce=True):
+
+        type_text = ''
+        if itype:
+            if itype == 'array':
+                type_text = "Type: array of {} seperated by _,".format(sitype)
+            else:
+                type_text = "Type: " + itype
+
+        if help_text:
+            help_text = help_text.strip('.') + '. ' + type_text
+        else:
+            help_text = type_text
+
+        if help_text:
+            print(u"\u001b[38;5;244m«{}»\u001b[0m".format(help_text))
 
         if default:
             text += ' [{}]'.format(default)
@@ -172,32 +199,58 @@ class JCA_CLI:
                 default=int(default)
         text += ': '
 
+        if itype=='boolean' and not values:
+            values = ['_true', '_false']
+
         while True:
             selection = input(text)
             selection = selection.strip()
 
+            if enforce and not selection:
+                continue
+
+            if 'q' in values and selection == 'q':
+                print("Quiting...")
+                sys.exit()
+
             if default and not selection:
                 selection = default
-            
-            if not itype is None:
-                try:
-                    selection = self.check_type(selection, itype)
+
+            if itype == 'array' and sitype:
+                selection = selection.split('_,')
+                for i, item in enumerate(selection):
+                    data_ok = True
+                    try:
+                        selection[i] = self.check_type(item.strip(), sitype)
+                    except TypeError as e:
+                        print(e)
+                        data_ok = False
+                if data_ok:
                     break
-                except TypeError as e:
-                    print(e)
+            else:
+                if not itype is None:
+                    try:
+                        selection = self.check_type(selection, itype)
+                    except TypeError as e:
+                        print(e)
 
-            if values:
-                if selection in values:
+                if values:
+                    if selection in values:
+                        break
+                    elif itype=='boolean':
+                        if isinstance(selection, bool):
+                            break
+                        else:
+                            continue
+                    else:
+                        print('Please enter one of ', ', '.join(values))
+
+                if not values and not selection and not enforce:
                     break
-                else:
-                    print('Invalid Choice. Please enter one of ', ', '.join(values))
+                
+                if not values and selection:
+                    break
 
-            if not values and not selection:
-                break
-
-        if 'q' in values and selection == 'q':
-            print("Quiting...")
-            sys.exit()
 
         if selection == '_null':
             selection = None
@@ -211,16 +264,32 @@ class JCA_CLI:
         print(text)
         print('-' * len(text.splitlines()[-1]))
 
+    def get_endpiont_url_param(self, endpoint):
+        param = {}
+        if endpoint.path.endswith('}'):
+            pname = re.findall('/\{(.*?)\}$', endpoint.path)[0]
+            param = {'name': pname, 'description':pname, 'schema': {'type': 'string'}}
+
+        return param
 
     def obtain_parameters(self, endpoint):
         parameters = {}
+        
+        endpoint_parameters = []
         if 'parameters' in endpoint.info:
-            for param in endpoint.info['parameters']:
-                parameters[param['name']] = self.get_input(
-                            text=param['description'].strip('.'), 
-                            itype=param['schema']['type'],
-                            default = param['schema'].get('default')
-                            )
+            endpoint_parameters = endpoint.info['parameters']
+        
+        end_point_param = self.get_endpiont_url_param(endpoint)
+        if end_point_param:
+            endpoint_parameters.insert(0, end_point_param)
+
+        for param in endpoint_parameters:
+            parameters[param['name']] = self.get_input(
+                        text=param['description'].strip('.'), 
+                        itype=param['schema']['type'],
+                        default = param['schema'].get('default'),
+                        enforce=False
+                        )
 
         return parameters
 
@@ -237,6 +306,12 @@ class JCA_CLI:
         return ''.join(namle_list)+'Api'
 
 
+    def get_scope_for_endpoint(self, endpoint):
+        for security in endpoint.info['security']:
+            if 'jans-auth' in security:
+                return security['jans-auth'][0]
+
+
     def unmap_model(self, model):
         data_unmaped = {}
         data = model.to_dict()
@@ -246,7 +321,7 @@ class JCA_CLI:
 
         return data_unmaped
 
-    def process_get(self, endpoint):
+    def process_get(self, endpoint, return_value=False):
         clear()
         title = endpoint.name
         if endpoint.name != endpoint.info['description'].strip('.'):
@@ -258,12 +333,10 @@ class JCA_CLI:
 
         api_instance = client(swagger_client.ApiClient(self.swagger_configuration))
 
-        for security_ in endpoint.info['security']:
-            if 'jans-auth' in security_:
-                security = security_['jans-auth'][0]
-                break
+        security = self.get_scope_for_endpoint(endpoint)
 
         parameters = self.obtain_parameters(endpoint)
+        
         for param in parameters.copy():
             if not parameters[param]:
                 del parameters[param]
@@ -277,12 +350,17 @@ class JCA_CLI:
 
         api_caller = getattr(api_instance, endpoint.info['operationId'].replace('-','_'))
 
-        #api_response = api_caller(type=type, limit=limit, pattern=pattern)
         api_response = api_caller(**parameters)
 
         api_response_unmapped = []
-        for model in api_response:
-            api_response_unmapped.append(self.unmap_model(model))
+        if isinstance(api_response, list):
+            for model in api_response:
+                api_response_unmapped.append(self.unmap_model(model))
+        else:
+            api_response_unmapped = self.unmap_model(api_response)
+
+        if return_value:
+            return api_response_unmapped
 
         print()
         print(json.dumps(api_response_unmapped, indent=2))
@@ -304,28 +382,124 @@ class JCA_CLI:
                     print("An error ocurred while saving data")
                     print(e)
 
+    def get_scheme_for_endpoint(self, endpoint):
+        schema = endpoint.info['requestBody']['content']['application/json']['schema']
+
+        if '$ref' in schema:
+            schema_path_list = schema.pop('$ref').strip('/#').split('/')
+            schema = self.cfg_yml[schema_path_list[0]]
+            for p in schema_path_list[1:]:
+                schema = schema[p]
+        
+        return schema
+
+
+    def get_swagger_name(self, model, name):
+        for attribute in model.attribute_map:
+            if model.attribute_map[attribute] == name:
+                return attribute
+
+    def get_swagger_types(self, model, name):
+        for attribute in model.swagger_types:
+            if model.swagger_types[attribute] == name:
+                return attribute
+
+
+    def get_input_for_schema_(self, schema, model):
+        
+        for prop in schema['properties']:
+            item = schema['properties'][prop]
+
+            if item['type'] == 'object':
+                sub_model_class = getattr(swagger_client.models, item['description'])
+                sub_model = sub_model_class()
+                self.get_input_for_schema_(item, sub_model)
+                swagger_name = self.get_swagger_types(model, item['description'])
+                setattr(model, swagger_name, sub_model)
+
+            else:
+                val = self.get_input(
+                        values=item.get('enum', []),
+                        text=prop,
+                        #default=default,
+                        itype=item['type'],
+                        help_text=item.get('description'),
+                        sitype=item.get('items', {}).get('type')
+                        )
+
+                swagger_name = self.get_swagger_name(model, prop)
+                setattr(model, swagger_name, val)
+
+    def get_api_caller(self, endpoint):
+        security = self.get_scope_for_endpoint(endpoint)
+        self.get_access_token(security)
+        client = getattr(swagger_client, self.get_api_class_name(endpoint.parent.name))
+        api_instance = client(swagger_client.ApiClient(self.swagger_configuration))
+        api_caller = getattr(api_instance, endpoint.info['operationId'].replace('-','_'))
+
+        return api_caller
+
     def process_post(self, endpoint):
-        print("GET mehod for '{}' is not implemented yet".format(endpoint))
-        selection = self.get_input(['b'])
-        if selection == 'b':
+        
+        schema = self.get_scheme_for_endpoint(endpoint)
+        
+        title = schema.get('description') or schema['title']
+        data_dict = {}
+        model_class = getattr(swagger_client.models, schema['title'])
+        model = model_class()
+        self.get_input_for_schema_(schema, model)
+
+        print("Obtained Data:")
+        print(model)
+
+        selection = self.get_input(values=['q', 'b', 'y', 'n'], text='Coninue?')
+        
+        if selection == 'y':
+            api_caller = self.get_api_caller(endpoint)
+            print("Please wait while posting data ...\n")
+            api_response = api_caller(body=model)
+            pprint(api_response)
+            
+            
+        if selection in ('b', 'n'):
             self.display_menu(endpoint.parent)
             
     def process_delete(self, endpoint):
-        print("GET mehod for '{}' is not implemented yet".format(endpoint))
+        print("DELETE mehod for '{}' is not implemented yet".format(endpoint))
         
         selection = self.get_input(['b'])
         if selection == 'b':
             self.display_menu(endpoint.parent)
 
     def process_patch(self, endpoint):
-        print("GET mehod for '{}' is not implemented yet".format(endpoint))
+        print("PATCH mehod for '{}' is not implemented yet".format(endpoint))
         
         selection = self.get_input(['b'])
         if selection == 'b':
             self.display_menu(endpoint.parent)
 
     def process_put(self, endpoint):
-        print("GET mehod for '{}' is not implemented yet".format(endpoint))
+
+        """
+        cur_values = None
+        for m in endpoint.parent:
+            if m.method=='get' and m.path.endswith('}'):
+                cur_values = self.process_get(m, return_value=True)
+        
+        if cur_values:
+            print(cur_values)
+
+        schema = endpoint.info['requestBody']['content']['application/json']['schema']
+
+        if '$ref' in schema:
+            schema_path_list = schema['$ref'].strip('/#').split('/')
+            schema = self.cfg_yml[schema_path_list[0]]
+            for p in schema_path_list[1:]:
+                schema = schema[p]
+
+        print(json.dumps(schema, indent=2))
+        """
+        print("PUT mehod for '{}' is not implemented yet".format(endpoint))
         
         selection = self.get_input(['b'])
         if selection == 'b':
