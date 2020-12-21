@@ -222,6 +222,8 @@ class JCA_CLI:
                     data_ok = True
                     try:
                         selection[i] = self.check_type(item.strip(), sitype)
+                        if selection[i] == '_null':
+                            selection[i] = None
                     except TypeError as e:
                         print(e)
                         data_ok = False
