@@ -63,7 +63,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_oauth_openid_clients**
-> list[InlineResponse20010] get_oauth_openid_clients(limit=limit, pattern=pattern)
+> list[Client] get_oauth_openid_clients(limit=limit, pattern=pattern)
 
 Gets list of OpenID Connect clients
 
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[InlineResponse20010]**](InlineResponse20010.md)
+[**list[Client]**](Client.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_oauth_openid_clients_by_inum**
-> InlineResponse20011 get_oauth_openid_clients_by_inum(inum)
+> Client get_oauth_openid_clients_by_inum(inum)
 
 Get OpenId Connect Client by Inum
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**Client**](Client.md)
 
 ### Authorization
 
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_oauth_openid_clients_by_inum**
-> InlineResponse20012 patch_oauth_openid_clients_by_inum(inum, body=body)
+> Client patch_oauth_openid_clients_by_inum(inum, body=body)
 
 Update modified properties of OpenId Connect client by Inum.
 
@@ -190,7 +190,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.OAuthOpenIDConnectClientsApi(swagger_client.ApiClient(configuration))
 inum = 'inum_example' # str | Client identifier
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Update modified properties of OpenId Connect client by Inum.
@@ -205,11 +205,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **inum** | **str**| Client identifier | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**Client**](Client.md)
 
 ### Authorization
 
@@ -217,13 +217,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_oauth_openid_clients**
-> OpenIDConnectClientDetails3 post_oauth_openid_clients(body=body)
+> Client post_oauth_openid_clients(body=body)
 
 Create new OpenId connect client
 
@@ -243,7 +243,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.OAuthOpenIDConnectClientsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.OpenIDConnectClientDetails2() # OpenIDConnectClientDetails2 |  (optional)
+body = swagger_client.Client() # Client |  (optional)
 
 try:
     # Create new OpenId connect client
@@ -257,11 +257,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**OpenIDConnectClientDetails2**](OpenIDConnectClientDetails2.md)|  | [optional] 
+ **body** | [**Client**](Client.md)|  | [optional] 
 
 ### Return type
 
-[**OpenIDConnectClientDetails3**](OpenIDConnectClientDetails3.md)
+[**Client**](Client.md)
 
 ### Authorization
 
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_oauth_openid_clients**
-> OpenIDConnectClientDetails1 put_oauth_openid_clients(body=body)
+> Client put_oauth_openid_clients(body=body)
 
 Update OpenId Connect client.
 
@@ -295,7 +295,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.OAuthOpenIDConnectClientsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.OpenIDConnectClientDetails_() # OpenIDConnectClientDetails_ |  (optional)
+body = swagger_client.Client() # Client |  (optional)
 
 try:
     # Update OpenId Connect client.
@@ -309,11 +309,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**OpenIDConnectClientDetails_**](OpenIDConnectClientDetails_.md)|  | [optional] 
+ **body** | [**Client**](Client.md)|  | [optional] 
 
 ### Return type
 
-[**OpenIDConnectClientDetails1**](OpenIDConnectClientDetails1.md)
+[**Client**](Client.md)
 
 ### Authorization
 

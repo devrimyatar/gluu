@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**put_config_cache_native_persistence**](CacheConfigurationNativePersistenceApi.md#put_config_cache_native_persistence) | **PUT** /jans-config-api/api/v1/config/cache/native-persistence | Updates native persistence cache configuration.
 
 # **get_config_cache_native_persistence**
-> InlineResponse2006 get_config_cache_native_persistence()
+> NativePersistenceConfiguration get_config_cache_native_persistence()
 
 Returns native persistence cache configuration.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**NativePersistenceConfiguration**](NativePersistenceConfiguration.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_cache_native_persistence**
-> Body3 put_config_cache_native_persistence(body=body)
+> NativePersistenceConfiguration put_config_cache_native_persistence(body=body)
 
 Updates native persistence cache configuration.
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CacheConfigurationNativePersistenceApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body3() # Body3 |  (optional)
+body = swagger_client.NativePersistenceConfiguration() # NativePersistenceConfiguration |  (optional)
 
 try:
     # Updates native persistence cache configuration.
@@ -90,11 +90,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body3**](Body3.md)|  | [optional] 
+ **body** | [**NativePersistenceConfiguration**](NativePersistenceConfiguration.md)|  | [optional] 
 
 ### Return type
 
-[**Body3**](Body3.md)
+[**NativePersistenceConfiguration**](NativePersistenceConfiguration.md)
 
 ### Authorization
 

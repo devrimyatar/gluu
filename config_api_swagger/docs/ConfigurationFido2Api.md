@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**put_properties_fido2**](ConfigurationFido2Api.md#put_properties_fido2) | **PUT** /jans-config-api/api/v1/fido2/config | Updates Fido2 configuration properties.
 
 # **get_properties_fido2**
-> list[InlineResponse200] get_properties_fido2()
+> JansFido2DynConfiguration get_properties_fido2()
 
 Gets Jans Authorization Server Fido2 configuration properties.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[InlineResponse200]**](InlineResponse200.md)
+[**JansFido2DynConfiguration**](JansFido2DynConfiguration.md)
 
 ### Authorization
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.ConfigurationFido2Api(swagger_client.ApiClient(configuration))
-body = [swagger_client.InlineResponse200()] # list[InlineResponse200] |  (optional)
+body = swagger_client.JansFido2DynConfiguration() # JansFido2DynConfiguration |  (optional)
 
 try:
     # Updates Fido2 configuration properties.
@@ -89,7 +89,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**list[InlineResponse200]**](InlineResponse200.md)|  | [optional] 
+ **body** | [**JansFido2DynConfiguration**](JansFido2DynConfiguration.md)|  | [optional] 
 
 ### Return type
 

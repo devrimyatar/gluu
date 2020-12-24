@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**put_config_cache_redis**](CacheConfigurationRedisApi.md#put_config_cache_redis) | **PUT** /jans-config-api/api/v1/config/cache/redis | Updates Redis cache configuration.
 
 # **get_config_cache_redis**
-> InlineResponse2004 get_config_cache_redis()
+> RedisConfiguration get_config_cache_redis()
 
 Returns Redis cache configuration.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**RedisConfiguration**](RedisConfiguration.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_cache_redis**
-> Body1 put_config_cache_redis(body=body)
+> RedisConfiguration put_config_cache_redis(body=body)
 
 Updates Redis cache configuration.
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CacheConfigurationRedisApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body1() # Body1 |  (optional)
+body = swagger_client.RedisConfiguration() # RedisConfiguration |  (optional)
 
 try:
     # Updates Redis cache configuration.
@@ -90,11 +90,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body1**](Body1.md)|  | [optional] 
+ **body** | [**RedisConfiguration**](RedisConfiguration.md)|  | [optional] 
 
 ### Return type
 
-[**Body1**](Body1.md)
+[**RedisConfiguration**](RedisConfiguration.md)
 
 ### Authorization
 

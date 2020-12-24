@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**get_config_database_ldap_by_name**](DatabaseLDAPConfigurationApi.md#get_config_database_ldap_by_name) | **GET** /jans-config-api/api/v1/config/database/ldap/{name} | Gets an LDAP configuration by name.
 [**patch_config_database_ldap_by_name**](DatabaseLDAPConfigurationApi.md#patch_config_database_ldap_by_name) | **PATCH** /jans-config-api/api/v1/config/database/ldap/{name} | Partially modify an LDAP configuration.
 [**post_config_database_ldap**](DatabaseLDAPConfigurationApi.md#post_config_database_ldap) | **POST** /jans-config-api/api/v1/config/database/ldap | Adds a new LDAP configuration.
-[**post_config_database_ldap_test**](DatabaseLDAPConfigurationApi.md#post_config_database_ldap_test) | **POST** /jans-config-api/api/v1/config/database/ldap/test | Tests a LDAP configurations by name.
+[**post_config_database_ldap_test**](DatabaseLDAPConfigurationApi.md#post_config_database_ldap_test) | **POST** /jans-config-api/api/v1/config/database/ldap/test | Tests an LDAP configuration.
 [**put_config_database_ldap**](DatabaseLDAPConfigurationApi.md#put_config_database_ldap) | **PUT** /jans-config-api/api/v1/config/database/ldap | Updates LDAP configuration.
 
 # **delete_config_database_ldap_by_name**
@@ -185,7 +185,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.DatabaseLDAPConfigurationApi(swagger_client.ApiClient(configuration))
 name = 'name_example' # str | Name of LDAP configuration.
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Partially modify an LDAP configuration.
@@ -200,7 +200,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| Name of LDAP configuration. | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -272,9 +272,9 @@ Name | Type | Description  | Notes
 # **post_config_database_ldap_test**
 > bool post_config_database_ldap_test(body)
 
-Tests a LDAP configurations by name.
+Tests an LDAP configuration.
 
-Tests a LDAP configurations by name.
+Tests an LDAP configuration.
 
 ### Example
 ```python
@@ -293,7 +293,7 @@ api_instance = swagger_client.DatabaseLDAPConfigurationApi(swagger_client.ApiCli
 body = swagger_client.LdapConfiguration() # LdapConfiguration | 
 
 try:
-    # Tests a LDAP configurations by name.
+    # Tests an LDAP configuration.
     api_response = api_instance.post_config_database_ldap_test(body)
     pprint(api_response)
 except ApiException as e:

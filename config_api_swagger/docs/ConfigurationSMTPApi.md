@@ -58,7 +58,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_config_smtp**
-> InlineResponse2007 get_config_smtp()
+> SmtpConfiguration get_config_smtp()
 
 Returns SMTP server configuration.
 
@@ -92,7 +92,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**SmtpConfiguration**](SmtpConfiguration.md)
 
 ### Authorization
 
@@ -106,7 +106,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_smtp**
-> Body5 post_config_smtp(body=body)
+> SmtpConfiguration post_config_smtp(body=body)
 
 Adds SMTP server configuration.
 
@@ -126,7 +126,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.ConfigurationSMTPApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body5() # Body5 |  (optional)
+body = swagger_client.SmtpConfiguration() # SmtpConfiguration |  (optional)
 
 try:
     # Adds SMTP server configuration.
@@ -140,11 +140,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body5**](Body5.md)|  | [optional] 
+ **body** | [**SmtpConfiguration**](SmtpConfiguration.md)|  | [optional] 
 
 ### Return type
 
-[**Body5**](Body5.md)
+[**SmtpConfiguration**](SmtpConfiguration.md)
 
 ### Authorization
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_smtp**
-> Body4 put_config_smtp(body=body)
+> SmtpConfiguration put_config_smtp(body=body)
 
 Updates SMTP server configuration.
 
@@ -178,7 +178,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.ConfigurationSMTPApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body4() # Body4 |  (optional)
+body = swagger_client.SmtpConfiguration() # SmtpConfiguration |  (optional)
 
 try:
     # Updates SMTP server configuration.
@@ -192,11 +192,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body4**](Body4.md)|  | [optional] 
+ **body** | [**SmtpConfiguration**](SmtpConfiguration.md)|  | [optional] 
 
 ### Return type
 
-[**Body4**](Body4.md)
+[**SmtpConfiguration**](SmtpConfiguration.md)
 
 ### Authorization
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **test_config_smtp**
-> InlineResponse2008 test_config_smtp()
+> InlineResponse200 test_config_smtp()
 
 Test SMTP server configuration.
 
@@ -244,7 +244,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse200**](InlineResponse200.md)
 
 ### Authorization
 

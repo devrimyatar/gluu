@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**put_config_cache_in_memory**](CacheConfigurationInMemoryApi.md#put_config_cache_in_memory) | **PUT** /jans-config-api/api/v1/config/cache/in-memory | Updates in-Memory cache configuration.
 
 # **get_config_cache_in_memory**
-> InlineResponse2005 get_config_cache_in_memory()
+> InMemoryConfiguration get_config_cache_in_memory()
 
 Returns in-Memory cache configuration.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InMemoryConfiguration**](InMemoryConfiguration.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_cache_in_memory**
-> Body2 put_config_cache_in_memory(body=body)
+> InMemoryConfiguration put_config_cache_in_memory(body=body)
 
 Updates in-Memory cache configuration.
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CacheConfigurationInMemoryApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body2() # Body2 |  (optional)
+body = swagger_client.InMemoryConfiguration() # InMemoryConfiguration |  (optional)
 
 try:
     # Updates in-Memory cache configuration.
@@ -90,11 +90,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body2**](Body2.md)|  | [optional] 
+ **body** | [**InMemoryConfiguration**](InMemoryConfiguration.md)|  | [optional] 
 
 ### Return type
 
-[**Body2**](Body2.md)
+[**InMemoryConfiguration**](InMemoryConfiguration.md)
 
 ### Authorization
 

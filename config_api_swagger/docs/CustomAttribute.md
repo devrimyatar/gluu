@@ -1,9 +1,11 @@
-# AuthenticationMethod
+# CustomAttribute
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**default_acr** | **str** | This field controls the default authentication mechanism that is presented to users from all applications that leverage Janssen Server for authentication. | [optional] 
+**name** | **str** | Name of the attribute. | 
+**multi_valued** | **bool** | Indicates if the attribute can hold multiple values. | 
+**values** | **list[str]** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -192,7 +192,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.AttributeApi(swagger_client.ApiClient(configuration))
 inum = 'inum_example' # str | Attribute ID.
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Partially modify a GluuAttribute.
@@ -207,7 +207,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **inum** | **str**| Attribute ID. | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -219,13 +219,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_attributes**
-> GluuAttribute post_attributes(name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip)
+> GluuAttribute post_attributes(body)
 
 Adds a new attribute.
 
@@ -245,34 +245,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.AttributeApi(swagger_client.ApiClient(configuration))
-name = 'name_example' # str | 
-display_name = ['display_name_example'] # list[str] | 
-description = 'description_example' # str | 
-data_type = 'data_type_example' # str | 
-status = 'status_example' # str | 
-jans_multivalued_attr = true # bool | 
-lifetime = 'lifetime_example' # str | 
-source_attribute = 'source_attribute_example' # str | 
-salt = 'salt_example' # str | 
-name_id_type = 'name_id_type_example' # str | 
-origin = 'origin_example' # str | 
-edit_type = ['edit_type_example'] # list[str] | 
-view_type = ['view_type_example'] # list[str] | 
-usage_type = ['usage_type_example'] # list[str] | 
-jans_attr_name = 'jans_attr_name_example' # str | 
-see_also = 'see_also_example' # str | 
-saml1_uri = 'saml1_uri_example' # str | 
-saml2_uri = 'saml2_uri_example' # str | 
-urn = 'urn_example' # str | 
-jans_scim_custom_attr = true # bool | 
-custom = true # bool | 
-requred = true # bool | 
-attribute_validation = swagger_client.GluuAttributeAttributeValidation() # GluuAttributeAttributeValidation | 
-gluu_tooltip = 'gluu_tooltip_example' # str | 
+body = swagger_client.GluuAttribute() # GluuAttribute | 
 
 try:
     # Adds a new attribute.
-    api_response = api_instance.post_attributes(name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip)
+    api_response = api_instance.post_attributes(body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling AttributeApi->post_attributes: %s\n" % e)
@@ -282,30 +259,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**|  | 
- **display_name** | [**list[str]**](str.md)|  | 
- **description** | **str**|  | 
- **data_type** | **str**|  | 
- **status** | **str**|  | 
- **jans_multivalued_attr** | **bool**|  | 
- **lifetime** | **str**|  | 
- **source_attribute** | **str**|  | 
- **salt** | **str**|  | 
- **name_id_type** | **str**|  | 
- **origin** | **str**|  | 
- **edit_type** | [**list[str]**](str.md)|  | 
- **view_type** | [**list[str]**](str.md)|  | 
- **usage_type** | [**list[str]**](str.md)|  | 
- **jans_attr_name** | **str**|  | 
- **see_also** | **str**|  | 
- **saml1_uri** | **str**|  | 
- **saml2_uri** | **str**|  | 
- **urn** | **str**|  | 
- **jans_scim_custom_attr** | **bool**|  | 
- **custom** | **bool**|  | 
- **requred** | **bool**|  | 
- **attribute_validation** | [**GluuAttributeAttributeValidation**](.md)|  | 
- **gluu_tooltip** | **str**|  | 
+ **body** | [**GluuAttribute**](GluuAttribute.md)|  | 
 
 ### Return type
 
@@ -317,13 +271,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/x-www-form-urlencoded
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_attributes**
-> list[GluuAttribute] put_attributes(body)
+> GluuAttribute put_attributes(body)
 
 Updates an existing attribute.
 
@@ -361,7 +315,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[GluuAttribute]**](GluuAttribute.md)
+[**GluuAttribute**](GluuAttribute.md)
 
 ### Authorization
 

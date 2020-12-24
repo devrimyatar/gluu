@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**put_config_cache_memcached**](CacheConfigurationMemcachedApi.md#put_config_cache_memcached) | **PUT** /jans-config-api/api/v1/config/cache/memcached | Updates Memcached cache configuration.
 
 # **get_config_cache_memcached**
-> InlineResponse2003 get_config_cache_memcached()
+> MemcachedConfiguration get_config_cache_memcached()
 
 Returns Memcached cache configuration.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**MemcachedConfiguration**](MemcachedConfiguration.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_cache_memcached**
-> Body put_config_cache_memcached(body=body)
+> MemcachedConfiguration put_config_cache_memcached(body=body)
 
 Updates Memcached cache configuration.
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CacheConfigurationMemcachedApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body() # Body |  (optional)
+body = swagger_client.MemcachedConfiguration() # MemcachedConfiguration |  (optional)
 
 try:
     # Updates Memcached cache configuration.
@@ -90,11 +90,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body**](Body.md)|  | [optional] 
+ **body** | [**MemcachedConfiguration**](MemcachedConfiguration.md)|  | [optional] 
 
 ### Return type
 
-[**Body**](Body.md)
+[**MemcachedConfiguration**](MemcachedConfiguration.md)
 
 ### Authorization
 

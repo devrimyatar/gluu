@@ -192,7 +192,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.OAuthScopesApi(swagger_client.ApiClient(configuration))
 inum = 'inum_example' # str | 
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Update modified attributes of existing Scope by Inum.
@@ -207,7 +207,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **inum** | **str**|  | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -63,7 +63,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_oauth_uma_resources**
-> list[InlineResponse20014] get_oauth_uma_resources(limit=limit, pattern=pattern)
+> list[UmaResource] get_oauth_uma_resources(limit=limit, pattern=pattern)
 
 Gets list of UMA resources.
 
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[InlineResponse20014]**](InlineResponse20014.md)
+[**list[UmaResource]**](UmaResource.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_oauth_uma_resources_by_id**
-> UMAResource1 get_oauth_uma_resources_by_id(id)
+> UmaResource get_oauth_uma_resources_by_id(id)
 
 Gets an UMA resource by ID.
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UMAResource1**](UMAResource1.md)
+[**UmaResource**](UmaResource.md)
 
 ### Authorization
 
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_oauth_uma_resources_by_id**
-> UMAResource1 patch_oauth_uma_resources_by_id(id, body=body)
+> UmaResource patch_oauth_uma_resources_by_id(id, body=body)
 
 Partially updates an UMA resource by Inum.
 
@@ -190,7 +190,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.OAuthUMAResourcesApi(swagger_client.ApiClient(configuration))
 id = 'id_example' # str | Resource description ID.
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Partially updates an UMA resource by Inum.
@@ -205,11 +205,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Resource description ID. | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
-[**UMAResource1**](UMAResource1.md)
+[**UmaResource**](UmaResource.md)
 
 ### Authorization
 
@@ -217,13 +217,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_oauth_uma_resources**
-> UMAResource1 post_oauth_uma_resources(body=body)
+> UmaResource post_oauth_uma_resources(body=body)
 
 Creates an UMA resource.
 
@@ -243,7 +243,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.OAuthUMAResourcesApi(swagger_client.ApiClient(configuration))
-body = swagger_client.UMAResource1() # UMAResource1 |  (optional)
+body = swagger_client.UmaResource() # UmaResource |  (optional)
 
 try:
     # Creates an UMA resource.
@@ -257,11 +257,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**UMAResource1**](UMAResource1.md)|  | [optional] 
+ **body** | [**UmaResource**](UmaResource.md)|  | [optional] 
 
 ### Return type
 
-[**UMAResource1**](UMAResource1.md)
+[**UmaResource**](UmaResource.md)
 
 ### Authorization
 
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_oauth_uma_resources**
-> UMAResource put_oauth_uma_resources(body=body)
+> UmaResource put_oauth_uma_resources(body=body)
 
 Updates an UMA resource.
 
@@ -295,7 +295,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.OAuthUMAResourcesApi(swagger_client.ApiClient(configuration))
-body = swagger_client.UMAResource() # UMAResource |  (optional)
+body = swagger_client.UmaResource() # UmaResource |  (optional)
 
 try:
     # Updates an UMA resource.
@@ -309,11 +309,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**UMAResource**](UMAResource.md)|  | [optional] 
+ **body** | [**UmaResource**](UmaResource.md)|  | [optional] 
 
 ### Return type
 
-[**UMAResource**](UMAResource.md)
+[**UmaResource**](UmaResource.md)
 
 ### Authorization
 

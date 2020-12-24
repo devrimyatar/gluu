@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**get_config_database_couchbase_by_name**](DatabaseCouchbaseConfigurationApi.md#get_config_database_couchbase_by_name) | **GET** /jans-config-api/api/v1/config/database/couchbase/{name} | Gets a Couchbase configurations by name.
 [**patch_config_database_couchbase_by_name**](DatabaseCouchbaseConfigurationApi.md#patch_config_database_couchbase_by_name) | **PATCH** /jans-config-api/api/v1/config/database/couchbase/{name} | Partially modify an Couchbase configuration.
 [**post_config_database_couchbase**](DatabaseCouchbaseConfigurationApi.md#post_config_database_couchbase) | **POST** /jans-config-api/api/v1/config/database/couchbase | Adds a new Couchbase configuration.
-[**post_config_database_couchbase_test**](DatabaseCouchbaseConfigurationApi.md#post_config_database_couchbase_test) | **POST** /jans-config-api/api/v1/config/database/couchbase/test | Tests a Couchbase configurations by name.
+[**post_config_database_couchbase_test**](DatabaseCouchbaseConfigurationApi.md#post_config_database_couchbase_test) | **POST** /jans-config-api/api/v1/config/database/couchbase/test | Tests an Couchbase configuration.
 [**put_config_database_couchbase**](DatabaseCouchbaseConfigurationApi.md#put_config_database_couchbase) | **PUT** /jans-config-api/api/v1/config/database/couchbase | Updates Couchbase configuration.
 
 # **delete_config_database_couchbase_by_name**
@@ -185,7 +185,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.DatabaseCouchbaseConfigurationApi(swagger_client.ApiClient(configuration))
 name = 'name_example' # str | Name of Couchbase configuration.
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Partially modify an Couchbase configuration.
@@ -200,7 +200,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| Name of Couchbase configuration. | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -272,9 +272,9 @@ Name | Type | Description  | Notes
 # **post_config_database_couchbase_test**
 > bool post_config_database_couchbase_test(body)
 
-Tests a Couchbase configurations by name.
+Tests an Couchbase configuration.
 
-Tests a Couchbase configurations by name.
+Tests an Couchbase configuration.
 
 ### Example
 ```python
@@ -293,7 +293,7 @@ api_instance = swagger_client.DatabaseCouchbaseConfigurationApi(swagger_client.A
 body = swagger_client.CouchbaseConfiguration() # CouchbaseConfiguration | 
 
 try:
-    # Tests a Couchbase configurations by name.
+    # Tests an Couchbase configuration.
     api_response = api_instance.post_config_database_couchbase_test(body)
     pprint(api_response)
 except ApiException as e:

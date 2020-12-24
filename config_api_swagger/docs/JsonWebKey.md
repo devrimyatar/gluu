@@ -3,13 +3,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**kid** | **str** |  | 
-**kty** | **str** |  | 
-**use** | **str** |  | 
-**alg** | **str** |  | 
+**kid** | **str** |  | [optional] 
+**kty** | **str** |  | [optional] 
+**use** | **str** |  | [optional] 
+**alg** | **str** |  | [optional] 
 **crv** | **str** |  | [optional] 
-**exp** | **int** |  | 
-**x5c** | **list[str]** |  | 
+**exp** | **int** |  | [optional] 
+**x5c** | **list[str]** |  | [optional] 
 **n** | **str** |  | [optional] 
 **e** | **str** |  | [optional] 
 **x** | **str** |  | [optional] 

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**patch_config_cache**](CacheConfigurationApi.md#patch_config_cache) | **PATCH** /jans-config-api/api/v1/config/cache | Partially modifies cache configuration.
 
 # **get_config_cache**
-> InlineResponse2001 get_config_cache()
+> CacheConfiguration get_config_cache()
 
 Returns cache configuration.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**CacheConfiguration**](CacheConfiguration.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_config_cache**
-> InlineResponse2002 patch_config_cache(body=body)
+> CacheConfiguration patch_config_cache(body=body)
 
 Partially modifies cache configuration.
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CacheConfigurationApi(swagger_client.ApiClient(configuration))
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Partially modifies cache configuration.
@@ -90,11 +90,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**CacheConfiguration**](CacheConfiguration.md)
 
 ### Authorization
 
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

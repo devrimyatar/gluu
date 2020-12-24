@@ -287,7 +287,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CustomScriptsApi(swagger_client.ApiClient(configuration))
-body = [swagger_client.CustomScript()] # list[CustomScript] |  (optional)
+body = swagger_client.CustomScript() # CustomScript |  (optional)
 
 try:
     # Updates a custom script.
@@ -300,7 +300,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**list[CustomScript]**](CustomScript.md)|  | [optional] 
+ **body** | [**CustomScript**](CustomScript.md)|  | [optional] 
 
 ### Return type
 

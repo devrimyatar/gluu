@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dn** | **str** |  | [optional] 
 **id** | **str** | The base64url encoded id. | [optional] 
-**inum** | **str** | Unique id identifying the attribute | [optional] 
+**inum** | **str** | Unique id identifying the . | [optional] 
 **display_name** | **str** | A human-readable name of the scope. | [optional] 
 **description** | **str** | A human-readable string describing the scope. | [optional] 
 **icon_url** | **str** | A URL for a graphic icon representing the scope. The referenced icon MAY be used by the authorization server in any user interface it presents to the resource owner. | [optional] 

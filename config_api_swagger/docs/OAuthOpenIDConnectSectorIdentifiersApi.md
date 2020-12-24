@@ -63,7 +63,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_oauth_openid_sectors**
-> list[InlineResponse20013] get_oauth_openid_sectors()
+> list[SectorIdentifier] get_oauth_openid_sectors()
 
 Gets list of OpenID Connect Sectors.
 
@@ -97,7 +97,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[InlineResponse20013]**](InlineResponse20013.md)
+[**list[SectorIdentifier]**](SectorIdentifier.md)
 
 ### Authorization
 
@@ -111,7 +111,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_oauth_openid_sectors_by_id**
-> Body7 get_oauth_openid_sectors_by_id(inum)
+> SectorIdentifier get_oauth_openid_sectors_by_id(inum)
 
 Get OpenID Connect Sector by Inum.
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Body7**](Body7.md)
+[**SectorIdentifier**](SectorIdentifier.md)
 
 ### Authorization
 
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_oauth_openid_sectors_by_id**
-> Body7 patch_oauth_openid_sectors_by_id(inum, body=body)
+> SectorIdentifier patch_oauth_openid_sectors_by_id(inum, body=body)
 
 Partially update OpenId Connect Sector by Inum.
 
@@ -184,7 +184,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = swagger_client.OAuthOpenIDConnectSectorIdentifiersApi(swagger_client.ApiClient(configuration))
 inum = 'inum_example' # str | Scope ID.
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Partially update OpenId Connect Sector by Inum.
@@ -199,11 +199,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **inum** | **str**| Scope ID. | 
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
-[**Body7**](Body7.md)
+[**SectorIdentifier**](SectorIdentifier.md)
 
 ### Authorization
 
@@ -211,13 +211,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json-patch+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_oauth_openid_sectors**
-> NewlyAddedOpenIDConnectSectorIdentifier_ post_oauth_openid_sectors(body=body)
+> SectorIdentifier post_oauth_openid_sectors(body=body)
 
 Create new OpenID Connect Sector.
 
@@ -237,7 +237,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.OAuthOpenIDConnectSectorIdentifiersApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body7() # Body7 |  (optional)
+body = swagger_client.SectorIdentifier() # SectorIdentifier |  (optional)
 
 try:
     # Create new OpenID Connect Sector.
@@ -251,11 +251,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body7**](Body7.md)|  | [optional] 
+ **body** | [**SectorIdentifier**](SectorIdentifier.md)|  | [optional] 
 
 ### Return type
 
-[**NewlyAddedOpenIDConnectSectorIdentifier_**](NewlyAddedOpenIDConnectSectorIdentifier_.md)
+[**SectorIdentifier**](SectorIdentifier.md)
 
 ### Authorization
 
@@ -269,7 +269,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_oauth_openid_sectors**
-> NewlyAddedOpenIDConnectSectorIdentifier_ put_oauth_openid_sectors(body=body)
+> SectorIdentifier put_oauth_openid_sectors(body=body)
 
 Update OpenId Connect Sector.
 
@@ -289,7 +289,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.OAuthOpenIDConnectSectorIdentifiersApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Body6() # Body6 |  (optional)
+body = swagger_client.SectorIdentifier() # SectorIdentifier |  (optional)
 
 try:
     # Update OpenId Connect Sector.
@@ -303,11 +303,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body6**](Body6.md)|  | [optional] 
+ **body** | [**SectorIdentifier**](SectorIdentifier.md)|  | [optional] 
 
 ### Return type
 
-[**NewlyAddedOpenIDConnectSectorIdentifier_**](NewlyAddedOpenIDConnectSectorIdentifier_.md)
+[**SectorIdentifier**](SectorIdentifier.md)
 
 ### Authorization
 

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**put_config_logging**](ConfigurationLoggingApi.md#put_config_logging) | **PUT** /jans-config-api/api/v1/logging | Updates Jans Authorization Server logging settings.
 
 # **get_config_logging**
-> list[InlineResponse2009] get_config_logging()
+> LoggingConfiguration get_config_logging()
 
 Returns Jans Authorization Server logging settings.
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**list[InlineResponse2009]**](InlineResponse2009.md)
+[**LoggingConfiguration**](LoggingConfiguration.md)
 
 ### Authorization
 
@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.ConfigurationLoggingApi(swagger_client.ApiClient(configuration))
-body = [swagger_client.InlineResponse2009()] # list[InlineResponse2009] |  (optional)
+body = swagger_client.LoggingConfiguration() # LoggingConfiguration |  (optional)
 
 try:
     # Updates Jans Authorization Server logging settings.
@@ -89,7 +89,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**list[InlineResponse2009]**](InlineResponse2009.md)|  | [optional] 
+ **body** | [**LoggingConfiguration**](LoggingConfiguration.md)|  | [optional] 
 
 ### Return type
 

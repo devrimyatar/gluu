@@ -77,7 +77,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.ConfigurationJWKJSONWebKeyJWKApi(swagger_client.ApiClient(configuration))
-body = swagger_client.PatchRequest() # PatchRequest |  (optional)
+body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Patch JWKS
@@ -90,7 +90,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**PatchRequest**](PatchRequest.md)|  | [optional] 
+ **body** | [**list[PatchRequest]**](PatchRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -128,7 +128,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.ConfigurationJWKJSONWebKeyJWKApi(swagger_client.ApiClient(configuration))
-body = swagger_client.WebKeysConfiguration1() # WebKeysConfiguration1 |  (optional)
+body = swagger_client.WebKeysConfiguration() # WebKeysConfiguration |  (optional)
 
 try:
     # Puts/replaces JWKS
@@ -141,7 +141,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**WebKeysConfiguration1**](WebKeysConfiguration1.md)|  | [optional] 
+ **body** | [**WebKeysConfiguration**](WebKeysConfiguration.md)|  | [optional] 
 
 ### Return type
 

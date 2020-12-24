@@ -76,7 +76,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultAuthenticationMethodApi(swagger_client.ApiClient(configuration))
-body = swagger_client.AuthenticationMethod1() # AuthenticationMethod1 |  (optional)
+body = swagger_client.AuthenticationMethod() # AuthenticationMethod |  (optional)
 
 try:
     # Updates default authentication method.
@@ -89,7 +89,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**AuthenticationMethod1**](AuthenticationMethod1.md)|  | [optional] 
+ **body** | [**AuthenticationMethod**](AuthenticationMethod.md)|  | [optional] 
 
 ### Return type
 
