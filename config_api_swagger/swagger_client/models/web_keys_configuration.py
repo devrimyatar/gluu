@@ -28,23 +28,18 @@ class WebKeysConfiguration(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'keys': 'list[JsonWebKey]',
-        'jwks_algorithms_supported': 'list[str]'
+        'keys': 'list[JsonWebKey]'
     }
 
     attribute_map = {
-        'keys': 'keys',
-        'jwks_algorithms_supported': 'jwksAlgorithmsSupported'
+        'keys': 'keys'
     }
 
-    def __init__(self, keys=None, jwks_algorithms_supported=None):  # noqa: E501
+    def __init__(self, keys=None):  # noqa: E501
         """WebKeysConfiguration - a model defined in Swagger"""  # noqa: E501
         self._keys = None
-        self._jwks_algorithms_supported = None
         self.discriminator = None
         self.keys = keys
-        if jwks_algorithms_supported is not None:
-            self.jwks_algorithms_supported = jwks_algorithms_supported
 
     @property
     def keys(self):
@@ -70,29 +65,6 @@ class WebKeysConfiguration(object):
             raise ValueError("Invalid value for `keys`, must not be `None`")  # noqa: E501
 
         self._keys = keys
-
-    @property
-    def jwks_algorithms_supported(self):
-        """Gets the jwks_algorithms_supported of this WebKeysConfiguration.  # noqa: E501
-
-        A list of algorithms that will be used in JWKS endpoint.  # noqa: E501
-
-        :return: The jwks_algorithms_supported of this WebKeysConfiguration.  # noqa: E501
-        :rtype: list[str]
-        """
-        return self._jwks_algorithms_supported
-
-    @jwks_algorithms_supported.setter
-    def jwks_algorithms_supported(self, jwks_algorithms_supported):
-        """Sets the jwks_algorithms_supported of this WebKeysConfiguration.
-
-        A list of algorithms that will be used in JWKS endpoint.  # noqa: E501
-
-        :param jwks_algorithms_supported: The jwks_algorithms_supported of this WebKeysConfiguration.  # noqa: E501
-        :type: list[str]
-        """
-
-        self._jwks_algorithms_supported = jwks_algorithms_supported
 
     def to_dict(self):
         """Returns the model properties as a dict"""

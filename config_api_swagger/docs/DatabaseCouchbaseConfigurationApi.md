@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**get_config_database_couchbase_by_name**](DatabaseCouchbaseConfigurationApi.md#get_config_database_couchbase_by_name) | **GET** /jans-config-api/api/v1/config/database/couchbase/{name} | Gets a Couchbase configurations by name.
 [**patch_config_database_couchbase_by_name**](DatabaseCouchbaseConfigurationApi.md#patch_config_database_couchbase_by_name) | **PATCH** /jans-config-api/api/v1/config/database/couchbase/{name} | Partially modify an Couchbase configuration.
 [**post_config_database_couchbase**](DatabaseCouchbaseConfigurationApi.md#post_config_database_couchbase) | **POST** /jans-config-api/api/v1/config/database/couchbase | Adds a new Couchbase configuration.
-[**post_config_database_couchbase_test**](DatabaseCouchbaseConfigurationApi.md#post_config_database_couchbase_test) | **POST** /jans-config-api/api/v1/config/database/couchbase/test | Tests an Couchbase configuration.
+[**post_config_database_couchbase_test**](DatabaseCouchbaseConfigurationApi.md#post_config_database_couchbase_test) | **POST** /jans-config-api/api/v1/config/database/couchbase/test | Tests a Couchbase configuration.
 [**put_config_database_couchbase**](DatabaseCouchbaseConfigurationApi.md#put_config_database_couchbase) | **PUT** /jans-config-api/api/v1/config/database/couchbase | Updates Couchbase configuration.
 
 # **delete_config_database_couchbase_by_name**
@@ -272,9 +272,9 @@ Name | Type | Description  | Notes
 # **post_config_database_couchbase_test**
 > bool post_config_database_couchbase_test(body)
 
-Tests an Couchbase configuration.
+Tests a Couchbase configuration.
 
-Tests an Couchbase configuration.
+Tests a Couchbase configuration.
 
 ### Example
 ```python
@@ -293,7 +293,7 @@ api_instance = swagger_client.DatabaseCouchbaseConfigurationApi(swagger_client.A
 body = swagger_client.CouchbaseConfiguration() # CouchbaseConfiguration | 
 
 try:
-    # Tests an Couchbase configuration.
+    # Tests a Couchbase configuration.
     api_response = api_instance.post_config_database_couchbase_test(body)
     pprint(api_response)
 except ApiException as e:

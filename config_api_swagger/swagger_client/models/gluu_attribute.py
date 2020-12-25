@@ -28,12 +28,14 @@ class GluuAttribute(object):
                             and the value is json key in definition.
     """
     swagger_types = {
+        'dn': 'str',
+        'inum': 'str',
+        'selected': 'bool',
         'name': 'str',
-        'display_name': 'list[str]',
+        'display_name': 'str',
         'description': 'str',
         'data_type': 'str',
         'status': 'str',
-        'jans_multivalued_attr': 'bool',
         'lifetime': 'str',
         'source_attribute': 'str',
         'salt': 'str',
@@ -42,25 +44,28 @@ class GluuAttribute(object):
         'edit_type': 'list[str]',
         'view_type': 'list[str]',
         'usage_type': 'list[str]',
-        'jans_attr_name': 'str',
+        'claim_name': 'str',
         'see_also': 'str',
         'saml1_uri': 'str',
         'saml2_uri': 'str',
         'urn': 'str',
-        'jans_scim_custom_attr': 'bool',
+        'scim_custom_attr': 'bool',
+        'ox_multi_valued_attribute': 'bool',
         'custom': 'bool',
         'requred': 'bool',
         'attribute_validation': 'GluuAttributeAttributeValidation',
-        'gluu_tooltip': 'str'
+        'tooltip': 'str'
     }
 
     attribute_map = {
+        'dn': 'dn',
+        'inum': 'inum',
+        'selected': 'selected',
         'name': 'name',
         'display_name': 'displayName',
         'description': 'description',
         'data_type': 'dataType',
         'status': 'status',
-        'jans_multivalued_attr': 'jansMultivaluedAttr',
         'lifetime': 'lifetime',
         'source_attribute': 'sourceAttribute',
         'salt': 'salt',
@@ -69,26 +74,29 @@ class GluuAttribute(object):
         'edit_type': 'editType',
         'view_type': 'viewType',
         'usage_type': 'usageType',
-        'jans_attr_name': 'jansAttrName',
+        'claim_name': 'claimName',
         'see_also': 'seeAlso',
         'saml1_uri': 'saml1Uri',
         'saml2_uri': 'saml2Uri',
         'urn': 'urn',
-        'jans_scim_custom_attr': 'jansSCIMCustomAttr',
+        'scim_custom_attr': 'scimCustomAttr',
+        'ox_multi_valued_attribute': 'oxMultiValuedAttribute',
         'custom': 'custom',
         'requred': 'requred',
         'attribute_validation': 'attributeValidation',
-        'gluu_tooltip': 'gluuTooltip'
+        'tooltip': 'tooltip'
     }
 
-    def __init__(self, name=None, display_name=None, description=None, data_type=None, status=None, jans_multivalued_attr=None, lifetime=None, source_attribute=None, salt=None, name_id_type=None, origin=None, edit_type=None, view_type=None, usage_type=None, jans_attr_name=None, see_also=None, saml1_uri=None, saml2_uri=None, urn=None, jans_scim_custom_attr=None, custom=None, requred=None, attribute_validation=None, gluu_tooltip=None):  # noqa: E501
+    def __init__(self, dn=None, inum=None, selected=None, name=None, display_name=None, description=None, data_type=None, status=None, lifetime=None, source_attribute=None, salt=None, name_id_type=None, origin=None, edit_type=None, view_type=None, usage_type=None, claim_name=None, see_also=None, saml1_uri=None, saml2_uri=None, urn=None, scim_custom_attr=None, ox_multi_valued_attribute=None, custom=None, requred=None, attribute_validation=None, tooltip=None):  # noqa: E501
         """GluuAttribute - a model defined in Swagger"""  # noqa: E501
+        self._dn = None
+        self._inum = None
+        self._selected = None
         self._name = None
         self._display_name = None
         self._description = None
         self._data_type = None
         self._status = None
-        self._jans_multivalued_attr = None
         self._lifetime = None
         self._source_attribute = None
         self._salt = None
@@ -97,25 +105,34 @@ class GluuAttribute(object):
         self._edit_type = None
         self._view_type = None
         self._usage_type = None
-        self._jans_attr_name = None
+        self._claim_name = None
         self._see_also = None
         self._saml1_uri = None
         self._saml2_uri = None
         self._urn = None
-        self._jans_scim_custom_attr = None
+        self._scim_custom_attr = None
+        self._ox_multi_valued_attribute = None
         self._custom = None
         self._requred = None
         self._attribute_validation = None
-        self._gluu_tooltip = None
+        self._tooltip = None
         self.discriminator = None
-        self.name = name
-        self.display_name = display_name
+        if dn is not None:
+            self.dn = dn
+        if inum is not None:
+            self.inum = inum
+        if selected is not None:
+            self.selected = selected
+        if name is not None:
+            self.name = name
+        if display_name is not None:
+            self.display_name = display_name
         if description is not None:
             self.description = description
-        self.data_type = data_type
-        self.status = status
-        if jans_multivalued_attr is not None:
-            self.jans_multivalued_attr = jans_multivalued_attr
+        if data_type is not None:
+            self.data_type = data_type
+        if status is not None:
+            self.status = status
         if lifetime is not None:
             self.lifetime = lifetime
         if source_attribute is not None:
@@ -132,8 +149,8 @@ class GluuAttribute(object):
             self.view_type = view_type
         if usage_type is not None:
             self.usage_type = usage_type
-        if jans_attr_name is not None:
-            self.jans_attr_name = jans_attr_name
+        if claim_name is not None:
+            self.claim_name = claim_name
         if see_also is not None:
             self.see_also = see_also
         if saml1_uri is not None:
@@ -142,16 +159,85 @@ class GluuAttribute(object):
             self.saml2_uri = saml2_uri
         if urn is not None:
             self.urn = urn
-        if jans_scim_custom_attr is not None:
-            self.jans_scim_custom_attr = jans_scim_custom_attr
+        if scim_custom_attr is not None:
+            self.scim_custom_attr = scim_custom_attr
+        if ox_multi_valued_attribute is not None:
+            self.ox_multi_valued_attribute = ox_multi_valued_attribute
         if custom is not None:
             self.custom = custom
         if requred is not None:
             self.requred = requred
         if attribute_validation is not None:
             self.attribute_validation = attribute_validation
-        if gluu_tooltip is not None:
-            self.gluu_tooltip = gluu_tooltip
+        if tooltip is not None:
+            self.tooltip = tooltip
+
+    @property
+    def dn(self):
+        """Gets the dn of this GluuAttribute.  # noqa: E501
+
+
+        :return: The dn of this GluuAttribute.  # noqa: E501
+        :rtype: str
+        """
+        return self._dn
+
+    @dn.setter
+    def dn(self, dn):
+        """Sets the dn of this GluuAttribute.
+
+
+        :param dn: The dn of this GluuAttribute.  # noqa: E501
+        :type: str
+        """
+
+        self._dn = dn
+
+    @property
+    def inum(self):
+        """Gets the inum of this GluuAttribute.  # noqa: E501
+
+        XRI i-number. Identifier to uniquely identify the attribute.  # noqa: E501
+
+        :return: The inum of this GluuAttribute.  # noqa: E501
+        :rtype: str
+        """
+        return self._inum
+
+    @inum.setter
+    def inum(self, inum):
+        """Sets the inum of this GluuAttribute.
+
+        XRI i-number. Identifier to uniquely identify the attribute.  # noqa: E501
+
+        :param inum: The inum of this GluuAttribute.  # noqa: E501
+        :type: str
+        """
+
+        self._inum = inum
+
+    @property
+    def selected(self):
+        """Gets the selected of this GluuAttribute.  # noqa: E501
+
+        Boolean value to indicate if the atrribute is selected.  # noqa: E501
+
+        :return: The selected of this GluuAttribute.  # noqa: E501
+        :rtype: bool
+        """
+        return self._selected
+
+    @selected.setter
+    def selected(self, selected):
+        """Sets the selected of this GluuAttribute.
+
+        Boolean value to indicate if the atrribute is selected.  # noqa: E501
+
+        :param selected: The selected of this GluuAttribute.  # noqa: E501
+        :type: bool
+        """
+
+        self._selected = selected
 
     @property
     def name(self):
@@ -173,8 +259,6 @@ class GluuAttribute(object):
         :param name: The name of this GluuAttribute.  # noqa: E501
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
 
@@ -184,7 +268,7 @@ class GluuAttribute(object):
 
 
         :return: The display_name of this GluuAttribute.  # noqa: E501
-        :rtype: list[str]
+        :rtype: str
         """
         return self._display_name
 
@@ -194,10 +278,8 @@ class GluuAttribute(object):
 
 
         :param display_name: The display_name of this GluuAttribute.  # noqa: E501
-        :type: list[str]
+        :type: str
         """
-        if display_name is None:
-            raise ValueError("Invalid value for `display_name`, must not be `None`")  # noqa: E501
 
         self._display_name = display_name
 
@@ -244,9 +326,7 @@ class GluuAttribute(object):
         :param data_type: The data_type of this GluuAttribute.  # noqa: E501
         :type: str
         """
-        if data_type is None:
-            raise ValueError("Invalid value for `data_type`, must not be `None`")  # noqa: E501
-        allowed_values = ["STRING", "NUMERIC", "BOOLEAN", "BINARY", "DATE"]  # noqa: E501
+        allowed_values = ["STRING", "NUMERIC", "BOOLEAN", "BINARY", "CERTIFICATE", "DATE"]  # noqa: E501
         if data_type not in allowed_values:
             raise ValueError(
                 "Invalid value for `data_type` ({0}), must be one of {1}"  # noqa: E501
@@ -275,33 +355,8 @@ class GluuAttribute(object):
         :param status: The status of this GluuAttribute.  # noqa: E501
         :type: str
         """
-        if status is None:
-            raise ValueError("Invalid value for `status`, must not be `None`")  # noqa: E501
 
         self._status = status
-
-    @property
-    def jans_multivalued_attr(self):
-        """Gets the jans_multivalued_attr of this GluuAttribute.  # noqa: E501
-
-        Boolean value indicating if the attribute is multi-value  # noqa: E501
-
-        :return: The jans_multivalued_attr of this GluuAttribute.  # noqa: E501
-        :rtype: bool
-        """
-        return self._jans_multivalued_attr
-
-    @jans_multivalued_attr.setter
-    def jans_multivalued_attr(self, jans_multivalued_attr):
-        """Sets the jans_multivalued_attr of this GluuAttribute.
-
-        Boolean value indicating if the attribute is multi-value  # noqa: E501
-
-        :param jans_multivalued_attr: The jans_multivalued_attr of this GluuAttribute.  # noqa: E501
-        :type: bool
-        """
-
-        self._jans_multivalued_attr = jans_multivalued_attr
 
     @property
     def lifetime(self):
@@ -428,6 +483,13 @@ class GluuAttribute(object):
         :param edit_type: The edit_type of this GluuAttribute.  # noqa: E501
         :type: list[str]
         """
+        allowed_values = ["ADMIN", "OWNER", "MANAGER", "USER", "WHITEPAGES"]  # noqa: E501
+        if not set(edit_type).issubset(set(allowed_values)):
+            raise ValueError(
+                "Invalid values for `edit_type` [{0}], must be a subset of [{1}]"  # noqa: E501
+                .format(", ".join(map(str, set(edit_type) - set(allowed_values))),  # noqa: E501
+                        ", ".join(map(str, allowed_values)))
+            )
 
         self._edit_type = edit_type
 
@@ -451,6 +513,13 @@ class GluuAttribute(object):
         :param view_type: The view_type of this GluuAttribute.  # noqa: E501
         :type: list[str]
         """
+        allowed_values = ["ADMIN", "OWNER", "MANAGER", "USER", "WHITEPAGES"]  # noqa: E501
+        if not set(view_type).issubset(set(allowed_values)):
+            raise ValueError(
+                "Invalid values for `view_type` [{0}], must be a subset of [{1}]"  # noqa: E501
+                .format(", ".join(map(str, set(view_type) - set(allowed_values))),  # noqa: E501
+                        ", ".join(map(str, allowed_values)))
+            )
 
         self._view_type = view_type
 
@@ -478,25 +547,25 @@ class GluuAttribute(object):
         self._usage_type = usage_type
 
     @property
-    def jans_attr_name(self):
-        """Gets the jans_attr_name of this GluuAttribute.  # noqa: E501
+    def claim_name(self):
+        """Gets the claim_name of this GluuAttribute.  # noqa: E501
 
 
-        :return: The jans_attr_name of this GluuAttribute.  # noqa: E501
+        :return: The claim_name of this GluuAttribute.  # noqa: E501
         :rtype: str
         """
-        return self._jans_attr_name
+        return self._claim_name
 
-    @jans_attr_name.setter
-    def jans_attr_name(self, jans_attr_name):
-        """Sets the jans_attr_name of this GluuAttribute.
+    @claim_name.setter
+    def claim_name(self, claim_name):
+        """Sets the claim_name of this GluuAttribute.
 
 
-        :param jans_attr_name: The jans_attr_name of this GluuAttribute.  # noqa: E501
+        :param claim_name: The claim_name of this GluuAttribute.  # noqa: E501
         :type: str
         """
 
-        self._jans_attr_name = jans_attr_name
+        self._claim_name = claim_name
 
     @property
     def see_also(self):
@@ -583,27 +652,50 @@ class GluuAttribute(object):
         self._urn = urn
 
     @property
-    def jans_scim_custom_attr(self):
-        """Gets the jans_scim_custom_attr of this GluuAttribute.  # noqa: E501
+    def scim_custom_attr(self):
+        """Gets the scim_custom_attr of this GluuAttribute.  # noqa: E501
 
         Boolean value indicating if the attribute is a SCIM custom attribute  # noqa: E501
 
-        :return: The jans_scim_custom_attr of this GluuAttribute.  # noqa: E501
+        :return: The scim_custom_attr of this GluuAttribute.  # noqa: E501
         :rtype: bool
         """
-        return self._jans_scim_custom_attr
+        return self._scim_custom_attr
 
-    @jans_scim_custom_attr.setter
-    def jans_scim_custom_attr(self, jans_scim_custom_attr):
-        """Sets the jans_scim_custom_attr of this GluuAttribute.
+    @scim_custom_attr.setter
+    def scim_custom_attr(self, scim_custom_attr):
+        """Sets the scim_custom_attr of this GluuAttribute.
 
         Boolean value indicating if the attribute is a SCIM custom attribute  # noqa: E501
 
-        :param jans_scim_custom_attr: The jans_scim_custom_attr of this GluuAttribute.  # noqa: E501
+        :param scim_custom_attr: The scim_custom_attr of this GluuAttribute.  # noqa: E501
         :type: bool
         """
 
-        self._jans_scim_custom_attr = jans_scim_custom_attr
+        self._scim_custom_attr = scim_custom_attr
+
+    @property
+    def ox_multi_valued_attribute(self):
+        """Gets the ox_multi_valued_attribute of this GluuAttribute.  # noqa: E501
+
+        Boolean value indicating if the attribute can hold multiple value.  # noqa: E501
+
+        :return: The ox_multi_valued_attribute of this GluuAttribute.  # noqa: E501
+        :rtype: bool
+        """
+        return self._ox_multi_valued_attribute
+
+    @ox_multi_valued_attribute.setter
+    def ox_multi_valued_attribute(self, ox_multi_valued_attribute):
+        """Sets the ox_multi_valued_attribute of this GluuAttribute.
+
+        Boolean value indicating if the attribute can hold multiple value.  # noqa: E501
+
+        :param ox_multi_valued_attribute: The ox_multi_valued_attribute of this GluuAttribute.  # noqa: E501
+        :type: bool
+        """
+
+        self._ox_multi_valued_attribute = ox_multi_valued_attribute
 
     @property
     def custom(self):
@@ -673,25 +765,25 @@ class GluuAttribute(object):
         self._attribute_validation = attribute_validation
 
     @property
-    def gluu_tooltip(self):
-        """Gets the gluu_tooltip of this GluuAttribute.  # noqa: E501
+    def tooltip(self):
+        """Gets the tooltip of this GluuAttribute.  # noqa: E501
 
 
-        :return: The gluu_tooltip of this GluuAttribute.  # noqa: E501
+        :return: The tooltip of this GluuAttribute.  # noqa: E501
         :rtype: str
         """
-        return self._gluu_tooltip
+        return self._tooltip
 
-    @gluu_tooltip.setter
-    def gluu_tooltip(self, gluu_tooltip):
-        """Sets the gluu_tooltip of this GluuAttribute.
+    @tooltip.setter
+    def tooltip(self, tooltip):
+        """Sets the tooltip of this GluuAttribute.
 
 
-        :param gluu_tooltip: The gluu_tooltip of this GluuAttribute.  # noqa: E501
+        :param tooltip: The tooltip of this GluuAttribute.  # noqa: E501
         :type: str
         """
 
-        self._gluu_tooltip = gluu_tooltip
+        self._tooltip = tooltip
 
     def to_dict(self):
         """Returns the model properties as a dict"""

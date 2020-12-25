@@ -42,7 +42,7 @@ class CacheConfigurationNativePersistenceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2006
+        :return: NativePersistenceConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -63,7 +63,7 @@ class CacheConfigurationNativePersistenceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2006
+        :return: NativePersistenceConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -111,7 +111,7 @@ class CacheConfigurationNativePersistenceApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2006',  # noqa: E501
+            response_type='NativePersistenceConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -129,8 +129,8 @@ class CacheConfigurationNativePersistenceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body3 body:
-        :return: Body3
+        :param NativePersistenceConfiguration body:
+        :return: NativePersistenceConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -151,8 +151,8 @@ class CacheConfigurationNativePersistenceApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body3 body:
-        :return: Body3
+        :param NativePersistenceConfiguration body:
+        :return: NativePersistenceConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -206,7 +206,7 @@ class CacheConfigurationNativePersistenceApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Body3',  # noqa: E501
+            response_type='NativePersistenceConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

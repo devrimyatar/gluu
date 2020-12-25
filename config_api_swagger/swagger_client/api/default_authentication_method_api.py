@@ -129,7 +129,7 @@ class DefaultAuthenticationMethodApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthenticationMethod1 body:
+        :param AuthenticationMethod body:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -151,7 +151,7 @@ class DefaultAuthenticationMethodApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthenticationMethod1 body:
+        :param AuthenticationMethod body:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.

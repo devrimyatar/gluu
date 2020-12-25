@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_properties_fido2**
-> put_properties_fido2(body=body)
+> JansFido2DynConfiguration put_properties_fido2(body=body)
 
 Updates Fido2 configuration properties.
 
@@ -80,7 +80,8 @@ body = swagger_client.JansFido2DynConfiguration() # JansFido2DynConfiguration | 
 
 try:
     # Updates Fido2 configuration properties.
-    api_instance.put_properties_fido2(body=body)
+    api_response = api_instance.put_properties_fido2(body=body)
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling ConfigurationFido2Api->put_properties_fido2: %s\n" % e)
 ```
@@ -93,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**JansFido2DynConfiguration**](JansFido2DynConfiguration.md)
 
 ### Authorization
 

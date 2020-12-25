@@ -69,14 +69,20 @@ class JsonWebKey(object):
         self._x = None
         self._y = None
         self.discriminator = None
-        self.kid = kid
-        self.kty = kty
-        self.use = use
-        self.alg = alg
+        if kid is not None:
+            self.kid = kid
+        if kty is not None:
+            self.kty = kty
+        if use is not None:
+            self.use = use
+        if alg is not None:
+            self.alg = alg
         if crv is not None:
             self.crv = crv
-        self.exp = exp
-        self.x5c = x5c
+        if exp is not None:
+            self.exp = exp
+        if x5c is not None:
+            self.x5c = x5c
         if n is not None:
             self.n = n
         if e is not None:
@@ -90,6 +96,7 @@ class JsonWebKey(object):
     def kid(self):
         """Gets the kid of this JsonWebKey.  # noqa: E501
 
+        The unique identifier for the key.  # noqa: E501
 
         :return: The kid of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -100,12 +107,11 @@ class JsonWebKey(object):
     def kid(self, kid):
         """Sets the kid of this JsonWebKey.
 
+        The unique identifier for the key.  # noqa: E501
 
         :param kid: The kid of this JsonWebKey.  # noqa: E501
         :type: str
         """
-        if kid is None:
-            raise ValueError("Invalid value for `kid`, must not be `None`")  # noqa: E501
 
         self._kid = kid
 
@@ -113,6 +119,7 @@ class JsonWebKey(object):
     def kty(self):
         """Gets the kty of this JsonWebKey.  # noqa: E501
 
+        The family of cryptographic algorithms used with the key.  # noqa: E501
 
         :return: The kty of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -123,12 +130,11 @@ class JsonWebKey(object):
     def kty(self, kty):
         """Sets the kty of this JsonWebKey.
 
+        The family of cryptographic algorithms used with the key.  # noqa: E501
 
         :param kty: The kty of this JsonWebKey.  # noqa: E501
         :type: str
         """
-        if kty is None:
-            raise ValueError("Invalid value for `kty`, must not be `None`")  # noqa: E501
 
         self._kty = kty
 
@@ -136,6 +142,7 @@ class JsonWebKey(object):
     def use(self):
         """Gets the use of this JsonWebKey.  # noqa: E501
 
+        How the key was meant to be used; sig represents the signature.  # noqa: E501
 
         :return: The use of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -146,12 +153,11 @@ class JsonWebKey(object):
     def use(self, use):
         """Sets the use of this JsonWebKey.
 
+        How the key was meant to be used; sig represents the signature.  # noqa: E501
 
         :param use: The use of this JsonWebKey.  # noqa: E501
         :type: str
         """
-        if use is None:
-            raise ValueError("Invalid value for `use`, must not be `None`")  # noqa: E501
 
         self._use = use
 
@@ -159,6 +165,7 @@ class JsonWebKey(object):
     def alg(self):
         """Gets the alg of this JsonWebKey.  # noqa: E501
 
+        The specific cryptographic algorithm used with the key.  # noqa: E501
 
         :return: The alg of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -169,12 +176,11 @@ class JsonWebKey(object):
     def alg(self, alg):
         """Sets the alg of this JsonWebKey.
 
+        The specific cryptographic algorithm used with the key.  # noqa: E501
 
         :param alg: The alg of this JsonWebKey.  # noqa: E501
         :type: str
         """
-        if alg is None:
-            raise ValueError("Invalid value for `alg`, must not be `None`")  # noqa: E501
 
         self._alg = alg
 
@@ -182,6 +188,7 @@ class JsonWebKey(object):
     def crv(self):
         """Gets the crv of this JsonWebKey.  # noqa: E501
 
+        The crv member identifies the cryptographic curve used with the key. Values defined by this specification are P-256, P-384 and P-521. Additional crv values MAY be used, provided they are understood by implementations using that Elliptic Curve key. The crv value is case sensitive.  # noqa: E501
 
         :return: The crv of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -192,6 +199,7 @@ class JsonWebKey(object):
     def crv(self, crv):
         """Sets the crv of this JsonWebKey.
 
+        The crv member identifies the cryptographic curve used with the key. Values defined by this specification are P-256, P-384 and P-521. Additional crv values MAY be used, provided they are understood by implementations using that Elliptic Curve key. The crv value is case sensitive.  # noqa: E501
 
         :param crv: The crv of this JsonWebKey.  # noqa: E501
         :type: str
@@ -203,6 +211,7 @@ class JsonWebKey(object):
     def exp(self):
         """Gets the exp of this JsonWebKey.  # noqa: E501
 
+        Contains the token expiration timestamp  # noqa: E501
 
         :return: The exp of this JsonWebKey.  # noqa: E501
         :rtype: int
@@ -213,12 +222,11 @@ class JsonWebKey(object):
     def exp(self, exp):
         """Sets the exp of this JsonWebKey.
 
+        Contains the token expiration timestamp  # noqa: E501
 
         :param exp: The exp of this JsonWebKey.  # noqa: E501
         :type: int
         """
-        if exp is None:
-            raise ValueError("Invalid value for `exp`, must not be `None`")  # noqa: E501
 
         self._exp = exp
 
@@ -226,6 +234,7 @@ class JsonWebKey(object):
     def x5c(self):
         """Gets the x5c of this JsonWebKey.  # noqa: E501
 
+        The x.509 certificate chain. The first entry in the array is the certificate to use for token verification; the other certificates can be used to verify this first certificate.  # noqa: E501
 
         :return: The x5c of this JsonWebKey.  # noqa: E501
         :rtype: list[str]
@@ -236,12 +245,11 @@ class JsonWebKey(object):
     def x5c(self, x5c):
         """Sets the x5c of this JsonWebKey.
 
+        The x.509 certificate chain. The first entry in the array is the certificate to use for token verification; the other certificates can be used to verify this first certificate.  # noqa: E501
 
         :param x5c: The x5c of this JsonWebKey.  # noqa: E501
         :type: list[str]
         """
-        if x5c is None:
-            raise ValueError("Invalid value for `x5c`, must not be `None`")  # noqa: E501
 
         self._x5c = x5c
 
@@ -249,6 +257,7 @@ class JsonWebKey(object):
     def n(self):
         """Gets the n of this JsonWebKey.  # noqa: E501
 
+        The modulus for the RSA public key.  # noqa: E501
 
         :return: The n of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -259,6 +268,7 @@ class JsonWebKey(object):
     def n(self, n):
         """Sets the n of this JsonWebKey.
 
+        The modulus for the RSA public key.  # noqa: E501
 
         :param n: The n of this JsonWebKey.  # noqa: E501
         :type: str
@@ -270,6 +280,7 @@ class JsonWebKey(object):
     def e(self):
         """Gets the e of this JsonWebKey.  # noqa: E501
 
+        The exponent for the RSA public key.  # noqa: E501
 
         :return: The e of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -280,6 +291,7 @@ class JsonWebKey(object):
     def e(self, e):
         """Sets the e of this JsonWebKey.
 
+        The exponent for the RSA public key.  # noqa: E501
 
         :param e: The e of this JsonWebKey.  # noqa: E501
         :type: str
@@ -291,6 +303,7 @@ class JsonWebKey(object):
     def x(self):
         """Gets the x of this JsonWebKey.  # noqa: E501
 
+        The x member contains the x coordinate for the elliptic curve point. It is represented as the base64url encoding of the coordinate's big endian representation.  # noqa: E501
 
         :return: The x of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -301,6 +314,7 @@ class JsonWebKey(object):
     def x(self, x):
         """Sets the x of this JsonWebKey.
 
+        The x member contains the x coordinate for the elliptic curve point. It is represented as the base64url encoding of the coordinate's big endian representation.  # noqa: E501
 
         :param x: The x of this JsonWebKey.  # noqa: E501
         :type: str
@@ -312,6 +326,7 @@ class JsonWebKey(object):
     def y(self):
         """Gets the y of this JsonWebKey.  # noqa: E501
 
+        The y member contains the y coordinate for the elliptic curve point. It is represented as the base64url encoding of the coordinate's big endian representation.  # noqa: E501
 
         :return: The y of this JsonWebKey.  # noqa: E501
         :rtype: str
@@ -322,6 +337,7 @@ class JsonWebKey(object):
     def y(self, y):
         """Sets the y of this JsonWebKey.
 
+        The y member contains the y coordinate for the elliptic curve point. It is represented as the base64url encoding of the coordinate's big endian representation.  # noqa: E501
 
         :param y: The y of this JsonWebKey.  # noqa: E501
         :type: str

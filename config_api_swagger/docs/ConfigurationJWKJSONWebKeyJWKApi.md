@@ -57,7 +57,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_config_jwks**
-> patch_config_jwks(body=body)
+> WebKeysConfiguration patch_config_jwks(body=body)
 
 Patch JWKS
 
@@ -81,7 +81,8 @@ body = [swagger_client.PatchRequest()] # list[PatchRequest] |  (optional)
 
 try:
     # Patch JWKS
-    api_instance.patch_config_jwks(body=body)
+    api_response = api_instance.patch_config_jwks(body=body)
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling ConfigurationJWKJSONWebKeyJWKApi->patch_config_jwks: %s\n" % e)
 ```
@@ -94,7 +95,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**WebKeysConfiguration**](WebKeysConfiguration.md)
 
 ### Authorization
 
@@ -108,7 +109,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_jwks**
-> put_config_jwks(body=body)
+> WebKeysConfiguration put_config_jwks(body=body)
 
 Puts/replaces JWKS
 
@@ -132,7 +133,8 @@ body = swagger_client.WebKeysConfiguration() # WebKeysConfiguration |  (optional
 
 try:
     # Puts/replaces JWKS
-    api_instance.put_config_jwks(body=body)
+    api_response = api_instance.put_config_jwks(body=body)
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling ConfigurationJWKJSONWebKeyJWKApi->put_config_jwks: %s\n" % e)
 ```
@@ -145,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**WebKeysConfiguration**](WebKeysConfiguration.md)
 
 ### Authorization
 

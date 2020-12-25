@@ -139,7 +139,7 @@ class OAuthUMAResourcesApi(object):
         :param async_req bool
         :param int limit: Search size - max size of the results to return.
         :param str pattern: Search pattern.
-        :return: list[InlineResponse20014]
+        :return: list[UmaResource]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -162,7 +162,7 @@ class OAuthUMAResourcesApi(object):
         :param async_req bool
         :param int limit: Search size - max size of the results to return.
         :param str pattern: Search pattern.
-        :return: list[InlineResponse20014]
+        :return: list[UmaResource]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -214,7 +214,7 @@ class OAuthUMAResourcesApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[InlineResponse20014]',  # noqa: E501
+            response_type='list[UmaResource]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -233,7 +233,7 @@ class OAuthUMAResourcesApi(object):
 
         :param async_req bool
         :param str id: Resource description ID. (required)
-        :return: UMAResource1
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -255,7 +255,7 @@ class OAuthUMAResourcesApi(object):
 
         :param async_req bool
         :param str id: Resource description ID. (required)
-        :return: UMAResource1
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -309,7 +309,7 @@ class OAuthUMAResourcesApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='UMAResource1',  # noqa: E501
+            response_type='UmaResource',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -328,8 +328,8 @@ class OAuthUMAResourcesApi(object):
 
         :param async_req bool
         :param str id: Resource description ID. (required)
-        :param PatchRequest body:
-        :return: UMAResource1
+        :param list[PatchRequest] body:
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -351,8 +351,8 @@ class OAuthUMAResourcesApi(object):
 
         :param async_req bool
         :param str id: Resource description ID. (required)
-        :param PatchRequest body:
-        :return: UMAResource1
+        :param list[PatchRequest] body:
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -399,7 +399,7 @@ class OAuthUMAResourcesApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+            ['application/json-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['jans-auth']  # noqa: E501
@@ -412,7 +412,7 @@ class OAuthUMAResourcesApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='UMAResource1',  # noqa: E501
+            response_type='UmaResource',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -430,8 +430,8 @@ class OAuthUMAResourcesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param UMAResource1 body:
-        :return: UMAResource1
+        :param UmaResource body:
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -452,8 +452,8 @@ class OAuthUMAResourcesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param UMAResource1 body:
-        :return: UMAResource1
+        :param UmaResource body:
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -507,7 +507,7 @@ class OAuthUMAResourcesApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='UMAResource1',  # noqa: E501
+            response_type='UmaResource',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -525,8 +525,8 @@ class OAuthUMAResourcesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param UMAResource body:
-        :return: UMAResource
+        :param UmaResource body:
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -547,8 +547,8 @@ class OAuthUMAResourcesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param UMAResource body:
-        :return: UMAResource
+        :param UmaResource body:
+        :return: UmaResource
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -602,7 +602,7 @@ class OAuthUMAResourcesApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='UMAResource',  # noqa: E501
+            response_type='UmaResource',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_scripts**
-> CustomScript post_config_scripts()
+> CustomScript post_config_scripts(body=body)
 
 Adds a new custom script.
 
@@ -239,17 +239,21 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.CustomScriptsApi(swagger_client.ApiClient(configuration))
+body = swagger_client.CustomScript() # CustomScript |  (optional)
 
 try:
     # Adds a new custom script.
-    api_response = api_instance.post_config_scripts()
+    api_response = api_instance.post_config_scripts(body=body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CustomScriptsApi->post_config_scripts: %s\n" % e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**CustomScript**](CustomScript.md)|  | [optional] 
 
 ### Return type
 
@@ -261,13 +265,13 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_config_scripts**
-> put_config_scripts(body=body)
+> CustomScript put_config_scripts(body=body)
 
 Updates a custom script.
 
@@ -291,7 +295,8 @@ body = swagger_client.CustomScript() # CustomScript |  (optional)
 
 try:
     # Updates a custom script.
-    api_instance.put_config_scripts(body=body)
+    api_response = api_instance.put_config_scripts(body=body)
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling CustomScriptsApi->put_config_scripts: %s\n" % e)
 ```
@@ -304,7 +309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CustomScript**](CustomScript.md)
 
 ### Authorization
 

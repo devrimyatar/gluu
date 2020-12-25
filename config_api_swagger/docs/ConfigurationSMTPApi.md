@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**get_config_smtp**](ConfigurationSMTPApi.md#get_config_smtp) | **GET** /jans-config-api/api/v1/config/smtp | Returns SMTP server configuration.
 [**post_config_smtp**](ConfigurationSMTPApi.md#post_config_smtp) | **POST** /jans-config-api/api/v1/config/smtp | Adds SMTP server configuration.
 [**put_config_smtp**](ConfigurationSMTPApi.md#put_config_smtp) | **PUT** /jans-config-api/api/v1/config/smtp | Updates SMTP server configuration.
-[**test_config_smtp**](ConfigurationSMTPApi.md#test_config_smtp) | **GET** /jans-config-api/api/v1/config/smtp/test | Test SMTP server configuration.
+[**test_config_smtp**](ConfigurationSMTPApi.md#test_config_smtp) | **POST** /jans-config-api/api/v1/config/smtp/test | Test SMTP server configuration.
 
 # **delete_config_smtp**
 > delete_config_smtp()

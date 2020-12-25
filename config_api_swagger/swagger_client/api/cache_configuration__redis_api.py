@@ -42,7 +42,7 @@ class CacheConfigurationRedisApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2004
+        :return: RedisConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -63,7 +63,7 @@ class CacheConfigurationRedisApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2004
+        :return: RedisConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -111,7 +111,7 @@ class CacheConfigurationRedisApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2004',  # noqa: E501
+            response_type='RedisConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -129,8 +129,8 @@ class CacheConfigurationRedisApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body1 body:
-        :return: Body1
+        :param RedisConfiguration body:
+        :return: RedisConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -151,8 +151,8 @@ class CacheConfigurationRedisApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body1 body:
-        :return: Body1
+        :param RedisConfiguration body:
+        :return: RedisConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -206,7 +206,7 @@ class CacheConfigurationRedisApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Body1',  # noqa: E501
+            response_type='RedisConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

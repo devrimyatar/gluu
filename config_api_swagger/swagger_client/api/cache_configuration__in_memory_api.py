@@ -42,7 +42,7 @@ class CacheConfigurationInMemoryApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2005
+        :return: InMemoryConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -63,7 +63,7 @@ class CacheConfigurationInMemoryApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2005
+        :return: InMemoryConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -111,7 +111,7 @@ class CacheConfigurationInMemoryApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2005',  # noqa: E501
+            response_type='InMemoryConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -129,8 +129,8 @@ class CacheConfigurationInMemoryApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body2 body:
-        :return: Body2
+        :param InMemoryConfiguration body:
+        :return: InMemoryConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -151,8 +151,8 @@ class CacheConfigurationInMemoryApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body2 body:
-        :return: Body2
+        :param InMemoryConfiguration body:
+        :return: InMemoryConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -206,7 +206,7 @@ class CacheConfigurationInMemoryApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Body2',  # noqa: E501
+            response_type='InMemoryConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

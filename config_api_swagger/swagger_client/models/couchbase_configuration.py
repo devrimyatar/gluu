@@ -87,12 +87,18 @@ class CouchbaseConfiguration(object):
         self._binary_attributes = None
         self._certificate_attributes = None
         self.discriminator = None
-        self.config_id = config_id
-        self.user_name = user_name
-        self.user_password = user_password
-        self.servers = servers
-        self.default_bucket = default_bucket
-        self.buckets = buckets
+        if config_id is not None:
+            self.config_id = config_id
+        if user_name is not None:
+            self.user_name = user_name
+        if user_password is not None:
+            self.user_password = user_password
+        if servers is not None:
+            self.servers = servers
+        if default_bucket is not None:
+            self.default_bucket = default_bucket
+        if buckets is not None:
+            self.buckets = buckets
         if password_encryption_method is not None:
             self.password_encryption_method = password_encryption_method
         if operation_tracing_enabled is not None:
@@ -136,8 +142,6 @@ class CouchbaseConfiguration(object):
         :param config_id: The config_id of this CouchbaseConfiguration.  # noqa: E501
         :type: str
         """
-        if config_id is None:
-            raise ValueError("Invalid value for `config_id`, must not be `None`")  # noqa: E501
 
         self._config_id = config_id
 
@@ -161,8 +165,6 @@ class CouchbaseConfiguration(object):
         :param user_name: The user_name of this CouchbaseConfiguration.  # noqa: E501
         :type: str
         """
-        if user_name is None:
-            raise ValueError("Invalid value for `user_name`, must not be `None`")  # noqa: E501
 
         self._user_name = user_name
 
@@ -186,8 +188,6 @@ class CouchbaseConfiguration(object):
         :param user_password: The user_password of this CouchbaseConfiguration.  # noqa: E501
         :type: str
         """
-        if user_password is None:
-            raise ValueError("Invalid value for `user_password`, must not be `None`")  # noqa: E501
 
         self._user_password = user_password
 
@@ -211,8 +211,6 @@ class CouchbaseConfiguration(object):
         :param servers: The servers of this CouchbaseConfiguration.  # noqa: E501
         :type: list[str]
         """
-        if servers is None:
-            raise ValueError("Invalid value for `servers`, must not be `None`")  # noqa: E501
 
         self._servers = servers
 
@@ -236,8 +234,6 @@ class CouchbaseConfiguration(object):
         :param default_bucket: The default_bucket of this CouchbaseConfiguration.  # noqa: E501
         :type: str
         """
-        if default_bucket is None:
-            raise ValueError("Invalid value for `default_bucket`, must not be `None`")  # noqa: E501
 
         self._default_bucket = default_bucket
 
@@ -261,8 +257,6 @@ class CouchbaseConfiguration(object):
         :param buckets: The buckets of this CouchbaseConfiguration.  # noqa: E501
         :type: list[str]
         """
-        if buckets is None:
-            raise ValueError("Invalid value for `buckets`, must not be `None`")  # noqa: E501
 
         self._buckets = buckets
 
@@ -475,6 +469,7 @@ class CouchbaseConfiguration(object):
     def binary_attributes(self):
         """Gets the binary_attributes of this CouchbaseConfiguration.  # noqa: E501
 
+        List of binary attributes.  # noqa: E501
 
         :return: The binary_attributes of this CouchbaseConfiguration.  # noqa: E501
         :rtype: list[str]
@@ -485,6 +480,7 @@ class CouchbaseConfiguration(object):
     def binary_attributes(self, binary_attributes):
         """Sets the binary_attributes of this CouchbaseConfiguration.
 
+        List of binary attributes.  # noqa: E501
 
         :param binary_attributes: The binary_attributes of this CouchbaseConfiguration.  # noqa: E501
         :type: list[str]
@@ -496,6 +492,7 @@ class CouchbaseConfiguration(object):
     def certificate_attributes(self):
         """Gets the certificate_attributes of this CouchbaseConfiguration.  # noqa: E501
 
+        List of certificate attributes.  # noqa: E501
 
         :return: The certificate_attributes of this CouchbaseConfiguration.  # noqa: E501
         :rtype: list[str]
@@ -506,6 +503,7 @@ class CouchbaseConfiguration(object):
     def certificate_attributes(self, certificate_attributes):
         """Sets the certificate_attributes of this CouchbaseConfiguration.
 
+        List of certificate attributes.  # noqa: E501
 
         :param certificate_attributes: The certificate_attributes of this CouchbaseConfiguration.  # noqa: E501
         :type: list[str]

@@ -129,7 +129,7 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2007
+        :return: SmtpConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -150,7 +150,7 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2007
+        :return: SmtpConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -198,7 +198,7 @@ class ConfigurationSMTPApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2007',  # noqa: E501
+            response_type='SmtpConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -216,8 +216,8 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body5 body:
-        :return: Body5
+        :param SmtpConfiguration body:
+        :return: SmtpConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -238,8 +238,8 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body5 body:
-        :return: Body5
+        :param SmtpConfiguration body:
+        :return: SmtpConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -293,7 +293,7 @@ class ConfigurationSMTPApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Body5',  # noqa: E501
+            response_type='SmtpConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -311,8 +311,8 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body4 body:
-        :return: Body4
+        :param SmtpConfiguration body:
+        :return: SmtpConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -333,8 +333,8 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param Body4 body:
-        :return: Body4
+        :param SmtpConfiguration body:
+        :return: SmtpConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -388,7 +388,7 @@ class ConfigurationSMTPApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Body4',  # noqa: E501
+            response_type='SmtpConfiguration',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -406,7 +406,7 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2008
+        :return: InlineResponse200
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -427,7 +427,7 @@ class ConfigurationSMTPApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :return: InlineResponse2008
+        :return: InlineResponse200
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -468,14 +468,14 @@ class ConfigurationSMTPApi(object):
         auth_settings = ['jans-auth']  # noqa: E501
 
         return self.api_client.call_api(
-            '/jans-config-api/api/v1/config/smtp/test', 'GET',
+            '/jans-config-api/api/v1/config/smtp/test', 'POST',
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='InlineResponse2008',  # noqa: E501
+            response_type='InlineResponse200',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

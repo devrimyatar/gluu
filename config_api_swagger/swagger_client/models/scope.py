@@ -150,7 +150,7 @@ class Scope(object):
     def inum(self):
         """Gets the inum of this Scope.  # noqa: E501
 
-        Unique id identifying the attribute  # noqa: E501
+        Unique id identifying the .  # noqa: E501
 
         :return: The inum of this Scope.  # noqa: E501
         :rtype: str
@@ -161,7 +161,7 @@ class Scope(object):
     def inum(self, inum):
         """Sets the inum of this Scope.
 
-        Unique id identifying the attribute  # noqa: E501
+        Unique id identifying the .  # noqa: E501
 
         :param inum: The inum of this Scope.  # noqa: E501
         :type: str

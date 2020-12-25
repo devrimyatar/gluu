@@ -320,7 +320,7 @@ class DatabaseCouchbaseConfigurationApi(object):
 
         :param async_req bool
         :param str name: Name of Couchbase configuration. (required)
-        :param PatchRequest body:
+        :param list[PatchRequest] body:
         :return: CouchbaseConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
@@ -343,7 +343,7 @@ class DatabaseCouchbaseConfigurationApi(object):
 
         :param async_req bool
         :param str name: Name of Couchbase configuration. (required)
-        :param PatchRequest body:
+        :param list[PatchRequest] body:
         :return: CouchbaseConfiguration
                  If the method is called asynchronously,
                  returns the request thread.
@@ -391,7 +391,7 @@ class DatabaseCouchbaseConfigurationApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+            ['application/json-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['jans-auth']  # noqa: E501
@@ -512,9 +512,9 @@ class DatabaseCouchbaseConfigurationApi(object):
             collection_formats=collection_formats)
 
     def post_config_database_couchbase_test(self, body, **kwargs):  # noqa: E501
-        """Tests a Couchbase configurations by name.  # noqa: E501
+        """Tests a Couchbase configuration.  # noqa: E501
 
-        Tests a Couchbase configurations by name.  # noqa: E501
+        Tests a Couchbase configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.post_config_database_couchbase_test(body, async_req=True)
@@ -534,9 +534,9 @@ class DatabaseCouchbaseConfigurationApi(object):
             return data
 
     def post_config_database_couchbase_test_with_http_info(self, body, **kwargs):  # noqa: E501
-        """Tests a Couchbase configurations by name.  # noqa: E501
+        """Tests a Couchbase configuration.  # noqa: E501
 
-        Tests a Couchbase configurations by name.  # noqa: E501
+        Tests a Couchbase configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.post_config_database_couchbase_test_with_http_info(body, async_req=True)

@@ -28,266 +28,76 @@ class InlineResponse200(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'authenticator_certs_folder': 'str',
-        'mds_access_token': 'str',
-        'mds_certs_folder': 'str',
-        'mds_tocs_folder': 'str',
-        'user_auto_enrollment': 'bool',
-        'unfinished_request_expiration': 'int',
-        'authentication_history_expiration': 'int',
-        'server_metadata_folder': 'str',
-        'disable_fido2': 'bool'
+        'service': 'str',
+        'status': 'str'
     }
 
     attribute_map = {
-        'authenticator_certs_folder': 'authenticatorCertsFolder',
-        'mds_access_token': 'mdsAccessToken',
-        'mds_certs_folder': 'mdsCertsFolder',
-        'mds_tocs_folder': 'mdsTocsFolder',
-        'user_auto_enrollment': 'userAutoEnrollment',
-        'unfinished_request_expiration': 'unfinishedRequestExpiration',
-        'authentication_history_expiration': 'authenticationHistoryExpiration',
-        'server_metadata_folder': 'serverMetadataFolder',
-        'disable_fido2': 'disableFido2'
+        'service': 'service',
+        'status': 'status'
     }
 
-    def __init__(self, authenticator_certs_folder=None, mds_access_token=None, mds_certs_folder=None, mds_tocs_folder=None, user_auto_enrollment=None, unfinished_request_expiration=None, authentication_history_expiration=None, server_metadata_folder=None, disable_fido2=None):  # noqa: E501
+    def __init__(self, service=None, status=None):  # noqa: E501
         """InlineResponse200 - a model defined in Swagger"""  # noqa: E501
-        self._authenticator_certs_folder = None
-        self._mds_access_token = None
-        self._mds_certs_folder = None
-        self._mds_tocs_folder = None
-        self._user_auto_enrollment = None
-        self._unfinished_request_expiration = None
-        self._authentication_history_expiration = None
-        self._server_metadata_folder = None
-        self._disable_fido2 = None
+        self._service = None
+        self._status = None
         self.discriminator = None
-        if authenticator_certs_folder is not None:
-            self.authenticator_certs_folder = authenticator_certs_folder
-        if mds_access_token is not None:
-            self.mds_access_token = mds_access_token
-        if mds_certs_folder is not None:
-            self.mds_certs_folder = mds_certs_folder
-        if mds_tocs_folder is not None:
-            self.mds_tocs_folder = mds_tocs_folder
-        if user_auto_enrollment is not None:
-            self.user_auto_enrollment = user_auto_enrollment
-        if unfinished_request_expiration is not None:
-            self.unfinished_request_expiration = unfinished_request_expiration
-        if authentication_history_expiration is not None:
-            self.authentication_history_expiration = authentication_history_expiration
-        if server_metadata_folder is not None:
-            self.server_metadata_folder = server_metadata_folder
-        if disable_fido2 is not None:
-            self.disable_fido2 = disable_fido2
+        if service is not None:
+            self.service = service
+        if status is not None:
+            self.status = status
 
     @property
-    def authenticator_certs_folder(self):
-        """Gets the authenticator_certs_folder of this InlineResponse200.  # noqa: E501
+    def service(self):
+        """Gets the service of this InlineResponse200.  # noqa: E501
 
-        Authenticators certificates fodler.  # noqa: E501
+        Service name.  # noqa: E501
 
-        :return: The authenticator_certs_folder of this InlineResponse200.  # noqa: E501
+        :return: The service of this InlineResponse200.  # noqa: E501
         :rtype: str
         """
-        return self._authenticator_certs_folder
+        return self._service
 
-    @authenticator_certs_folder.setter
-    def authenticator_certs_folder(self, authenticator_certs_folder):
-        """Sets the authenticator_certs_folder of this InlineResponse200.
+    @service.setter
+    def service(self, service):
+        """Sets the service of this InlineResponse200.
 
-        Authenticators certificates fodler.  # noqa: E501
+        Service name.  # noqa: E501
 
-        :param authenticator_certs_folder: The authenticator_certs_folder of this InlineResponse200.  # noqa: E501
+        :param service: The service of this InlineResponse200.  # noqa: E501
         :type: str
         """
 
-        self._authenticator_certs_folder = authenticator_certs_folder
+        self._service = service
 
     @property
-    def mds_access_token(self):
-        """Gets the mds_access_token of this InlineResponse200.  # noqa: E501
+    def status(self):
+        """Gets the status of this InlineResponse200.  # noqa: E501
 
-        MDS Access token.  # noqa: E501
+        Status of SMTP server connection test.  # noqa: E501
 
-        :return: The mds_access_token of this InlineResponse200.  # noqa: E501
+        :return: The status of this InlineResponse200.  # noqa: E501
         :rtype: str
         """
-        return self._mds_access_token
+        return self._status
 
-    @mds_access_token.setter
-    def mds_access_token(self, mds_access_token):
-        """Sets the mds_access_token of this InlineResponse200.
+    @status.setter
+    def status(self, status):
+        """Sets the status of this InlineResponse200.
 
-        MDS Access token.  # noqa: E501
+        Status of SMTP server connection test.  # noqa: E501
 
-        :param mds_access_token: The mds_access_token of this InlineResponse200.  # noqa: E501
+        :param status: The status of this InlineResponse200.  # noqa: E501
         :type: str
         """
+        allowed_values = ["OKAY", "FAILED"]  # noqa: E501
+        if status not in allowed_values:
+            raise ValueError(
+                "Invalid value for `status` ({0}), must be one of {1}"  # noqa: E501
+                .format(status, allowed_values)
+            )
 
-        self._mds_access_token = mds_access_token
-
-    @property
-    def mds_certs_folder(self):
-        """Gets the mds_certs_folder of this InlineResponse200.  # noqa: E501
-
-        MDS TOC root certificates folder.  # noqa: E501
-
-        :return: The mds_certs_folder of this InlineResponse200.  # noqa: E501
-        :rtype: str
-        """
-        return self._mds_certs_folder
-
-    @mds_certs_folder.setter
-    def mds_certs_folder(self, mds_certs_folder):
-        """Sets the mds_certs_folder of this InlineResponse200.
-
-        MDS TOC root certificates folder.  # noqa: E501
-
-        :param mds_certs_folder: The mds_certs_folder of this InlineResponse200.  # noqa: E501
-        :type: str
-        """
-
-        self._mds_certs_folder = mds_certs_folder
-
-    @property
-    def mds_tocs_folder(self):
-        """Gets the mds_tocs_folder of this InlineResponse200.  # noqa: E501
-
-        MDS TOC files folder.  # noqa: E501
-
-        :return: The mds_tocs_folder of this InlineResponse200.  # noqa: E501
-        :rtype: str
-        """
-        return self._mds_tocs_folder
-
-    @mds_tocs_folder.setter
-    def mds_tocs_folder(self, mds_tocs_folder):
-        """Sets the mds_tocs_folder of this InlineResponse200.
-
-        MDS TOC files folder.  # noqa: E501
-
-        :param mds_tocs_folder: The mds_tocs_folder of this InlineResponse200.  # noqa: E501
-        :type: str
-        """
-
-        self._mds_tocs_folder = mds_tocs_folder
-
-    @property
-    def user_auto_enrollment(self):
-        """Gets the user_auto_enrollment of this InlineResponse200.  # noqa: E501
-
-        Allow to enroll users on enrollment/authentication requests.  # noqa: E501
-
-        :return: The user_auto_enrollment of this InlineResponse200.  # noqa: E501
-        :rtype: bool
-        """
-        return self._user_auto_enrollment
-
-    @user_auto_enrollment.setter
-    def user_auto_enrollment(self, user_auto_enrollment):
-        """Sets the user_auto_enrollment of this InlineResponse200.
-
-        Allow to enroll users on enrollment/authentication requests.  # noqa: E501
-
-        :param user_auto_enrollment: The user_auto_enrollment of this InlineResponse200.  # noqa: E501
-        :type: bool
-        """
-
-        self._user_auto_enrollment = user_auto_enrollment
-
-    @property
-    def unfinished_request_expiration(self):
-        """Gets the unfinished_request_expiration of this InlineResponse200.  # noqa: E501
-
-        Expiration time in seconds for pending enrollment/authentication requests  # noqa: E501
-
-        :return: The unfinished_request_expiration of this InlineResponse200.  # noqa: E501
-        :rtype: int
-        """
-        return self._unfinished_request_expiration
-
-    @unfinished_request_expiration.setter
-    def unfinished_request_expiration(self, unfinished_request_expiration):
-        """Sets the unfinished_request_expiration of this InlineResponse200.
-
-        Expiration time in seconds for pending enrollment/authentication requests  # noqa: E501
-
-        :param unfinished_request_expiration: The unfinished_request_expiration of this InlineResponse200.  # noqa: E501
-        :type: int
-        """
-
-        self._unfinished_request_expiration = unfinished_request_expiration
-
-    @property
-    def authentication_history_expiration(self):
-        """Gets the authentication_history_expiration of this InlineResponse200.  # noqa: E501
-
-        Expiration time in seconds for approved authentication requests.  # noqa: E501
-
-        :return: The authentication_history_expiration of this InlineResponse200.  # noqa: E501
-        :rtype: int
-        """
-        return self._authentication_history_expiration
-
-    @authentication_history_expiration.setter
-    def authentication_history_expiration(self, authentication_history_expiration):
-        """Sets the authentication_history_expiration of this InlineResponse200.
-
-        Expiration time in seconds for approved authentication requests.  # noqa: E501
-
-        :param authentication_history_expiration: The authentication_history_expiration of this InlineResponse200.  # noqa: E501
-        :type: int
-        """
-
-        self._authentication_history_expiration = authentication_history_expiration
-
-    @property
-    def server_metadata_folder(self):
-        """Gets the server_metadata_folder of this InlineResponse200.  # noqa: E501
-
-        Authenticators metadata in json format.  # noqa: E501
-
-        :return: The server_metadata_folder of this InlineResponse200.  # noqa: E501
-        :rtype: str
-        """
-        return self._server_metadata_folder
-
-    @server_metadata_folder.setter
-    def server_metadata_folder(self, server_metadata_folder):
-        """Sets the server_metadata_folder of this InlineResponse200.
-
-        Authenticators metadata in json format.  # noqa: E501
-
-        :param server_metadata_folder: The server_metadata_folder of this InlineResponse200.  # noqa: E501
-        :type: str
-        """
-
-        self._server_metadata_folder = server_metadata_folder
-
-    @property
-    def disable_fido2(self):
-        """Gets the disable_fido2 of this InlineResponse200.  # noqa: E501
-
-        Enable/Disable Fido2 endpoints.  # noqa: E501
-
-        :return: The disable_fido2 of this InlineResponse200.  # noqa: E501
-        :rtype: bool
-        """
-        return self._disable_fido2
-
-    @disable_fido2.setter
-    def disable_fido2(self, disable_fido2):
-        """Sets the disable_fido2 of this InlineResponse200.
-
-        Enable/Disable Fido2 endpoints.  # noqa: E501
-
-        :param disable_fido2: The disable_fido2 of this InlineResponse200.  # noqa: E501
-        :type: bool
-        """
-
-        self._disable_fido2 = disable_fido2
+        self._status = status
 
     def to_dict(self):
         """Returns the model properties as a dict"""

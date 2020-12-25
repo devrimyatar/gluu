@@ -88,7 +88,8 @@ class CustomScript(object):
             self.dn = dn
         if inum is not None:
             self.inum = inum
-        self.name = name
+        if name is not None:
+            self.name = name
         if aliases is not None:
             self.aliases = aliases
         if description is not None:
@@ -141,6 +142,7 @@ class CustomScript(object):
     def inum(self):
         """Gets the inum of this CustomScript.  # noqa: E501
 
+        XRI i-number. Identifier to uniquely identify the script.  # noqa: E501
 
         :return: The inum of this CustomScript.  # noqa: E501
         :rtype: str
@@ -151,6 +153,7 @@ class CustomScript(object):
     def inum(self, inum):
         """Sets the inum of this CustomScript.
 
+        XRI i-number. Identifier to uniquely identify the script.  # noqa: E501
 
         :param inum: The inum of this CustomScript.  # noqa: E501
         :type: str
@@ -178,8 +181,6 @@ class CustomScript(object):
         :param name: The name of this CustomScript.  # noqa: E501
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
 
@@ -187,6 +188,7 @@ class CustomScript(object):
     def aliases(self):
         """Gets the aliases of this CustomScript.  # noqa: E501
 
+        List of possible alias for the script.  # noqa: E501
 
         :return: The aliases of this CustomScript.  # noqa: E501
         :rtype: list[str]
@@ -197,6 +199,7 @@ class CustomScript(object):
     def aliases(self, aliases):
         """Sets the aliases of this CustomScript.
 
+        List of possible alias for the script.  # noqa: E501
 
         :param aliases: The aliases of this CustomScript.  # noqa: E501
         :type: list[str]
@@ -208,6 +211,7 @@ class CustomScript(object):
     def description(self):
         """Gets the description of this CustomScript.  # noqa: E501
 
+        Details describing the script.  # noqa: E501
 
         :return: The description of this CustomScript.  # noqa: E501
         :rtype: str
@@ -218,6 +222,7 @@ class CustomScript(object):
     def description(self, description):
         """Sets the description of this CustomScript.
 
+        Details describing the script.  # noqa: E501
 
         :param description: The description of this CustomScript.  # noqa: E501
         :type: str
@@ -252,6 +257,7 @@ class CustomScript(object):
     def script_type(self):
         """Gets the script_type of this CustomScript.  # noqa: E501
 
+        Type of script.  # noqa: E501
 
         :return: The script_type of this CustomScript.  # noqa: E501
         :rtype: str
@@ -262,11 +268,12 @@ class CustomScript(object):
     def script_type(self, script_type):
         """Sets the script_type of this CustomScript.
 
+        Type of script.  # noqa: E501
 
         :param script_type: The script_type of this CustomScript.  # noqa: E501
         :type: str
         """
-        allowed_values = ["person_authentication", "introspection", "resource_owner_password_credentials", "application_session", "cache_refresh", "update_user", "user_registration", "client_registration", "id_generator", "uma_rpt_policy", "uma_rpt_claims", "uma_claims_gathering", "consent_gathering", "dynamic_scope", "spontaneous_scope", "end_session", "post_authn", "scim", "ciba_end_user_notification", "persistence_extension", "idp"]  # noqa: E501
+        allowed_values = ["PERSON_AUTHENTICATION", "INTROSPECTION", "RESOURCE_OWNER_PASSWORD_CREDENTIALS", "APPLICATION_SESSION", "CACHE_REFRESH", "UPDATE_USER", "USER_REGISTRATION", "CLIENT_REGISTRATION", "ID_GENERATOR", "UMA_RPT_POLICY", "UMA_RPT_CLAIMS", "UMA_CLAIMS_GATHERING", "CONSENT_GATHERING", "DYNAMIC_SCOPE", "SPONTANEOUS_SCOPE", "END_SESSION", "POST_AUTHN", "SCIM", "CIBA_END_USER_NOTIFICATION", "PERSISTENCE_EXTENSION", "IDP"]  # noqa: E501
         if script_type not in allowed_values:
             raise ValueError(
                 "Invalid value for `script_type` ({0}), must be one of {1}"  # noqa: E501
@@ -279,7 +286,7 @@ class CustomScript(object):
     def programming_language(self):
         """Gets the programming_language of this CustomScript.  # noqa: E501
 
-        Specifies programming language of the custom script.  # noqa: E501
+        Programming language of the custom script.  # noqa: E501
 
         :return: The programming_language of this CustomScript.  # noqa: E501
         :rtype: str
@@ -290,12 +297,12 @@ class CustomScript(object):
     def programming_language(self, programming_language):
         """Sets the programming_language of this CustomScript.
 
-        Specifies programming language of the custom script.  # noqa: E501
+        Programming language of the custom script.  # noqa: E501
 
         :param programming_language: The programming_language of this CustomScript.  # noqa: E501
         :type: str
         """
-        allowed_values = ["python", "javascript"]  # noqa: E501
+        allowed_values = ["PYTHON", "JAVASCRIPT"]  # noqa: E501
         if programming_language not in allowed_values:
             raise ValueError(
                 "Invalid value for `programming_language` ({0}), must be one of {1}"  # noqa: E501
@@ -308,6 +315,7 @@ class CustomScript(object):
     def module_properties(self):
         """Gets the module_properties of this CustomScript.  # noqa: E501
 
+        Module-level properties applicable to the script.  # noqa: E501
 
         :return: The module_properties of this CustomScript.  # noqa: E501
         :rtype: list[CustomScriptModuleProperties]
@@ -318,6 +326,7 @@ class CustomScript(object):
     def module_properties(self, module_properties):
         """Sets the module_properties of this CustomScript.
 
+        Module-level properties applicable to the script.  # noqa: E501
 
         :param module_properties: The module_properties of this CustomScript.  # noqa: E501
         :type: list[CustomScriptModuleProperties]
@@ -329,6 +338,7 @@ class CustomScript(object):
     def configuration_properties(self):
         """Gets the configuration_properties of this CustomScript.  # noqa: E501
 
+        Configuration properties applicable to the script.  # noqa: E501
 
         :return: The configuration_properties of this CustomScript.  # noqa: E501
         :rtype: list[CustomScriptConfigurationProperties]
@@ -339,6 +349,7 @@ class CustomScript(object):
     def configuration_properties(self, configuration_properties):
         """Sets the configuration_properties of this CustomScript.
 
+        Configuration properties applicable to the script.  # noqa: E501
 
         :param configuration_properties: The configuration_properties of this CustomScript.  # noqa: E501
         :type: list[CustomScriptConfigurationProperties]
@@ -350,6 +361,7 @@ class CustomScript(object):
     def level(self):
         """Gets the level of this CustomScript.  # noqa: E501
 
+        Script level.  # noqa: E501
 
         :return: The level of this CustomScript.  # noqa: E501
         :rtype: int
@@ -360,6 +372,7 @@ class CustomScript(object):
     def level(self, level):
         """Sets the level of this CustomScript.
 
+        Script level.  # noqa: E501
 
         :param level: The level of this CustomScript.  # noqa: E501
         :type: int
@@ -371,6 +384,7 @@ class CustomScript(object):
     def revision(self):
         """Gets the revision of this CustomScript.  # noqa: E501
 
+        Update revision number of the script.  # noqa: E501
 
         :return: The revision of this CustomScript.  # noqa: E501
         :rtype: int
@@ -381,6 +395,7 @@ class CustomScript(object):
     def revision(self, revision):
         """Sets the revision of this CustomScript.
 
+        Update revision number of the script.  # noqa: E501
 
         :param revision: The revision of this CustomScript.  # noqa: E501
         :type: int
@@ -392,6 +407,7 @@ class CustomScript(object):
     def enabled(self):
         """Gets the enabled of this CustomScript.  # noqa: E501
 
+        boolean value indicating if script enabled.  # noqa: E501
 
         :return: The enabled of this CustomScript.  # noqa: E501
         :rtype: bool
@@ -402,6 +418,7 @@ class CustomScript(object):
     def enabled(self, enabled):
         """Sets the enabled of this CustomScript.
 
+        boolean value indicating if script enabled.  # noqa: E501
 
         :param enabled: The enabled of this CustomScript.  # noqa: E501
         :type: bool
@@ -434,6 +451,7 @@ class CustomScript(object):
     def modified(self):
         """Gets the modified of this CustomScript.  # noqa: E501
 
+        boolean value indicating if the script is modified.  # noqa: E501
 
         :return: The modified of this CustomScript.  # noqa: E501
         :rtype: bool
@@ -444,6 +462,7 @@ class CustomScript(object):
     def modified(self, modified):
         """Sets the modified of this CustomScript.
 
+        boolean value indicating if the script is modified.  # noqa: E501
 
         :param modified: The modified of this CustomScript.  # noqa: E501
         :type: bool
@@ -455,6 +474,7 @@ class CustomScript(object):
     def internal(self):
         """Gets the internal of this CustomScript.  # noqa: E501
 
+        boolean value indicating if the script is interanl.  # noqa: E501
 
         :return: The internal of this CustomScript.  # noqa: E501
         :rtype: bool
@@ -465,6 +485,7 @@ class CustomScript(object):
     def internal(self, internal):
         """Sets the internal of this CustomScript.
 
+        boolean value indicating if the script is interanl.  # noqa: E501
 
         :param internal: The internal of this CustomScript.  # noqa: E501
         :type: bool

@@ -332,7 +332,7 @@ class AttributeApi(object):
 
         :param async_req bool
         :param str inum: Attribute ID. (required)
-        :param PatchRequest body:
+        :param list[PatchRequest] body:
         :return: GluuAttribute
                  If the method is called asynchronously,
                  returns the request thread.
@@ -355,7 +355,7 @@ class AttributeApi(object):
 
         :param async_req bool
         :param str inum: Attribute ID. (required)
-        :param PatchRequest body:
+        :param list[PatchRequest] body:
         :return: GluuAttribute
                  If the method is called asynchronously,
                  returns the request thread.
@@ -403,7 +403,7 @@ class AttributeApi(object):
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
+            ['application/json-patch+json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['jans-auth']  # noqa: E501
@@ -424,91 +424,45 @@ class AttributeApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def post_attributes(self, name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip, **kwargs):  # noqa: E501
+    def post_attributes(self, body, **kwargs):  # noqa: E501
         """Adds a new attribute.  # noqa: E501
 
         Adds a new attribute.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_attributes(name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip, async_req=True)
+        >>> thread = api.post_attributes(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str name: (required)
-        :param list[str] display_name: (required)
-        :param str description: (required)
-        :param str data_type: (required)
-        :param str status: (required)
-        :param bool jans_multivalued_attr: (required)
-        :param str lifetime: (required)
-        :param str source_attribute: (required)
-        :param str salt: (required)
-        :param str name_id_type: (required)
-        :param str origin: (required)
-        :param list[str] edit_type: (required)
-        :param list[str] view_type: (required)
-        :param list[str] usage_type: (required)
-        :param str jans_attr_name: (required)
-        :param str see_also: (required)
-        :param str saml1_uri: (required)
-        :param str saml2_uri: (required)
-        :param str urn: (required)
-        :param bool jans_scim_custom_attr: (required)
-        :param bool custom: (required)
-        :param bool requred: (required)
-        :param GluuAttributeAttributeValidation attribute_validation: (required)
-        :param str gluu_tooltip: (required)
+        :param GluuAttribute body: (required)
         :return: GluuAttribute
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.post_attributes_with_http_info(name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip, **kwargs)  # noqa: E501
+            return self.post_attributes_with_http_info(body, **kwargs)  # noqa: E501
         else:
-            (data) = self.post_attributes_with_http_info(name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip, **kwargs)  # noqa: E501
+            (data) = self.post_attributes_with_http_info(body, **kwargs)  # noqa: E501
             return data
 
-    def post_attributes_with_http_info(self, name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip, **kwargs):  # noqa: E501
+    def post_attributes_with_http_info(self, body, **kwargs):  # noqa: E501
         """Adds a new attribute.  # noqa: E501
 
         Adds a new attribute.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_attributes_with_http_info(name, display_name, description, data_type, status, jans_multivalued_attr, lifetime, source_attribute, salt, name_id_type, origin, edit_type, view_type, usage_type, jans_attr_name, see_also, saml1_uri, saml2_uri, urn, jans_scim_custom_attr, custom, requred, attribute_validation, gluu_tooltip, async_req=True)
+        >>> thread = api.post_attributes_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param str name: (required)
-        :param list[str] display_name: (required)
-        :param str description: (required)
-        :param str data_type: (required)
-        :param str status: (required)
-        :param bool jans_multivalued_attr: (required)
-        :param str lifetime: (required)
-        :param str source_attribute: (required)
-        :param str salt: (required)
-        :param str name_id_type: (required)
-        :param str origin: (required)
-        :param list[str] edit_type: (required)
-        :param list[str] view_type: (required)
-        :param list[str] usage_type: (required)
-        :param str jans_attr_name: (required)
-        :param str see_also: (required)
-        :param str saml1_uri: (required)
-        :param str saml2_uri: (required)
-        :param str urn: (required)
-        :param bool jans_scim_custom_attr: (required)
-        :param bool custom: (required)
-        :param bool requred: (required)
-        :param GluuAttributeAttributeValidation attribute_validation: (required)
-        :param str gluu_tooltip: (required)
+        :param GluuAttribute body: (required)
         :return: GluuAttribute
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['name', 'display_name', 'description', 'data_type', 'status', 'jans_multivalued_attr', 'lifetime', 'source_attribute', 'salt', 'name_id_type', 'origin', 'edit_type', 'view_type', 'usage_type', 'jans_attr_name', 'see_also', 'saml1_uri', 'saml2_uri', 'urn', 'jans_scim_custom_attr', 'custom', 'requred', 'attribute_validation', 'gluu_tooltip']  # noqa: E501
+        all_params = ['body']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -523,102 +477,10 @@ class AttributeApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'name' is set
-        if ('name' not in params or
-                params['name'] is None):
-            raise ValueError("Missing the required parameter `name` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'display_name' is set
-        if ('display_name' not in params or
-                params['display_name'] is None):
-            raise ValueError("Missing the required parameter `display_name` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'description' is set
-        if ('description' not in params or
-                params['description'] is None):
-            raise ValueError("Missing the required parameter `description` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'data_type' is set
-        if ('data_type' not in params or
-                params['data_type'] is None):
-            raise ValueError("Missing the required parameter `data_type` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'status' is set
-        if ('status' not in params or
-                params['status'] is None):
-            raise ValueError("Missing the required parameter `status` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'jans_multivalued_attr' is set
-        if ('jans_multivalued_attr' not in params or
-                params['jans_multivalued_attr'] is None):
-            raise ValueError("Missing the required parameter `jans_multivalued_attr` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'lifetime' is set
-        if ('lifetime' not in params or
-                params['lifetime'] is None):
-            raise ValueError("Missing the required parameter `lifetime` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'source_attribute' is set
-        if ('source_attribute' not in params or
-                params['source_attribute'] is None):
-            raise ValueError("Missing the required parameter `source_attribute` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'salt' is set
-        if ('salt' not in params or
-                params['salt'] is None):
-            raise ValueError("Missing the required parameter `salt` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'name_id_type' is set
-        if ('name_id_type' not in params or
-                params['name_id_type'] is None):
-            raise ValueError("Missing the required parameter `name_id_type` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'origin' is set
-        if ('origin' not in params or
-                params['origin'] is None):
-            raise ValueError("Missing the required parameter `origin` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'edit_type' is set
-        if ('edit_type' not in params or
-                params['edit_type'] is None):
-            raise ValueError("Missing the required parameter `edit_type` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'view_type' is set
-        if ('view_type' not in params or
-                params['view_type'] is None):
-            raise ValueError("Missing the required parameter `view_type` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'usage_type' is set
-        if ('usage_type' not in params or
-                params['usage_type'] is None):
-            raise ValueError("Missing the required parameter `usage_type` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'jans_attr_name' is set
-        if ('jans_attr_name' not in params or
-                params['jans_attr_name'] is None):
-            raise ValueError("Missing the required parameter `jans_attr_name` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'see_also' is set
-        if ('see_also' not in params or
-                params['see_also'] is None):
-            raise ValueError("Missing the required parameter `see_also` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'saml1_uri' is set
-        if ('saml1_uri' not in params or
-                params['saml1_uri'] is None):
-            raise ValueError("Missing the required parameter `saml1_uri` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'saml2_uri' is set
-        if ('saml2_uri' not in params or
-                params['saml2_uri'] is None):
-            raise ValueError("Missing the required parameter `saml2_uri` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'urn' is set
-        if ('urn' not in params or
-                params['urn'] is None):
-            raise ValueError("Missing the required parameter `urn` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'jans_scim_custom_attr' is set
-        if ('jans_scim_custom_attr' not in params or
-                params['jans_scim_custom_attr'] is None):
-            raise ValueError("Missing the required parameter `jans_scim_custom_attr` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'custom' is set
-        if ('custom' not in params or
-                params['custom'] is None):
-            raise ValueError("Missing the required parameter `custom` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'requred' is set
-        if ('requred' not in params or
-                params['requred'] is None):
-            raise ValueError("Missing the required parameter `requred` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'attribute_validation' is set
-        if ('attribute_validation' not in params or
-                params['attribute_validation'] is None):
-            raise ValueError("Missing the required parameter `attribute_validation` when calling `post_attributes`")  # noqa: E501
-        # verify the required parameter 'gluu_tooltip' is set
-        if ('gluu_tooltip' not in params or
-                params['gluu_tooltip'] is None):
-            raise ValueError("Missing the required parameter `gluu_tooltip` when calling `post_attributes`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `post_attributes`")  # noqa: E501
 
         collection_formats = {}
 
@@ -630,67 +492,17 @@ class AttributeApi(object):
 
         form_params = []
         local_var_files = {}
-        if 'name' in params:
-            form_params.append(('name', params['name']))  # noqa: E501
-        if 'display_name' in params:
-            form_params.append(('displayName', params['display_name']))  # noqa: E501
-            collection_formats['displayName'] = 'multi'  # noqa: E501
-        if 'description' in params:
-            form_params.append(('description', params['description']))  # noqa: E501
-        if 'data_type' in params:
-            form_params.append(('dataType', params['data_type']))  # noqa: E501
-        if 'status' in params:
-            form_params.append(('status', params['status']))  # noqa: E501
-        if 'jans_multivalued_attr' in params:
-            form_params.append(('jansMultivaluedAttr', params['jans_multivalued_attr']))  # noqa: E501
-        if 'lifetime' in params:
-            form_params.append(('lifetime', params['lifetime']))  # noqa: E501
-        if 'source_attribute' in params:
-            form_params.append(('sourceAttribute', params['source_attribute']))  # noqa: E501
-        if 'salt' in params:
-            form_params.append(('salt', params['salt']))  # noqa: E501
-        if 'name_id_type' in params:
-            form_params.append(('nameIdType', params['name_id_type']))  # noqa: E501
-        if 'origin' in params:
-            form_params.append(('origin', params['origin']))  # noqa: E501
-        if 'edit_type' in params:
-            form_params.append(('editType', params['edit_type']))  # noqa: E501
-            collection_formats['editType'] = 'multi'  # noqa: E501
-        if 'view_type' in params:
-            form_params.append(('viewType', params['view_type']))  # noqa: E501
-            collection_formats['viewType'] = 'multi'  # noqa: E501
-        if 'usage_type' in params:
-            form_params.append(('usageType', params['usage_type']))  # noqa: E501
-            collection_formats['usageType'] = 'multi'  # noqa: E501
-        if 'jans_attr_name' in params:
-            form_params.append(('jansAttrName', params['jans_attr_name']))  # noqa: E501
-        if 'see_also' in params:
-            form_params.append(('seeAlso', params['see_also']))  # noqa: E501
-        if 'saml1_uri' in params:
-            form_params.append(('saml1Uri', params['saml1_uri']))  # noqa: E501
-        if 'saml2_uri' in params:
-            form_params.append(('saml2Uri', params['saml2_uri']))  # noqa: E501
-        if 'urn' in params:
-            form_params.append(('urn', params['urn']))  # noqa: E501
-        if 'jans_scim_custom_attr' in params:
-            form_params.append(('jansSCIMCustomAttr', params['jans_scim_custom_attr']))  # noqa: E501
-        if 'custom' in params:
-            form_params.append(('custom', params['custom']))  # noqa: E501
-        if 'requred' in params:
-            form_params.append(('requred', params['requred']))  # noqa: E501
-        if 'attribute_validation' in params:
-            form_params.append(('attributeValidation', params['attribute_validation']))  # noqa: E501
-        if 'gluu_tooltip' in params:
-            form_params.append(('gluuTooltip', params['gluu_tooltip']))  # noqa: E501
 
         body_params = None
+        if 'body' in params:
+            body_params = params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
 
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/x-www-form-urlencoded'])  # noqa: E501
+            ['application/json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['jans-auth']  # noqa: E501
@@ -722,7 +534,7 @@ class AttributeApi(object):
 
         :param async_req bool
         :param GluuAttribute body: (required)
-        :return: list[GluuAttribute]
+        :return: GluuAttribute
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -744,7 +556,7 @@ class AttributeApi(object):
 
         :param async_req bool
         :param GluuAttribute body: (required)
-        :return: list[GluuAttribute]
+        :return: GluuAttribute
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -802,7 +614,7 @@ class AttributeApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[GluuAttribute]',  # noqa: E501
+            response_type='GluuAttribute',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
