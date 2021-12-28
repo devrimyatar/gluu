@@ -32,6 +32,10 @@ We are going to add simple text attrbiute **customAttribute** with max size 200 
   2) On Gluu oxTrust UI go Configuration/Attributes and click **Register Attribute** button. Fill the fields according to your needs, 
   see following screenshot
   
+  ![register attribute](./add_custom_attribute.png)
 
+  Once you registered attribute, you will see under Available User Claims / gluuPerson
 
+  ![available claims](./available_claims.png)
+  
 
